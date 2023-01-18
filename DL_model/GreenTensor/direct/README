@@ -1,0 +1,34 @@
+Ideas para mejorar el Electric direct field: versiones de E_field_direct.py 
+
+- Graficar las funciones a integrar ---> determinar nuevos limites de integracion. Done
+- Disminuir los limites de integracion. Done
+- Cambiar la variable de integracion x_D por \tilde{x}_D = x_D*k1 (adimensional). Done
+
+- v4: Reescribir las funciones de manera mas sencilla (sin tomar la parte real e imaginaria de manera numerica), ademas le saque el lambda = x en la doble integral ---> version 4. Done. Parece que hay un error de cuenta por los graficos (la version analitica difiere MUCHO del resto (*)) pero no logro encontrarlo :( 
+
+- v5: Cambiar el orden de integracion ---> version 5. Done. No disminuye el tiempo, hasta creo que es peor. 
+- v6: montecarlo como metodo de integracion ---> version 7 https://www.youtube.com/watch?v=WAf0rqwAvgg. Done como v4 pero con montecarlo. Agregar mas puntos. 
+- v7 : montecarlo pero antes de v4
+
+Al final lo de montecarlo no fue necesario, la version 4 es rapida. Sigo sin encontrar el error (*)
+
+
+
+#### sobre versiones ############### todos con \tilde{x}_D ##########################
+
+-v1 con parte real e imaginaria numerica (numpy). 2 terminos diferentes para la funcion sin QE. Solo hasta 50, tanto para alfa_parallel como para x_D. usando lambda en la doble integral
+
+-v2 con parte real e imaginaria numerica (numpy). terminos juntos para la funcion sin QE. alfa_parallel hasta 100 y x_d desde -60 hasta 60. usando lambda en la doble integral
+
+-v2.2 v2 + los otros terminos (rosa y violeta) a ver si ese es el problema de (*) y sin usar lambda en la doble integral. Con parte real e imaginaria numpy para la sol num sin QE y con parte real e imag analitica para la parte con QE. Nuevos colores.  
+
+-v3 con parte real e imaginaria analiticas. terminos juntos para la funcion sin QE. usando lambda en la doble integral
+
+-v4 con parte real e imaginaria analiticas. terminos juntos para la funcion sin QE. sin usar lambda en la doble integral. 
+
+-v5 igual a v4 pero con diferente orden de integracion
+
+-v6 montecarlo
+
+-v7 montecarlo
+

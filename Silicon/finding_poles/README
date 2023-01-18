@@ -1,0 +1,9 @@
+problema: los coeficientes de fresnel y de pole aprox coinciden vs alpha_parallel pero al integrarlos se obtienen resultados diferentes. metodo de integracion se ajusta a la funcion, entonces conviene integrar por trapezoides ? cambiar el metodo de integracion en la version 3. 
+
+version3 : quadrature    -- Integrate with given tolerance using Gaussian quadrature.
+
+estaban mal los limites de integracion : rehacer las versiones 1 y 2 
+
+
+
+v2: el termino Rsigmaj es una constante en la pole aprox (chi y chi_prima estan evaluadas en k_parallel = polos)

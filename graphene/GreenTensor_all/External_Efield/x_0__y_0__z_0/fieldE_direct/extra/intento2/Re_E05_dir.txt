@@ -1,0 +1,1 @@
+# omega [THz]     Re(E_{dir,05}) analytic     Re(E_{dir,05}) QE num     Re(E_{dir,05}) sin QE num, $\epsilon_1$ = 1, v = c/300 $\mu$m/s, b = -2$\mu$m

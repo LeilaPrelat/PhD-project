@@ -1,0 +1,9 @@
+1 - Silver : 
+	- there is a typo in the dispersion relation. 
+	- check the epsilon with Eduardo paper (#370) . 
+	- update the long version of overlaf. Try VIM. Resolution of problems: 
+		- for the Pscat_n : it was not changing with "n" because I was not using the 
+			correct values for omega, a and N that give a real angle theta
+		- ... keep thinking for more items 
+
+2 - hBN : increase the loss to reduce the divergence (problem with the numerical expression) 

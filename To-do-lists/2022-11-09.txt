@@ -1,0 +1,95 @@
+Wednesday 09-11-2022 + Thursday 10-11-2022 + Monday 14-11-2022: 
+##############################################################################################################################################################################
+
+rehice los calculos para la pole approx de 2D film, thin film, anisotropic film (tabla 1 del paper "fundamentals") y para lambda_p tengo lo mismo pero para 
+R_p tengo ligeras diferencias. Graficar y compararlas . 
+
+the pole approximation no funciona para el primer polo (0.9eV<E<0.1eV) y no logro encontrar el motivo. Ademas el decay rate es negativo para el primer polo si d = 1nm,
+necesito usar un d mayor (d = 5 nm o d = 10 nm). 
+
+hoy : 
+	- escribir el codigo para zp optimum fuera de la resonancia + lossless para : 
+		- grafeno : done before. el caso fuera de resonancia tiene z_p menores (un orden menor). para el caso fuera de resonancia, probe con otra energia de 			polarizacion $\hbar\omega_o$ y si lo disminuyo, el zp aumenta un poco (500 nm-$\hbar\omega_o = 43$meV a 800 nm-$\hbar\omega_o = 20$meV). 
+		
+		
+		- hBN. polo 1 : directamente la pole aprox no funciona. polo 2: la pole aprox sí funciona. Chequear si Gself ana2 funciona: done. Sobre hBn: 
+			*A tener en cuenta sobre hBn: 
+				- hBn_lambda_p, hBn_Rp: Im(\sqrt(epsilon... )) > 0 y Im(kz) > 0 dentro del .py para comparar pole approximation y coef de fresnel 
+				- Green_self_image : si defino hBn_lambda_p_Gself_image.py y hBn_Rp_Gself_image.py sin Im(\sqrt(epsilon... )) > 0 ni Im(kz) > 0 funciona mejor. 
+				De hecho, la parte imaginaria de Green_self_image es positiva (lo que queremos para que el decay rate sea positivo)
+				Gself: la formula analitica 2 para Gself funciona bastante mejor (la PP no funciona por FP incidente). 
+				- decay rate : el dipole_moment.py y el Green_self_image.py estan involucrados. La version analitica del dipole moment
+				no funciona muy bien asi que para el zp optimo hay que usar la version numerica del dipole moment . 
+		d = 10 nm hecho 
+		d = 1 nm en proceso 
+		
+		- hBN disks. ---> rehacer y tener en cuenta todo lo de hBN esferas (hBn_lambda_p_Gself_image.py y hBn_Rp_Gself_image.py): 
+		jueves a la mañana. 
+			*cambios que hay que hacer : 
+				-Gself : usar hBn_lambda_p_Gself_image.py y hBn_Rp_Gself_image.py y chequear que obtengo lo mismo . done 
+				-dipole moment : usar hBn_lambda_p_Gself_image.py y hBn_Rp_Gself_image.py, imponer im(kz)>0 y chequear que obtengo lo mismo.
+				No obtengo lo mismo porque la polarizabilidad effectiva dentro del dipole moment es diferente ahora pero para la 2da banda, 
+				obtengo algo parecido. 
+			
+			-  El momento dipolar numerico y analitico son diferentes entonces voy a calcular el zp optimum con el decay rate numerico
+				- d = 10 nm
+			
+				- d = 1 nm
+		
+		
+				
+		
+		- Silver. Gself: la formula analitica 2 para Gself funciona bastante mejor (la PP no funciona por FP incidente). 
+		d = 10 nm falta 
+			- d = 1nm, el Gself es no nulo solo para pequeñas frecuencias (0-0.5eV). asi que es mejor hacerlo para d = 10 nm. done para d = 10 nm
+			
+		
+		
+	
+	
+	- jueves 10/11 : -comparar el decay rate con optimum zp / decay rate a zp = 50 nm ---> para los diferentes materiales. 
+				- graphene : done.
+				- hBN : done. Compare d = 1 nm con d = 10 nm. 
+				- hBN disks : 
+				- Silver :
+					- chequear Gself y dipole moment (quizas tengo que definir Silver_lambda_p_Gself_image.py y Silver_Rp_Gself_image.py) 
+					En rp_coefficient, la pole approx funciona bastante bien para Silver sin cambiar nada. 
+					ojo : Im(Gself) para algunos valores de zp es negativo. para d = 10nm no es negativo pero para d = 1 nm es negativo
+					para zp chicos. 
+				
+				
+			  -extra: comparar el decay rate en resonancia con optimum zp / decay rate en resonancia  a zp = 50 nm ---> para los diferentes materiales. 
+	
+	
+	- viernes 11/11 : update the report , comparar el zp de los casos de resonancia 
+		
+	- comparar los 2 decay rate (resonancia + lossles vs fuera de resonancia) : en el mismo grafico vs freq y ver cuál tiene el mayor decay rate (extra). 
+		"plot_decay_rate_film_with_zp_optimum.py". 
+		- grafeno: done before. el que tiene un mayor valor es el de resonancia pero no se si puedo usarlo. 
+		- silver. 
+		- hBN esferas . 
+		- hBN disks . 
+		
+##############################################################################################################################################################################
+
+* hacer mapas de color que quiere javier y mejorar el reporte ---> jueves
+
+##############################################################################################################################################################################
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     dudas    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1- Problemas con la relacion de dispersion de hBN y la relacion de disp de hBN disks (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre porque no entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Deberia saber cual es la relacion de dispersion de hBN disks para saber en qué rango barro de freq barro el $z_p$ optimo. Desp de la reunion de grupo : hBN barrer para mayores freq pero 
+	
+2 -creo que debe faltar una constante "e" en el potential del caso QE porque cuando calculo el gamma_SPE deberia aparecer e^2/hbar = alfac*c
+	
+3 -duda: el campo electrico en gamma_SPE deberia estar evaluado en la posicion del dipolo o en la del plano 
+	
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+
+	
+	
+	
+	

@@ -1,0 +1,52 @@
+Friday 04-11-2022: 
+##############################################################################################################################################################################
+ 
+1- Problemas con la relacion de dispersion de hBN y la relacion de disp de hBN disks (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre el viernes porque no
+entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Viernes desp de reunion con javier  : preguntar el jueves 3 de nov
+
+##############################################################################################################################################################################
+
+
+hBn disks : chequear el decay rate y calcular el zp optimo ---> bajo las condiciones de resonancia + lossless tengo la misma polarizabilidad que cuando
+tengo esferas de hBN. Probablemente las condiciones de resonancia y de lossless sean diferentes ahora que cambio la polarizabilidad (y que de hecho hay 2) . Es cierto 
+que si separamos el analisisen momento dipolar paralelo a x y perp a z entonces tengo siempre una o la otra. Imponer las mismas condiciones y obtener la nueva polarizabilidad
+de resonancia y sin perdidas para el decay rate y el z_p optimo 
+
+hacer mapas de color que quiere javier (graficar el EELS para el zp optimo y agregar los parametros en los pies de figuras) ---> jueves
+
+Despues de la reunion con Eduardo : 
+
+	-cambiar la figura del paper : labels mas grandes, rayitos rojos desde el piso y plano no inclinado. done
+	
+	-calcular el decay rate para una polarizabilidad general, fuera de la condicion lossless y de resonancia, para el hBN discos y rehacer los anteriores ---> jueves a la mañana
+	
+	creo que hay un problema con el dipole moment del hBN disks. creo qeu la version numerica y la analitica difieren mucho mas de lo usual --> chequear el dipole moment.
+	Si, difiere. El zp optimo cambia un poco (en ese pequeño salto) cuando uno usa el decay rate analitico o numerico, la diferencia es cuán abrupto es ese salto. 
+	
+	-resto de los paneles que quiere javier ---> jueves desp de almorzar (preguntar a Eduardo si aparece el EELS o si todo lo que aparece es el decay rate en el pdf de javier)
+	
+	Al final el Pn es el Gamma_{SPE,n}, por ahora no divido por N porque no parece necesario. El potencial no diverge con N-->inf pero el campo electrico sí porque es la derivada del potencial y baja un kx,n que es proporcional a n ---> el campo electrico diverge con n--->inf
+	
+	-hacer para momento dipolar p//x y p//z ---> hBN disks . se parecen mucho los resultados, solo difieren en un par de decimales
+	
+	-tengo que rehacer el zp optimo sin usar la condicion de resonancia y lossless : para el grafeno ya se observa que da bastante diferente y tiene un pico en la
+	freq de resonancia de la polarizabilidad . falta hacerlo para Silver y para hBN esferas ---> viernes
+		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	
+	creo que debe faltar una constante "e" en el potential del caso QE porque cuando calculo el gamma_SPE deberia aparecer e^2/hbar = alfac*c
+	
+	duda: el campo electrico en gamma_SPE deberia estar evaluado en la posicion del dipolo o en la del plano 
+	
+	---> desp de la reunion de grupo : cambiar el dibujo de inskcape + aumentar la freq de los hBN discos 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

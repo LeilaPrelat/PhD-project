@@ -1,0 +1,39 @@
+cosas para hacer hoy : 16 de octubre de 2022
+
+
+- programar email para los de la jura : 
+	- pedir jura administratitiva para el 21 de diciembre 
+- programar email para los de titulos para preguntar si hice bien lo del analitico final ( si habia que adjuntar documentos, si solo habia que rellenar el formulario, blabla) 
+
+- cosas de icfo  : 
+	- revisar la carpeta de hBN. Revisar la aprox PP para el self image green tensor 
+
+	* la aproximacion que funciona para el self image green tensor es green_self_ana2.
+
+
+	cambiar la funcion del : 
+
+		- decay rate film resonance . done
+		
+	* fig 2 : graficar gamma SP / gamma total separado en parte paralela y perp . color maps. Ojo : no estoy segura de haber entendido bien 
+	lo de p_parallel y p_perp que escribio javier. chequear con Eduardo
+
+		- silver : --> domingo . hasta las 19
+		
+		- graphene : --> domingo . hasta las 19
+		
+		- hBN : --> miercoles 
+		
+	* fig 2 : optimal zp for gamma SP : 
+	
+		- silver  : --> domingo . hasta las 19
+		
+		- graphene  : --> domingo . hasta las 19
+		
+		- hBN  : --> miercoles
+		
+##################################################################################################################################		
+		
+
+nochecita : depilarme bien, armar mochi, llevar toalla, 
+

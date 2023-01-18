@@ -1,0 +1,49 @@
+cosas para hacer hoy Lunes: 
+
+
+- hacer los paneles de javier 
+
+- decay rate en mapa de color como funcion de zp y frequency
+	- silver : ojo que hay que usar el green self numerico dentro del dipole moment porque sino
+	el decay rate da negativo
+	
+- el decay rate que quiere Javier es restando el Gself_surf que es solamente la integral over k_parallel desde 0 hasta 1 
+	-graphene. done. no hay diferencia apreciable, solo en los ultimos decimales
+	-hBn
+	-silver. Gself = Gself_0_inf - Gself_0_1 ??
+	
+- optimum zp: 
+	- hbN disks : falta hacer sin condicion de resonancia . done 
+	
+
+- theta angulo 3D SP:
+	-graphene. done
+	-hBN ( creo que no se puede porque no tengo lambda_p ni k_p)
+	-silver. done 	
+
+- hablar con javier : miercoles.
+
+- hacer el emission probability para el resto de los materiales : 
+	- hBN. done
+	- graphene. done 
+	- silver: ya estaba hecho y no entiendo qué hice en el codigo. Parece que puse diferentes limites segun el theta_degree: ver el codigo plot_decay_theta_n_res.py para diferentes angulos, graficar versus freq y ver cuándo el decay rate es positivo 
+
+jueves 8 de diciembre 
+
+- hacer log(gamma_SPE) en mapa de color para : 
+	- silver
+	- graphene . done 
+
+- hacer gamma_SPE/gamma_tot para el hBN disks ---> intentar hacer 
+
+
+
+- agregar en las lineas de codigo "plt.savefig(...,bbox_inches='tight',pad_inches = 0...)" 
+	para despues no tener que recortar las figuras de python
+  
+
+#########################################################################################
+
+Optimal scatterer separation 
+
+Optimal dipole-surface separation 

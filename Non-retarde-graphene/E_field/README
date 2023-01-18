@@ -1,0 +1,9 @@
+version 1: quad integrando desde k hasta k*sqrt(epsilon). Expresion analytica: hankel functions
+
+version 2: quad integrando desde cerca de cada polo por separado. Expresion analytica: hankel functions
+
+version 3 : quadrature . Pero la version analitica tiene menos periodo (por el metodo de integracion). Expresion analytica: hankel functions
+
+version 4 : principal value . Expresion analytica: funciones de bessel . quad integrando desde cerca de cada polo por separado.
+
+version 5 : principal value . Expresion analytica: funciones de bessel . quad integrando desde k hasta k*sqrt(epsilon), funciona mejor la version 4, hay mucha divergencia en la parte numerica. 

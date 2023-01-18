@@ -1,0 +1,24 @@
+graficar el integrando del green self image tensor : la interferenciade fabry perot hace que no me este dando bien la pole approx (la solucion analitica y la numerica difieren mucho). Para ver eso, se debe graficar el integrando del self image green tensor y ver si hay una curva extra despues del pico de pole resonance
+
+primero graficar vs alfa_parallel : el problema es que el pico no me esta dando en alfa_p. Solucionado 
+
+version 2: graficar vs k_parallel : ver si el pico da en kp
+
+
+ ---> potential2 : caso complicado del potential pero con el self image green tensor numerico + el termino con J1 numerico (fabry perot interference)
+ 
+ 
+ EELS_film : calculo del decay rate con los campos E_R, Ez (coordenadas cilindricas)
+ 
+ EELS_film2 : calculo del decay rate con los campos Ex, Ey, Ez
+ 
+ EELS_film3 : calculo del decay rate con el self image green tensor. El decay rate tiene que ser en la posicion del dipolo (evaluado en R = R_D) y tiene que ser positivo 
+ 
+ 
+ ##### dipole moment: se usa para las 3 expression el Green self image tensor que tiene la parte real numerica (FP interference) y la parte imaginaria analitica (no hay FP interference)
+ 
+ 
+ 
+ 
+ 
+ 

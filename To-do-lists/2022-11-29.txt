@@ -1,0 +1,24 @@
+cosas para hacer hoy : 
+
+
+- hacer los paneles de javier 
+- decay rate en mapa de color como funcion de zp y frequency
+	- graphene. done
+	- hBn. done
+	- silver : ojo que hay que usar el green self numerico dentro del dipole moment porque sino
+	el decay rate da negativo 
+
+#########################################################################################
+- reembolso de los tickets
+
+- cambio de contrato de gas: imprimir formulario y llenarlo de nuevo 
+
+- anotar todos los numeros nuevos y viejos de contratos
+
+- imprimir los docs para renovacion NIE + permiso de re-entrada (con sede en castelldefels)
+
+- german phd graduation hat 
+	* keychain barcelona 
+	* golden balls for cake 
+
+

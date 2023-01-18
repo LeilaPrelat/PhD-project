@@ -1,0 +1,23 @@
+1 - Discuss with Eduardo about :
+
+	- Silver conductivity <-- problem with Javier formula
+	- if I can increment the hBN lossless only for finding the optimum zp. 
+	Ojo con hBN: 
+		- chequear que los coef de fresnel y de pole aprox se parezcan para un dado d (thickness), para d <= 10 nm y E = 0.18-0.19 va bien pero no funciona para el primer polo. 
+		- relacion de dispersion con hBN:  cual es el hbar*omega_bulk en un material isotropico?
+	
+	*find*: problem in the code that finds the optimum zp when there are multiple maximums ---> need to be change in hBN (done), Silver (done) and graphene (done). 
+	. Silver : zp optimum funciona para d = 1 nm
+	. hBN : no funciona. 
+	
+	
+	
+	- hBN disks : paper 303 for polarizabitly --> Monday : cambiar de grafeno a hBN . No idea how to change the values from Table 1 paper 303 from graphene to hBN (the mode eigenvalues and the dipole moment depend on the resonant frequency omega_j which depends on the material, the sigma for an anisotropic material ... ). 
+	
+	
+--> llamar por cambio de cerradura de puerta (done)
+
+2 - ordenar las tartas con yina para el domingo. (done)
+	
+3 - paper work : pedir la re-entrada a España (email de Ingrid). <--- verlo en casa
+

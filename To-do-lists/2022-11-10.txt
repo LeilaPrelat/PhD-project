@@ -1,0 +1,47 @@
+Tuesday 15-11-2022 + Wednesday 16-11-2022
+##############################################################################################################################################################################
+
+- comparar los 2 decay rate (resonancia + lossles vs fuera de resonancia) : en el mismo grafico vs freq y ver cuál tiene el mayor decay rate (extra). "plot_decay_rate_film_with_zp_optimum.py". 
+
+	- grafeno: done before. el que tiene un mayor valor es el de resonancia pero no se si puedo usarlo. 
+	- silver. 
+	- hBN esferas . 
+	- hBN disks . 
+		
+##############################################################################################################################################################################
+
+* hacer mapas de color que quiere javier y mejorar el reporte ---> martes 15/11 16-17  . 
+* mandar email el martes a la noche para juntarme por zoom el miercoles 16/11 con javier de manera rapida . 
+* miercoles 16/11 : 
+
+	- hacer el mapa de color del decay rate para hBN disks para n = 0, 1, 2 ... etc  + agregar al informe 
+	The analitic imaginary part of the Green self image funciona perfecto pero el dipole moment no, asi que no se si puedo
+	usar el decay rate analitico. Creo que cuando aparecen 2 picos y hay un salto en el zp optimum es por usar la version analitica 
+	del decay rate, asi qeu mejor uso la version numerica. habia un typo en el decay rate de inf dipolos, ya lo arregle en grafeno. 
+	
+	- hacer el zp optimum de todos los materiales pero con la condicion de lossless y de resonancia  + agregar al informe ---> jueves 17/11
+	    --> sacar la parte de Re{lambda_p}
+	
+	- devolverle la plata a fadil
+	
+	- jueves 17/11 : hablar con dentista + hacer lo de la resolucion favorable
+
+##############################################################################################################################################################################
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     dudas 4 ever    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1 - no estoy segura del valor de D para disks 
+	
+2 - creo que debe faltar una constante "e" en el potential del caso QE porque cuando calculo el gamma_SPE deberia aparecer e^2/hbar = alfac*c
+	
+3 - duda: el campo electrico en gamma_SPE deberia estar evaluado en la posicion del dipolo o en la del plano 
+	
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+
+
+	Leidenfrost_28
+	
+	

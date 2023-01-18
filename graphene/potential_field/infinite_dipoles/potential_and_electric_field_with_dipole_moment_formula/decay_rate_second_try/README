@@ -1,0 +1,3 @@
+- javier quiere que el decay rate sea para freq fija y en funcion de zp/lambda_p (ver la reunion del 2022-12-19) 
+
+- agregar para graficar el mapo de color gamma_{SP,n}/gamma_0 : plot_decay_rate_theta_res_div_gamma0 que sea a zp fijo 

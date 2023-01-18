@@ -1,0 +1,19 @@
+Monday 31-10-2022: 
+##############################################################################################################################################################################
+ 
+1- Problemas con la relacion de dispersion de hBN (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre el viernes porque no
+entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Viernes desp de reunion con javier  : preguntar el jueves 3 de nov
+
+
+2- Consultar por hBN disks  ---> comenzar y seguir el viernes desp de la reunion. Para el eta, se necesita la conductividad, que depende de permitivitty, hay 2 componentes. 
+Supongo que hay una polarizabilidad paralela y otra perpendicular, cada una con eta paralelo y perpendicular (sigma paralelo y perpendicular <-- permitivitty paralelo y perpendicular) entonces en la polarizabilidad efectiva aparece en el denominador 1/alfa_parallel - G_self_parallel + 1/alfa_perp - G_self_perp. Escribir el codigo el 
+viernes. ---> pasó al miercoles 2 
+
+3- hacer los mapas de color del reporte ---> pasó al miercoles 2 
+
+4- traer la tablet a icfo para hacer los esquemas del paper . done
+
+##############################################################################################################################################################################
+
+
+

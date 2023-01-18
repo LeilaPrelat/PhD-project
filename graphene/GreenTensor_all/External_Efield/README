@@ -1,0 +1,7 @@
+no estoy segura de la exponencial de Eref, cuales son los signos para e^{ikz(z+z_D)} porque Javier lo hizo (ver R6) cuando el plano esta ubicado en z = 0, y yo tengo el dipolo en z_D=0. 
+
+
+Dentro de fieldE_ref/extra : chequear que haya un error en el Gradshtein . Con revisar_Gradshtein2 : usar sympy y ver que la formula es la misma que la del Gradshtein. Con revisar_Gradshtein1 : revisar si obtenemos lo mismo numericamente que analiticamente usando el paquete para integrales que oscilan mpmath y con los ceros de la funcion de bessel 
+
+
+field_ref_numerical2 : usar el paquete de python especial para integrales que oscilan mpmath y con los ceros de la funcion de bessel 

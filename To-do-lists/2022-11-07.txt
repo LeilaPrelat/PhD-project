@@ -1,0 +1,49 @@
+Friday 04-11-2022: 
+##############################################################################################################################################################################
+ 
+1- Problemas con la relacion de dispersion de hBN y la relacion de disp de hBN disks (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre el viernes porque no
+entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Viernes desp de reunion con javier  : preguntar el martes 8 de nov
+
+##############################################################################################################################################################################
+
+
+hBn disks : chequear el decay rate y calcular el zp optimo ---> bajo las condiciones de resonancia + lossless tengo la misma polarizabilidad que cuando
+tengo esferas de hBN. Probablemente las condiciones de resonancia y de lossless sean diferentes ahora que cambio la polarizabilidad (y que de hecho hay 2) . Es cierto 
+que si separamos el analisisen momento dipolar paralelo a x y perp a z entonces tengo siempre una o la otra. Imponer las mismas condiciones y obtener la nueva polarizabilidad
+de resonancia y sin perdidas para el decay rate y el z_p optimo 
+
+hacer mapas de color que quiere javier (graficar el EELS para el zp optimo y agregar los parametros en los pies de figuras) ---> jueves
+
+*Despues de la reunion con Eduardo : 
+	
+	-resto de los paneles que quiere javier ---> jueves desp de almorzar (preguntar a Eduardo si aparece el EELS o si todo lo que aparece es el decay rate en el pdf de javier)
+	Al final es el decay rate del smith Purcell 
+	
+	
+	-tengo que rehacer el zp optimo sin usar la condicion de resonancia y lossless : 
+		- grafeno : viernes 4 de nov : se observa que da bastante diferente y tiene un pico en la freq de resonancia de la polarizabilidad
+		- silver : lunes 7 de nov . after lunch : 14 - 16
+		- hBN esferas : lunes 7 de nov. after lunch : 14 - 16
+
+--> cosas que quiero hacer : 
+		- vim 
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	
+	creo que debe faltar una constante "e" en el potential del caso QE porque cuando calculo el gamma_SPE deberia aparecer e^2/hbar = alfac*c
+	
+	duda: el campo electrico en gamma_SPE deberia estar evaluado en la posicion del dipolo o en la del plano 
+	
+	---> desp de la reunion de grupo : cambiar el dibujo de inskcape + aumentar la freq de los hBN discos (viernes 4 de nov) : 
+	no funciona lo de aumentar la freq de hBN --> hablarlo el martes 8 de nov con Eduardo
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+
+	- mandarle email a ingrid para que revise mi resguardo y vea si hay algo que falta o esta mal + decirle que entro todos los dias y no hay cita para
+	el permiso de re entrada + estoy preocupada por no poder viajar a argentina y ver a mi familia para navidad y año nuevo ---> hecho el martes. 
+	
+	- comprar estuche y vidrio para el celu en mix movil. 
+	
+	

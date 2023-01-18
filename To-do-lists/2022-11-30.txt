@@ -1,0 +1,36 @@
+cosas para hacer hoy : 
+
+
+- hacer los paneles de javier 
+
+- decay rate en mapa de color como funcion de zp y frequency
+	- graphene. done
+	- hBn. done
+	- silver : ojo que hay que usar el green self numerico dentro del dipole moment porque sino
+	el decay rate da negativo
+	
+- el decay rate que quiere Javier es restando el Gself_surf que es solamente la integral over k_parallel desde 0 hasta 1 
+	-graphene. done. no hay diferencia apreciable, solo en los ultimos decimales
+	-hBn
+	-silver
+	
+- optimum zp: 
+	- graphene. done
+	- hBn. done
+	- silver -->
+	
+#########################################################################################
+- enviar email a javier por el carla camp . done 
+
+- enviar email a recursos humanos por la cita de la autorizacion de regreso : 16.30-17. done 
+
+- enviar email de cambio de titularidad a dueña : 16.30-17. done 
+
+-jueves: ir a bcn a conseguir un llavero del barcelona :  18.30. done 
+
+- partido : 19.50. done 
+
+
+Optimal scatterer separation 
+
+Optimal dipole-surface separation

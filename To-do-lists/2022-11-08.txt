@@ -1,0 +1,53 @@
+Tuesday 08-11-2022: 
+##############################################################################################################################################################################
+ 
+##############################################################################################################################################################################
+
+hacer mapas de color que quiere javier (graficar el EELS para el zp optimo y agregar los parametros en los pies de figuras) ---> jueves
+
+*Despues de la reunion con Eduardo : 
+	
+	-resto de los paneles que quiere javier ---> jueves desp de almorzar (preguntar a Eduardo si aparece el EELS o si todo lo que aparece es el decay rate en el pdf de javier). Al final es el decay rate del smith Purcell 
+	
+	
+	-tengo que rehacer el zp optimo sin usar la condicion de resonancia y lossless : 
+		
+		- grafeno : el caso fuera de resonancia tiene z_p menores (un orden menor). para el caso fuera de resonancia, probe con otra energia de polarizacion $\hbar\omega_o$ y si lo disminuyo, el zp aumenta un poco (500 nm-$\hbar\omega_o = 43$meV a 800 nm-$\hbar\omega_o = 20$meV). 
+		
+		- comparar los 2 decay rate (resonancia + lossles vs fuera de resonancia) : en el mismo grafico vs freq y ver cuál tiene el mayor decay rate. 
+		"plot_decay_rate_film_with_zp_optimum.py". 
+			- grafeno: done. el que tiene un mayor valor es el de resonancia pero no se si puedo usarlo. 
+			- silver. 
+			- hBN esferas
+			- hBN disks
+		
+		- hBN disks : el problema era que lambda es muy chico, no se parece al de Eduardo (revisar y usar el mismo codigo que use para 
+		reproducir los graficos de Eduardo). Creo que lo de lambda chico tambien era un problema en el hBN esferas. El problema esta en 
+		la pole approx porque fresnel coefficiente tengo lo mismo que Eduardo (chequee con su paper) 
+		
+		- Silver : optimum zp fuera de resonancia.
+		- hBN esferas : optimum zp fuera de resonancia. 
+		
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     dudas    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1- Problemas con la relacion de dispersion de hBN y la relacion de disp de hBN disks (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre porque no entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Deberia saber cual es la relacion de dispersion de hBN disks para saber en qué rango barro de freq barro el $z_p$ optimo. Desp de la reunion de grupo : hBN barrer para mayores freq pero 
+	
+2 -creo que debe faltar una constante "e" en el potential del caso QE porque cuando calculo el gamma_SPE deberia aparecer e^2/hbar = alfac*c
+	
+3 -duda: el campo electrico en gamma_SPE deberia estar evaluado en la posicion del dipolo o en la del plano 
+	
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+
+	- mandarle email a ingrid para que revise mi resguardo y vea si hay algo que falta o esta mal + decirle que entro todos los dias y no hay cita para
+	el permiso de re entrada + estoy preocupada por no poder viajar a argentina y ver a mi familia para navidad y año nuevo ---> done. 
+	
+	- comprar estuche y vidrio para el celu en mix movil ---> viernes 
+	
+	
+	
+	
+	
+	

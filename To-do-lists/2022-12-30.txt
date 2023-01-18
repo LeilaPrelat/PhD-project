@@ -1,0 +1,31 @@
+cosas para hacer hoy despues de la 3era reunion sobre el paper : 
+
+- inf dipolos esquema. done
+
+- 1 dipolo esquema. done
+
+- inf dipolos disks esquema. done 
+
+
+- decay rate 1 dipolo : 
+	- graphene. done 
+	- silver. done 
+	- hBN. done
+
+- optimum zp 1 dipolo : 
+	- graphene. done 
+	- silver. done 
+	- hBN. done 
+
+
+Lunes 2 de enero 2023 : 
+
+- tratar de hacer la cuenta de disks ---> el lunes 2 de enero 2023 + mandar email a Eduardo 
+
+
+
+
+
+		
+		
+		

@@ -1,0 +1,65 @@
+Tuesday 25-10-2022: 
+
+	1- optimum zp hBN : done on Monday, show results to Edu
+	2- optimum zp Silver solved for d = 1 nm but check Silver conductivity from Javier formula porque para d > 1nm necesito un v > c para crear polaritones (interseccion entre la curva del Silver y la de los electrones) : discuss with Edu
+	
+	The formula A*k_parallel = energy**2 is only valid for low frequencies, so for high frequencies we have to find the poles as we did with Silicon (waveguides) ---> done.  
+	
+	
+	3- hBN disks: cambiar la polarizabilidad hecha del grafeno a hBN. No estoy segura como cambiar el material ---> Start on Wed 26/10
+	
+
+decay rate hBN: 
+### hay 2 picos y va variando cuál es el más alto pero creo que depende mucho del array para x que uno elija. OJO: estaba usando la version numerica del self image green tensor y no es necesario, se
+puede usar la analitica o la numerica PP (que coinciden), la full numerica tiene mucho error numerico ---> chequear el integrando del green self tensor para hBN manañana (y para silver de paso) , a ver si sucede lo de Fabry Perot. 
+
+	- In the moorning : check the self image green tensor and the integrand of 
+			- hBN -->
+			- Silver 
+	Find: typo in the Fresnel coefficients of the self image green tensor
+		---> replace in every code in :
+				- hBN
+				- Silver 
+				
+				
+	---> calcular optimum zp para Silver para d = 10 nm. Es muuy chico comparado con Re(lambda_p) ---> escribir el decay rate como el producto de 
+	2 funciones : gamma = f*g
+	
+	---> calcular dispersion relation for hBN (similar that Silver but with epsilon_parallel and epsilon_perp 
+	     since - hBN is anisotropic -). ---> miercoles
+	
+	---> calcular optimum zp para hBN. 
+	
+	
+############################################################################################################################
+Acerca de self image green tensor : 
+
+	-1) graphene : la parte real no funciona por FP. La parte imaginaria funcionan las 2 versiones analiticas. Faltaria chequear los coef de fresnel vs pole approx del grafeno (chequeado). 
+	
+	-2) Silver : hay que usar la version numerica para todo d peero si se usa la version numerica en el decay rate (dipole moment + self image green tensor) el decay rate tiene una parte negativa (error numerico ? ) 
+	
+	-3) hBN  : 
+	
+	
+	
+<<<<<<< 
+1-hallar la formula de relacion de dispersion para Silver : si aproximo mucho, llego a lo mismo que javier. Fitear la curva numerica
+y ver si realmente omega va como k_parallel^{1/2}
+2-escribir gamma como el producto de 2 funciones y ver cuanto es el decaimiento 
+
+
+
+=======
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+>>>>>>> 6dfc921c67cc31e1bec9139b7565bbe3678839fa
+	

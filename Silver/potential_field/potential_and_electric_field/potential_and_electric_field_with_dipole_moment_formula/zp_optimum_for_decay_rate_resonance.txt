@@ -1,0 +1,2 @@
+# E [meV]     zp [nm], b = -10 nm, v = c/20, d = 1 nm, $\hbar\omega$ = 9.17 eV
+# $\hbar\gamma_{in}$ = 21 meV, $\epsilon_b$ = 4, plot_optimum_zp_decay_rate_film_resonance.py

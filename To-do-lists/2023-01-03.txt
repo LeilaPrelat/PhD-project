@@ -1,0 +1,43 @@
+*Martes 3 de enero 2023 : 
+
+- fig 2 del paper plan : infinite dipoles 
+
+	- gamma_{SP,n}/gamma_0 vs z_o/lambda_p for diferent n 
+		- graphene. done 
+		- silver. jugar mas con el valor de "a" y "zp" para separar los picos 
+		- hBN. done 
+
+############################################################################################################
+
+*Viernes 6 de enero 2023 : 
+
+- fig 3 del paper plan : figuras color map para infinite dipoles 
+
+	- angle SP en 3D 
+		-graphene
+		-silver
+		-hBN
+	
+	change the formula for angle : i change the sign minus (n by -n) porque la zona donde no habia angulo, 
+	daba un decay rate vàlido
+	
+	- gamma_{SP,n}/gamma_0  en 3D 
+		-graphene . dome 
+		-silver
+		-hBN
+	---> deberia escribir gamma_{SP,n}/gamma_0 en funcion de theta_n : gamma_{SP}(\theta_n)/gamma_0 
+	para eso deberia escribir k_y = kp*sin(theta_n) y kx = kp*cos(theta_n). Da cosas feas hacer esto, 
+	porque no da un maximo. 
+
+
+############################################################################################################
+
+*Lunes 9 de enero 2023 : 
+
+- reunion a las 10 am con Eduardo : consultar la cuenta de los disks 
+
+- tratar de hacer la cuenta de disks durante el dia 
+		
+############################################################################################################
+
+---> omega/omega_D

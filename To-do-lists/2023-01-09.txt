@@ -1,0 +1,27 @@
+*Lunes 9 de enero 2023 : reunion con Eduardo 
+
+
+- figura 1 : 
+
+	- fig 1.a) z_o ---> z_0 . done 
+	- fig 1.a) que se vea mas el gris . done 
+	- fig 1.a) flechas mas grandes . done 
+	- fig 1.b) relacion de dispersion sacarle los numeros . done 
+	- fig 1.d) : agregar en el labelx "frequency.." y en el labely : "surface distance.." . done 
+	
+- figura 2 :
+	- fig 2.a) flechas de los dipolos mas grandes . done 
+	- fig 2.a) "n" en italica y el "-" tiene que ser largo . done 
+	- fig 2.c) y 2.d) : poner 10^algo en el cbar en lugar de graficar log(gamma..)   <------
+	
+	* ver por qué Silver difiere tanto del grafeno en el gamma_n* <------
+	
+- sobre hBN : 
+	- ver si se puede escribir como producto de polos  <------ 
+		- expresion analitica para green self image . done miercoles 10 de enero 
+		- 
+	
+	- relacion de dispersion para Silica, ver si coincide con epsilon = 2 <------  miercoles 10 de enero
+		https://refractiveindex.info/?shelf=main&book=SiO2&page=Kischkat
+
+- ensayo para deadline cleo europe <------  miercoles 10 de enero 

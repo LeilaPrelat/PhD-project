@@ -1,0 +1,76 @@
+*lunes 16 de enero 
+
+
+figura 2: 
+	- fig 2.c) y 2.d) : poner 10^algo en el cbar en lugar de graficar log(gamma..)   <------
+	
+	* ver por qué Silver difiere tanto del grafeno en el gamma_n* <------
+		- se resuelve usando el Gself numerico dentro de la funcion decay_rate_n (tarda mucho mas en correr) y para un a de 1500 nm . 
+	
+- sobre hBN : 
+	
+	- expresion analitica para green self image . done miercoles 10 de enero 	
+	- relacion de dispersion para Silica, ver si coincide con epsilon https://refractiveindex.info/?shelf=main&book=SiO2&page=Kischkat . done 
+	- green self image tensor . done 
+	- dipole moment. tengo nuevas formulas porque cambia rp . FALTA  <---- done 
+	- decay rate for 1 dipole . FALTA <----
+	- optimal zp for 1 dipole . FALTA  <----
+	
+	- decay rate for N dipoles ---> miercoles 18 desp de la GM 
+	- angle for N dipoles (color map) ---> miercoles 18 desp de la GM 
+	- Gamma_SP/Gamma_0 for N dipoles (color map)  ---> miercoles 18 desp de la GM 
+
+######################################################################################################################################
+
+- cosas que descubri el lunes 16 de enero : 
+	1- self image green tensor : 
+	
+		- version 1 : hacer todo con residuos
+		- version 2 : resolver todo analiticamente (aparece la funcion exponencial)
+		- version 3 : resolver una parte analiticamente y la parte con el polo resolverla por residuos (no aparece la funcion exponencial) 
+
+		- grafeno : la version 3 es igual a la version 2, ambas funcionan  
+		- silver : solo la version 2 funciona, funciona para la parte imaginaria pero no para la parte real del tensor 
+		- hBN : solo la version 2 funciona, funciona para la parte imaginaria pero no para la parte real del tensor 
+
+	2- corregir el alfa efectivo :
+		- grafeno. done 
+		- silver. done
+		- hBN. done 
+		- hBN disks. done 
+	
+	3- Gself_surf : hay que sacarlo del decay rate : 
+		-1 dipolo:
+			-grafeno. done (no veo que haya cambiado) 
+			-silver. done (no veo que haya cambiado)
+			-hBN. : FALTA EJECTURAR Y DEJAR CORRER   <----
+			-hBN disks : falta <----
+					
+		-inf dipolos:  
+			-grafeno. done (no veo que haya cambiado mucho, se corrieron un poco los picos) 
+			-silver. done (tambien use Gself numerico y los picos estan mas separados, al final creo que habia que hacer eso, usar Gself numerico) 
+			-hBN : FALTA EJECTURAR Y DEJAR CORRER  <----
+			-hBN disks : falta , probar de usar Gself numerico a ver si se separan los picos <----
+				
+		Ojo: hBN esferas: el momento dipolar analitico, aun con el Gself numerico, difiere del momento dipolar numerico 
+
+
+	4- sobre hBN disks: 
+		- higher freq: la parte imaginara de rp es despreciable : complica la convergencia. 
+
+
+se me borro todo lo del lunes 16 por un error en github :-( 
+
+######################################################################################################################################
+
+*martes 17 de enero 
+
+- ensayo para deadline cleo europe 
+
+
+- escribirle a Diana por el pasaje 
+- escribirle a depine 
+
+
+- pasar todo a un overleaf 
+- escribirle a la chica que me escribio por el pHD

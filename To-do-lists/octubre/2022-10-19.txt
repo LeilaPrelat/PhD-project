@@ -1,0 +1,11 @@
+-Problem with zp optimum for Silver : too small compared to graphene and hBN. 
+	Solutions : the thickness "d" was too big. First: check the pole approximation for different values of "d"
+	Second: plot the dispersion relation for those values of "d" to see what are the parameters for having 
+	plasmons. Concern about the dispersion relation: the k_parallel for small thickness is super big. 
+	
+	The problem was in the conductivity (find it! :D --> chocolate reward). Using Javier notes for the conductivity (function "k_parallel_v2") for plotting the dispersion relation (have to be change in overleaf) . For d = 1 nm, good results, but for d > 1 nm, the velocity of the electron has to be bigger than c (no sense) so probably there is a typo in Javier formula. This does 
+	not affect the rest of the results. 
+	
+
+
+

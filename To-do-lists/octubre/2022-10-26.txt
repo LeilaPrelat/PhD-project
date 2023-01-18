@@ -1,0 +1,9 @@
+Wed 26-10-2022: 
+
+	
+1-hallar la formula de relacion de dispersion para Silver : si no aproximo mucho, llego a una curva que da bastante bien, pero es k_parallel como funcion de omega, en lugar de omega en funcion de k_parallel. Si aproximo mas para poder despejar y escribir omega en funcion de k_parallel, llego a lo mismo que javier (misma constante A de la tabla). Esto lo chequeé: Fiteé la curva numerica, si dejo el parametro A libre y fijo que vaya como una raiz, se superpone con la formula de Javier (de la tabla) y si dejo el exponente libre, me aproxima mejor y el exponente obtenido del fiteo no es 0.5. Es decir, lo mejor que se puede obtener si uno quiere que omega vaya como la raiz de k_paralelo es con la formula de javier (tabla 1). 
+
+2-escribir gamma como el producto de 2 funciones y ver cuanto es el decaimiento : es bastante complicado por las expresiones de G_self y del momento dipolar. 
+
+
+	

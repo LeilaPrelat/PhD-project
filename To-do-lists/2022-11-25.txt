@@ -1,0 +1,10 @@
+notes meeting friday 25-11-2022 retraite
+
+
+### brainstorming : 
+
+	- non-linear : array with an emitter in a hole and the propagation of omega is trap while the 2*omega propagates
+	- tip + electron for heat/tunneling but there are many complications
+	
+	- 2 electron photoemission
+	- 

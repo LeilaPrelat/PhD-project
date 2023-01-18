@@ -1,0 +1,35 @@
+valores que funcionan para el decay rate del hBN con v = c/10 
+
+energy 	maximum 		lambda_p 
+0.171 eV      	491 nm			424 nm
+0.172 eV      	474 nm			228 nm
+0.173 eV      	457 nm			148 nm
+0.174 eV      	525 nm			107 nm
+0.175 eV      	439 nm			82 nm
+0.176 eV      	508 nm			66 nm
+0.177 eV      	422 nm			54 nm
+0.178 eV      	405 nm			45 nm
+0.179 eV      	474 nm			38 nm
+0.180 eV      	456 nm			33 nm
+0.181 eV      	370 nm			28 nm
+0.182 eV      	353 nm			24.7 nm
+0.183 eV      	 nm			 nm
+0.184 eV      	 nm			 nm
+0.185 eV      	301 nm			16.5 nm
+0.186 eV      	 nm			 nm
+0.187 eV      	 nm			 nm
+0.188 eV      	327 nm			11 nm
+0.189 eV      	 nm			 nm
+0.190 eV      	 nm			 nm
+0.191 eV      	 nm			 nm
+0.192 eV      	193 nm			6 nm
+0.193 eV      	 nm			 nm
+0.194 eV      	 nm			 nm
+0.195 eV      	141 nm			3.3 nm
+0.196 eV      	 nm			 nm    ## aca ya no funciona
+0.197 eV      	 nm			 nm
+0.198 eV      	 nm			 nm
+
+
+### hay 2 picos y va variando cuál es el más alto pero creo que depende mucho del array para x que uno elija. OJO: estaba usando la version numerica del self image green tensor y no es necesario, se
+puede usar la analitica o la numerica PP (que coinciden), la full numerica tiene mucho error numerico. 

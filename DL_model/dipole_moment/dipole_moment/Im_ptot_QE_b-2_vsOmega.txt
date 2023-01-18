@@ -1,0 +1,8 @@
+# p_{tot,x} QE num, $\epsilon_1$ = 12, v = c/400 $\mu$m/s, x = 0$\mu$m, y = 0$\mu$m, b = -2.00$\mu$m
+# $\epsilon_2$ = 2.4, $E_{bulk}$ = 9.17eV, $\hbar\gamma$ = 0.0001eV, $z_p=2.00\mu$m, z = 0$\mu$m
+# $\kappa$ = 0.10$\omega_0$, $\kappa_r$ = 0.50$\kappa$, $\omega_0$ =0.10THz, $\epsilon_b$ = 4, d = 0.0001$\mu$m
+-8.01470998508e-06
+-1.41467580034e-01
+5.77203805531e-03
+-5.24701049040e-03
+4.99972850774e-03

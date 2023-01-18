@@ -1,0 +1,66 @@
+cosas para hacer hoy Lunes: 
+
+- inf dipolos : rehacer el esquema de muchos dipolos 
+
+- 1 dipolo: decay rate para silver : el decay rate que quiere Javier es restando el Gself_surf que es solamente la integral over k_parallel desde 0 hasta 1 .
+	- graphene : done (sin diferencia apreciable)
+	- hBN : falta
+	- silver : falta. ojo que hay que usar el green self numerico dentro del dipole moment porque sino
+	el decay rate da negativo
+	
+- inf dipolos: theta angulo 3D SP:
+	- graphene: n = 2, n = 3
+	- agregar la ecuacion de theta para delimitar el inicio de la zona colorida 
+
+- inf dipolos: hacer el emission probability todos los materiales : nueva formula de la ultima reunion con javier
+	- hBN. 
+	- graphene. 
+	- silver. 
+
+
+##################################################################################################################################################################
+
+- agregar en las lineas de codigo "plt.savefig(...,bbox_inches='tight',pad_inches = 0...)" 
+	para despues no tener que recortar las figuras de python
+
+
+
+desp de la reunion con javier del lunes 12/12
+	- duda sobre la nueva formula del decay rate : 
+		- unidades porque dentro del phi_n aparece un "e" y me queda "e^2"
+		- es el phi_n que viene desp de integrar o antes ? 
+		- el phi_n esta evaluado en posicion = 0, no ? 
+		- mostrar resultados para el grafeno
+
+
+	- hacer :
+		- chequear unidades de la formula del gamma_n (formula javier, reunion del 12/12)
+		
+		- grafeno : gamma_n tiene una divergencia cuando zp/lambda_p --> 0, revisar si esto viene del dipole moment
+			- graficar el dipole moment en funcion de zp/lambda_p y usar los valores optimos igual que el caso de gamma_n :
+				- Re(py), Re(pz), Im(px), Im(py), |px| , |py| divergen cuando zp/lambda_p --> 0
+			- graficar el dipole moment/alfa_eff en funcion de zp/lambda_p y usar los valores optimos igual que el caso de gamma_n :
+				- Im(px), Im(py) , |py| divergen cuando zp/lambda_p --> 0
+			--> creo que la divergencia viene de las funciones K0 y K1 del momento dipolar (que divergen en el 0), no viene del self image interaction.
+			Las funciones K0 y K1 tienen omega en el argumento y zp/lambda_p --> 0 es lambda_p yendo a infinito y omega yendo a 0. 
+
+		- lo mismo para :
+			- Silver. jueves ---> problemas, los modos no se distinguen. quizas debo restar la integral over alpha_parallel desde 0 hasta 1 
+			- hBN. jueves ---> problemas, los modos no se distinguen. quizas debo restar la integral over alpha_parallel desde 0 hasta 1 
+		OJO: fijar la freq en gamma_n
+		
+		fig: 
+		- figura de inf dipolos desde arriba con inkscape . done
+		- figura de inf dipolos vista de costado con inkscape : agregar sombras a los dipolos. done
+		
+		- hablar con Edu : 14-16. done 
+		
+		- revisar que la multa esté paga. done 
+		
+		- reservar marchalo ? ---> jueves desp de la reunion de grupo. : mencionar en el almuerzo 
+		
+		
+		
+		
+		
+		

@@ -1,0 +1,11 @@
+Monday 24-10-2022: 
+
+	1- optimum zp hBN.
+	2- optimum zp Silver solved for d = 1 nm but check Silver conductivity from Javier formula porque para d > 1nm necesito un v > c para crear polaritones (interseccion entre la curva del Silver y la de los electrones)
+	3- hBN disks: cambiar la polarizabilidad hecha del grafeno a hBN. No estoy segura como cambiar el material ---> Tuesday 25/10
+	
+	
+	
+decay rate hBN: 
+### hay 2 picos y va variando cuál es el más alto pero creo que depende mucho del array para x que uno elija. OJO: estaba usando la version numerica del self image green tensor y no es necesario, se
+puede usar la analitica o la numerica PP (que coinciden), la full numerica tiene mucho error numerico ---> chequear el integrando del green self tensor para hBN manañana (y para silver de paso) , a ver si sucede lo de Fabry Perot. 

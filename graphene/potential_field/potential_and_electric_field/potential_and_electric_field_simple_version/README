@@ -1,0 +1,7 @@
+el termino con J1 y coef de fresnel hace que la aprox de phi_p de pole approx no funcione bien. Para ver si es por el fenomeno de fabry perot (plano actua como espejo) voy a graficar el intregando del termino con J1 vs alpha_parallel
+
+
+es por el fenomeno de interferncia de fabry perot: cuando dice version 2 es porque para el termino con J1 y rp (donde aparece FP) estoy usando siempre la version numerica, porque la pole approx no funciona
+
+
+potential3 : la expresion analitica es exacta (teorema de cauchy, residuos)

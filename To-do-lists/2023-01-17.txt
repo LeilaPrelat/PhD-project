@@ -1,0 +1,64 @@
+*martes 17 de enero 
+
+
+- sobre hBN : 
+	
+	- green self image tensor <--- nuevas formulas. done 
+	- dipole moment. tengo nuevas formulas porque cambia rp . done  <----
+	- decay rate for 1 dipole . FALTA <----
+	- optimal zp for 1 dipole . FALTA  <----
+
+######################################################################################################################################
+
+- cosas que descubri el lunes 16 de enero : 
+
+	3- Gself_surf : hay que sacarlo del decay rate : 
+		-1 dipolo:
+			-grafeno. done (no veo que haya cambiado) 
+			-silver. done (no veo que haya cambiado)
+			-hBN. : FALTA EJECTURAR Y DEJAR CORRER   <----
+			-hBN disks : falta <----
+					
+		-inf dipolos:  
+			-grafeno. done (no veo que haya cambiado mucho, se corrieron un poco los picos) 
+			-silver. done (tambien use Gself numerico y los picos estan mas separados, al final creo que habia que hacer eso, usar Gself numerico) 
+			-hBN : FALTA EJECTURAR Y DEJAR CORRER  <----
+			-hBN disks : falta , probar de usar Gself numerico a ver si se separan los picos <----
+				
+		Ojo: hBN esferas: el momento dipolar analitico, aun con el Gself numerico, difiere del momento dipolar numerico 
+
+
+	4- sobre hBN disks: 
+		- higher freq: la parte imaginara de rp es despreciable : complica la convergencia. 
+
+
+	*Desp de la reunion con Eduardo del 17/01/2023 : 
+		- z_o ---> z_0 
+		- Entender por qué no aparece el fenomeno de Fabry-Perot en hBN disks, la formula de PP es k_parallel/(k_parallel - k_p) 
+		en lugar de k_p/(k_parallel - k_p) 
+		- rp_coefficient : 
+			- rp_pole_aprox_v2 <-- k_p/(k_parallel - k_p) 
+			- rp_pole_aprox <-- k_parallel/(k_parallel - k_p) 
+	
+		- integrando de self image green tensor : done
+			- hay diferencia en el integrando para rp_pole_aprox y rp_pole_aprox_v2
+		
+######################################################################################################################################
+
+
+
+- ensayo para deadline cleo europe 
+
+
+- escribirle a Diana por el pasaje 
+- escribirle a depine 
+
+
+- pasar todo a un overleaf 
+- escribirle a la chica que me escribio por el pHD
+
+- comprar havanna/vauquita
+
+- mandar email a natalia con lo del diploma 
+
+

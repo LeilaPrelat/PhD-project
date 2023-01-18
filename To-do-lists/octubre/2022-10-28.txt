@@ -1,0 +1,27 @@
+Friday 28-10-2022: 
+##############################################################################################################################################################################
+Dudas : 
+
+
+1- Problemas con la relacion de dispersion de hBN (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre el viernes porque no
+entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Viernes desp de reunion con javier  : preguntar el lunes
+
+
+2- Consultar por hBN disks  ---> comenzar y seguir el viernes desp de la reunion. Para el eta, se necesita la conductividad, que depende de permitivitty, hay 2 componentes. 
+Supongo que hay una polarizabilidad paralela y otra perpendicular, cada una con eta paralelo y perpendicular (sigma paralelo y perpendicular <-- permitivitty paralelo y perpendicular) entonces en la polarizabilidad efectiva aparece en el denominador 1/alfa_parallel - G_self_parallel + 1/alfa_perp - G_self_perp. Escribir el codigo el 
+viernes. 
+
+3- Duda acerca de grafeno : para la relacion de dispersion, tambien hay que resolver el denominador del coef de Fresnel = 0.  No funciona el metodo de minimizacion
+del denominador :(, pero no creo que valga la pena hacerlo. 
+
+
+4- Update the report for Friday (--> reunion con javier el viernes 14). Viernes 12-13 
+
+	
+##############################################################################################################################################################################
+
+Viernes : limpiar la maquina de cafe. 
+
+Viernes : preguntar a Eduardo cuando viene la semana que viene ---> todos los dias salvo martes 
+
+

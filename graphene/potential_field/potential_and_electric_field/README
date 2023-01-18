@@ -1,0 +1,3 @@
+-carpeta potential simple version: el phi usa como p a numeros (px = 1, pz = 1, etc)
+
+-carpeta potential with diople moment formula: el phi usa como p a la formula que involucra el self green tensor y la polarizabilidad

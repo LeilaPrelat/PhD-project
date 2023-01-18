@@ -1,0 +1,22 @@
+Thrusday 27-10-2022: 
+##############################################################################################################################################################################
+
+---> 10.30 group meeting. 
+
+1- Problemas con la relacion de dispersion de hBN (leer sobre las bandas ---> googleable: hay un paper donde lo explican. Preguntar a Andre el viernes porque no
+entiendo bien cuál es la formula para el k, aparece una delta de dirac y es raro. Viernes desp de reunion con javier.
+
+
+2- Consultar por hBN disks  ---> comenzar y seguir el viernes desp de la reunion. Para el eta, se necesita la conductividad, que depende de permitivitty, hay 2 componentes. 
+Supongo que hay una polarizabilidad paralela y otra perpendicular, cada una con eta paralelo y perpendicular (sigma paralelo y perpendicular <-- permitivitty paralelo y perpendicular) entonces en la polarizabilidad efectiva aparece en el denominador 1/alfa_parallel - G_self_parallel + 1/alfa_perp - G_self_perp. Escribir el codigo el 
+viernes. 
+
+
+3- Escribir gamma como el producto de 2 funciones y ver cuanto es el decaimiento : es bastante complicado por las expresiones de G_self y del momento dipolar. Hablar con Edu : no es necesario. Graficar el decay_rate/|p|^2 y hallar el optimal zp y ver si cambia mucho con el "d" (only for Silver) : es solo una exponencial que decrece, no tiene maximo. 
+
+
+4- Update the report for Friday (--> reunion con javier el viernes 14). Viernes 12-13 
+
+
+##############################################################################################################################################################################
+

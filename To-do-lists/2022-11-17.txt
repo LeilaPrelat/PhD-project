@@ -1,0 +1,28 @@
+Thursday 17-11-2022
+##############################################################################################################################################################################
+
+- comparar los 2 decay rate (resonancia + lossles vs fuera de resonancia) : en el mismo grafico vs freq y ver cuál tiene el mayor decay rate (extra). "plot_decay_rate_film_with_zp_optimum.py". 
+
+	- grafeno: done before. el que tiene un mayor valor es el de resonancia pero no se si puedo usarlo. 
+	- silver. 
+	- hBN esferas . 
+	- hBN disks . 
+		
+##############################################################################################################################################################################
+
+* jueves 17/11
+	
+	- hacer el zp optimum de todos los materiales pero con la condicion de lossless y de resonancia  + agregar al informe 
+	    --> sacar la parte de Re{lambda_p} ---> jueves 17/11
+	
+	- jueves 17/11 : hablar con dentista + hacer lo de la resolucion favorable
+
+
+	***paper de CLEO***
+		- hacer un mapa de color para la mejora del decay rate con el zp optimum para el paper de CLEO
+		- reordenar en primero un dipolo
+	
+	D. Rodrigo, O. Limaj, D. Janner, D. Etezadi, F. J. García de Abajo, V. Pruneri, and H. Altug, “Mid-infrared plasmonic biosensing with graphene,” Science 349, 165–168 (2015). 
+	
+	
+	H. Hu, X. Yang, X. Guo, K. Khaliji, R. Biswas, F. J. García de Abajo, T. Low, Z. Sun, and Q. Dai, “Gas identification with graphene plasmons,” Nat. Commun. 10, 1131 (2019).
