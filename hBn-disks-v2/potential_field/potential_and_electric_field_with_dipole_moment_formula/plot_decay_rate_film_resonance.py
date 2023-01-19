@@ -71,21 +71,36 @@ aux2 = 1e12/c
 
 print('Definir parametros del problema')
 
-#v = c/int_v
-#omega = 0.7*1e12
 
-#v = c/int_v
-#omega = 0.7*1e12
+x1 = 0.09260651629072682 
+x2 = 0.10112781954887218
 
-#v = c/int_v
-#omega = 0.7*1e12
-cota = 75 #nanometros
-epsi1,epsi3 = 1,1
+x3 = 0.17030075187969923
+x4 = 0.19937343358395992
 
+x0 = 0.08684904004367106 
+xf =  0.8064559363534132
+
+x0 = x1 + 1e-3
+xf = x4 - 1e-3
 
 b = -0.01
 
-d_nano = 10
+d_nano = 0.4
+
+#### la parte real de lambda_p para d = 0.4 nm es positiva si #####
+
+# 0.08684904004367106 intervalo 1   # 0.093 - 0.1 esta dentro de x1-x2 pero no funciona porque Im{Gself} es negativo ---> el decay rate es negativo 
+# 0.13150932790273412
+
+# 0.15239881738519911 intervalo 2   # 0.153 - 0.169 esta dentro de x3-x4 . funciona desde 0.141 eV hasta 0.162 eV (entre 0.163 y 0.169 Im{Gself} es negativo ---> el decay rate es negativo )
+# 0.16968667074999771
+
+# 0.20714368637372804 intervalo 3 # es mayor a x4 
+# 0.8064559363534132
+
+
+#########################
 
 def lambda_p(energy0):
     
@@ -102,20 +117,15 @@ def lambda_p(energy0):
 
     return (2*np.pi/kp)*1e3 ## en micro
 
-#energy0_pol = 43
-#omega0 = energy0_pol*1e-3/hb 
-##R = 10 # 10 nm en unidades de micrometros
-#kappa_factor_omega0 = 0.1
-#kappa_r_factor= 0.5
+
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title4 = r'b = %i nm, d = %i nm' %(b*1e3,d_nano)
+title4 = r'b = %i nm, d = %.2f nm' %(b*1e3,d_nano)
 labelp = r'_res' 
 
 N = 30
-
 
 #%%
 
@@ -123,7 +133,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta = EELS_film_ana_f(omegac0,d_nano,int_v,b,zp)
+    rta = EELS_film_ana_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
     
     return rta
 
@@ -132,7 +142,7 @@ def function_imag_num(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta = EELS_film_num_f(omegac0,d_nano,int_v,b,zp)
+    rta = EELS_film_num_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
     
     return rta
 
@@ -141,7 +151,7 @@ def function_imag_pole_aprox(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta = EELS_film_pole_aprox_f(omegac0,d_nano,int_v,b,zp)
+    rta = EELS_film_pole_aprox_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
     
     return rta
 
@@ -173,16 +183,14 @@ if plot_vs_E ==1 :
     listx = np.linspace(15,65,N)
 
 
-x1 = 0.09260651629072682 
-x2 = 0.10112781954887218
-x3 = 0.17030075187969923
-x4 = 0.19937343358395992
-
 
 
 
 if plot_vs_zp == 1 : 
     E0 = 0.095 # eV
+    E0 = xf # eV
+    E0 = 0.143
+    
     int_v0 = 10
     lambbda_p = np.real(lambda_p(E0))
 
@@ -197,8 +205,9 @@ if plot_vs_zp == 1 :
             listx = np.linspace(50,600,N)
 
     else:
-        listx = np.linspace(1,400,N)
-    
+        listx = np.linspace(1,800,N)
+        
+#    listx = np.linspace(400,1600,N)
 #    listx = np.linspace(250,750,N)
 #    
     

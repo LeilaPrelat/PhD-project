@@ -16,7 +16,7 @@ from scipy import integrate
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field','')
+path_constants =  path_basic.replace('/potential_field/potential_and_electric_field_with_dipole_moment_formula','')
 #print('Importar modulos necesarios para este codigo')
 
 try:
@@ -267,6 +267,8 @@ def dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v
     rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+#    rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 , rtaself_y1 , rtaself_z1 
+    
 
     alffa_eff_x = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_x))**(-1)
     alffa_eff_y = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_y))**(-1)

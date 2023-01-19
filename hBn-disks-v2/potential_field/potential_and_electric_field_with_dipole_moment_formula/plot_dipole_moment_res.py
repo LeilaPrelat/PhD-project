@@ -86,8 +86,13 @@ x2 = 0.10112781954887218
 x3 = 0.17030075187969923
 x4 = 0.19937343358395992
 
+x0 = 0.08684904004367106 
+xf =  0.8064559363534132
+
 listx = np.linspace(0.09,0.195,N)
 listx = np.linspace(x1+1e-3,0.1975,N)
+listx = np.linspace(x1 + 1e-3, x4 - 1e-3,N)
+#listx = np.linspace(x0+1e-3,xf - 1e-3,N)
 #listx = np.linspace(x1,x2,N)
 
 ## entre x1 y x2, y entre x3 y x4 ##
