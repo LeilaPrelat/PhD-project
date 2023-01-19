@@ -74,7 +74,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 3
+zp_nano = 0.4
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -209,7 +209,7 @@ for n in list_n:
         
     maxi = np.max(list_y_re)
     maxis.append(maxi)
-    print(n,maxi)
+    print(n,listx_2[int(np.argmax(list_y_re))],maxi)
 #    list_y_re = np.array(list_y_re)/maxi
      
 maxis = []
