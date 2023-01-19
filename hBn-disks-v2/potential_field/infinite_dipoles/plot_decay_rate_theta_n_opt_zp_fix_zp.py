@@ -123,8 +123,8 @@ N = 500
 lim1,lim2 = 18,-60
 lim1,lim2 = 0,-1
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
-
-
+#listx_2 = np.linspace(listx[lim1], 0.8, N)
+#
 listy_2 = f1(listx_2)
 listz_2 = f2(listx_2)  
 
@@ -234,7 +234,7 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)*1e14
     
     listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_3,np.array(list_y_re)*1e-4,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_3,np.array(list_y_re)*1e-4,'.',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
