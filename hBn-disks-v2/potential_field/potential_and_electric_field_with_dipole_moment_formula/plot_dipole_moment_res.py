@@ -35,7 +35,7 @@ except ModuleNotFoundError:
     print(err)
 
 try:
-    sys.path.insert(1, path_basic)
+    sys.path.insert(1, path_constants)
     from Silica_epsilon import epsilon_Silica
 except ModuleNotFoundError:
     print(err)
