@@ -59,7 +59,7 @@ int_v = 10
 #v = c/int_v
 #omega = 0.7*1e12
 
-zp = 0.05
+zp = 0
 b = -0.01
 
 

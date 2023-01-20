@@ -55,7 +55,7 @@ aux2 = 1e12/c
 print('Definir parametros del problema')
 
 
-zp_nano = 0.05*1e3
+zp_nano = 50
 
 
 d_nano = 0.4
