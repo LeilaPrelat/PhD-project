@@ -75,7 +75,7 @@ print('Definir parametros del problema')
 x1 = 0.09260651629072682 
 x2 = 0.10112781954887218
 
-x3 = 0.17030075187969923
+x3 = 0.17030075187969923 # no se puede hacer el 2do intervalo porque Im{Gself} es negativo 
 x4 = 0.19937343358395992
 
 x0 = 0.08684904004367106 
@@ -191,6 +191,8 @@ if plot_vs_zp == 1 :
 #    E0 = xf # eV
 #    E0 = 0.143
     E0 = 0.1625
+    
+    E0 = 0.172
     int_v0 = 10
     lambbda_p = np.real(lambda_p(E0))
 

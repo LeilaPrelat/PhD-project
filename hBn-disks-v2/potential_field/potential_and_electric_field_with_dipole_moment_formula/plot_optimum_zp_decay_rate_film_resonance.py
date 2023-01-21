@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 1
-load_data = 0
+create_data = 0
+load_data = 1
 
 #%%
 
@@ -81,7 +81,7 @@ int_v = 10
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
 title1 = r'b = %i nm, v = c/%i, d = %i nm, hBN' %(b*1e3,int_v, d_nano)
 #title2 = r'$\hbar\gamma_{in}$ = %i meV, $\epsilon_b$ = %i' %(hbgamma_DL*1e3,epsilon_b)
-labelp = r'_d%inm_v%i' %(d_nano,int_v)
+labelp = r'_d%.1fnm_v%i' %(d_nano,int_v)
 title = title1 
 
 x1 = 0.09260651629072682 
@@ -114,9 +114,12 @@ listx = np.linspace(0.09,0.195,N)
 #
 #listx = np.linspace(0.095 , 0.162, N )
    
-listx = np.linspace(0.1525 , 0.162, N ) ## para d = 0.4 nm
+listx = np.linspace(0.1525 , 0.162, N ) ## para d = 0.4 nm y primer intervalo 
 
-listx = np.linspace(0.093 , 0.1625, N ) ## para d = 0.1 nm
+listx = np.linspace(0.093 , 0.1625, N ) ## para d = 0.1 nm y primer intervalo 
+
+listx = np.linspace(0.093 , 0.1, N ) ## para d = 0.1 nm y primer intervalo 
+
 
 #%%
 
@@ -283,7 +286,7 @@ if load_data == 1:
     list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 27, 3)
 
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-    plt.plot(listx_2[0:15],np.array(list_zp_div_lambda_p[0:15]),'-',ms = ms,color = 'purple')
+    plt.plot(listx_2,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple')
 #    plt.plot(listx,np.array(list_lambda_p)*1e-3,'--',ms = ms,color = 'lightseagreen')
 #    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
     plt.tight_layout()

@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_constants)
-    from dipole_moment import dipole_moment_anav2_resonance,dipole_moment_anav2_for_decay_rate_resonance
+    from dipole_moment import dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_pole_aprox_for_decay_rate_resonance_v1
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_constants)
     
@@ -175,7 +175,7 @@ def decay_rate_theta_inf_dipoles_ana_res(omegac,epsi1,epsi3,d_nano,int_v,zp,a,b,
 #   
     theta_degree = 45
     theta = theta_degree*np.pi/180
-    px,py,pz  = dipole_moment_anav2_resonance(omegac,epsi1,epsi3,d_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi1,epsi3,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -254,19 +254,19 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
 
     epsi_HBN_par = epsi_x
    
-    d_micro = d_nano*1e-3
-    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
-    kp = alfa_p*omegac
-    Rp = 1
+#    d_micro = d_nano*1e-3
+#    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+#    kp = alfa_p*omegac
+#    Rp = 1
 
-#    d_micros = d_nano*1e-3
-#    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
-#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-#    kp = 2*np.pi/lambda_p_v
-#    alfa_p = kp/omegac 
+    d_micros = d_nano*1e-3
+    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
+    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+    kp = 2*np.pi/lambda_p_v
+    alfa_p = kp/omegac 
         
     
-    px,py,pz  = dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_pole_aprox_for_decay_rate_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -299,6 +299,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
 #    cte_aux = cte_aux*1e9 ### cambiar unidades
 
     gamma = np.sqrt(1 - (int_v)**(-2))**(-1)
+    gamma = 1
     alpha = -3*epsi_silica(E)/(4*1j*k1**3)
 
     arg = np.abs(b)*omegac*int_v/gamma

@@ -60,7 +60,7 @@ print('Definir parametros del problema')
 
 b = - 0.01
 
-d_nano = 0.4
+d_nano = 0.1
 
 int_v = 10
 
@@ -74,7 +74,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 50
+zp_nano = 0.1
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -89,7 +89,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
 
-a = 150*1e-3
+a = 5*1e-3
 #a = 150*1e-3
 
 a_nm = a*1e3
@@ -101,7 +101,7 @@ title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3)
 title3 = r'a = %i nm' %(a*1e3)
 title4 = r', $z_p$ = $z^{opt}_p$' 
 
-labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
+labelp = r'_a%.2fnm_zp%inm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
 #label1 = 'vs_zp_lambda_p'  + labelp
 
 
@@ -119,9 +119,9 @@ labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 500
+N = 50
 lim1,lim2 = 18,-60
-lim1,lim2 = 0,-1
+lim1,lim2 = 15,-30
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 #listx_2 = np.linspace(listx[lim1], 0.2, N)
 #
@@ -212,6 +212,8 @@ for n in list_n:
     print(n,listx_2[int(np.argmax(list_y_re))],maxi)
 #    list_y_re = np.array(list_y_re)/maxi
      
+    #%%
+    
 maxis = []
     
 graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
@@ -234,7 +236,7 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)*1e14
     
     listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_3,np.array(list_y_re)*1e-4,'.',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_3,np.array(list_y_re)*1e-4,'.-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
