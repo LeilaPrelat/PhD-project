@@ -74,7 +74,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 0.1
+zp_nano = 0.01
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -101,7 +101,7 @@ title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3)
 title3 = r'a = %i nm' %(a*1e3)
 title4 = r', $z_p$ = $z^{opt}_p$' 
 
-labelp = r'_a%.2fnm_zp%inm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
+labelp = r'_a%.2fnm_zp%.2fnm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
 #label1 = 'vs_zp_lambda_p'  + labelp
 
 
