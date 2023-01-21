@@ -86,7 +86,7 @@ xf = x4 - 1e-3
 
 b = -0.01
 
-d_nano = 0.4
+d_nano = 0.1
 
 #### la parte real de lambda_p para d = 0.4 nm es positiva si #####
 
@@ -188,9 +188,9 @@ if plot_vs_E ==1 :
 
 if plot_vs_zp == 1 : 
     E0 = 0.095 # eV
-    E0 = xf # eV
-    E0 = 0.143
-    
+#    E0 = xf # eV
+#    E0 = 0.143
+#    E0 = 0.162
     int_v0 = 10
     lambbda_p = np.real(lambda_p(E0))
 
@@ -206,7 +206,7 @@ if plot_vs_zp == 1 :
 
     else:
         listx = np.linspace(1,800,N)
-        
+    listx = np.linspace(10,400,N)
 #    listx = np.linspace(400,1600,N)
 #    listx = np.linspace(250,750,N)
 #    
@@ -294,9 +294,9 @@ elif plot_vs_zp == 1:
 
 #%%
         
-peaks, _ = find_peaks(listy_im_ana, height=0)
+peaks, _ = find_peaks(listy_im_pole_aprox, height=0)
 maxi = listx[peaks]
-listy_aux  = np.linspace(np.min(listy_im_ana), np.max(listy_im_ana), 10)
+listy_aux  = np.linspace(np.min(listy_im_pole_aprox), np.max(listy_im_pole_aprox), 10)
 print(maxi)
 if len(maxi ) > 1 :
     listy_im_ana = np.array(listy_im_ana)
@@ -307,8 +307,8 @@ if len(maxi ) > 1 :
     print(E0,maxi)
 
 graph(title,labelx,'$\Gamma_{film}$ [$\mu$s]',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-plt.plot(listx,listy_im_ana,'.-',ms = ms,color = 'purple', label = 'PP analytical')
-plt.plot(listx,listy_im_num,'.-',ms = ms,color = 'lightseagreen',label = 'full numerical')
+#plt.plot(listx,listy_im_ana,'.-',ms = ms,color = 'purple', label = 'PP analytical')
+#plt.plot(listx,listy_im_num,'.-',ms = ms,color = 'lightseagreen',label = 'full numerical')
 plt.plot(listx,listy_im_pole_aprox,'.-',ms = ms,color = 'darkred',label = 'PP numerical')
 #plt.plot(np.ones(10)*maxi, listy_aux,'-k')
 plt.legend(loc = 'best',markerscale=1.5,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)

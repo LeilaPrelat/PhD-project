@@ -29,7 +29,7 @@ if not os.path.exists(path_save):
 err = 'fieldE_direct_numerical.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from green_self_image import green_self_ana,green_self_pole_aprox, green_self_num,green_self_ana2,green_self_ana3
+    from green_self_image import green_self_ana_v1,green_self_ana_v2, green_self_pole_aprox_v1, green_self_pole_aprox_v2, green_self_num
 except ModuleNotFoundError:
     print(err)
 
@@ -58,7 +58,7 @@ print('Definir parametros del problema')
 zp_nano = 50
 
 
-d_nano = 0.4
+d_nano = 0.1
 
 title = r'$z_p$=%inm, d = %.2f nm' %(zp_nano,d_nano)
 
@@ -66,7 +66,7 @@ N = 100
 
     # z0 = 0.06*1e3
 labelx = r'$\hbar\omega$ [eV]'   
-label1 = 'vs_E_d%inm' %(d_nano) 
+labelp = 'vs_E_d%inm' %(d_nano) 
 
 
 listx = np.linspace(0.087, 0.8, N)
@@ -90,71 +90,91 @@ def function_num_xx_im(energy0):
     return np.imag(rtaself_x)
 
 
-def function_ana_xx_re(energy0):
+def function_ana_xx_re_v1(energy0):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_ana(omegac0,epsilon_Silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  = green_self_ana_v1(omegac0,epsilon_Silica,d_nano,zp)
     
     return np.real(rtaself_x)
 
 
-def function_ana2_xx_re(energy0):
+def function_ana_xx_re_v2(energy0):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_ana2(omegac0,epsilon_Silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  = green_self_ana_v2(omegac0,epsilon_Silica,d_nano,zp)
     
     return np.real(rtaself_x) 
 
 
 
-def function_ana3_xx_re(energy0):
+#def function_ana3_xx_re(energy0):
+#    omegac0 = energy0/aux 
+#    zp = zp_nano*1e-3
+#    rtaself_x, rtaself_y, rtaself_z  = green_self_ana3(omegac0,epsilon_Silica,d_nano,zp)
+#    
+#    return np.real(rtaself_x) 
+
+def function_ana_xx_im_v1(energy0):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_ana3(omegac0,epsilon_Silica,d_nano,zp)
-    
-    return np.real(rtaself_x) 
-
-def function_ana_xx_im(energy0):
-    omegac0 = energy0/aux 
-    zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_ana(omegac0,epsilon_Silica,d_nano,zp)
-    
-    return np.imag(rtaself_x)
-
-
-
-def function_ana2_xx_im(energy0):
-    omegac0 = energy0/aux 
-    zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_ana2(omegac0,epsilon_Silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  = green_self_ana_v1(omegac0,epsilon_Silica,d_nano,zp)
     
     return np.imag(rtaself_x)
 
 
 
-def function_ana3_xx_im(energy0):
+def function_ana_xx_im_v2(energy0):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_ana3(omegac0,epsilon_Silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  = green_self_ana_v2(omegac0,epsilon_Silica,d_nano,zp)
     
     return np.imag(rtaself_x)
 
-def function_pole_aprox_xx_re(energy0):
+
+
+#def function_ana3_xx_im(energy0):
+#    omegac0 = energy0/aux 
+#    zp = zp_nano*1e-3
+#    rtaself_x, rtaself_y, rtaself_z  = green_self_ana3(omegac0,epsilon_Silica,d_nano,zp)
+#    
+#    return np.imag(rtaself_x)
+
+def function_pole_aprox_xx_re_v1(energy0):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
-    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox(omegac0,epsilon_Silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_v1(omegac0,epsilon_Silica,d_nano,zp)
     
     return np.real(rtaself_x)
 
 
 
-def function_pole_aprox_xx_im(energy0):
+def function_pole_aprox_xx_im_v1(energy0):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox(omegac0,epsilon_Silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_v1(omegac0,epsilon_Silica,d_nano,zp)
     
     return np.imag(rtaself_x)
+
+
+
+def function_pole_aprox_xx_re_v2(energy0):
+    omegac0 = energy0/aux 
+    zp = zp_nano*1e-3
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_v2(omegac0,epsilon_Silica,d_nano,zp)
+    
+    return np.real(rtaself_x)
+
+
+
+def function_pole_aprox_xx_im_v2(energy0):
+    omegac0 = energy0/aux 
+    zp = zp_nano*1e-3
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_v2(omegac0,epsilon_Silica,d_nano,zp)
+    
+    return np.imag(rtaself_x)
+
 
 
 #%%
@@ -183,73 +203,86 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
 
 #%%
 
-listy_re_ana = []
-listy_re_ana2 = []
-listy_re_ana3 = []
+listy_re_ana_v1 = []
+listy_re_ana_v2 = []
+#listy_re_ana3 = []
 listy_re_num = []
-listy_re_pole_aprox = []
+listy_re_pole_aprox_v1 = []
+listy_re_pole_aprox_v2 = []
 
-
-listy_im_ana = []
-listy_im_ana2 = []
-listy_im_ana3 = []
+listy_im_ana_v1 = []
+listy_im_ana_v2 = []
+#listy_im_ana3 = []
 listy_im_num = []
-listy_im_pole_aprox = []
-
+listy_im_pole_aprox_v1 = []
+listy_im_pole_aprox_v2 = []
 
 for value in listx: 
 
-    y_re_ana = function_ana_xx_re(value)       
-    y_re_ana2 = function_ana2_xx_re(value)       
-    y_re_ana3 = function_ana3_xx_re(value)    
+    y_re_ana_v1 = function_ana_xx_re_v1(value)       
+    y_re_ana_v2 = function_ana_xx_re_v2(value)       
+#    y_re_ana3 = function_ana3_xx_re(value)    
     y_re_num = function_num_xx_re(value)
-    y_re_pole_aprox = function_pole_aprox_xx_re(value)
+    y_re_pole_aprox_v1 = function_pole_aprox_xx_re_v1(value)
+    y_re_pole_aprox_v2 = function_pole_aprox_xx_re_v2(value)
+
     
-    listy_re_ana.append(y_re_ana)
-    listy_re_ana2.append(y_re_ana2)
-    listy_re_ana3.append(y_re_ana3)
+    listy_re_ana_v1.append(y_re_ana_v1)
+    listy_re_ana_v2.append(y_re_ana_v2)
+#    listy_re_ana3.append(y_re_ana3)
     listy_re_num.append(y_re_num)
-    listy_re_pole_aprox.append(y_re_pole_aprox)
+    listy_re_pole_aprox_v1.append(y_re_pole_aprox_v1)
+    listy_re_pole_aprox_v2.append(y_re_pole_aprox_v2)
 
-    y_im_ana = function_ana_xx_im(value)       
-    y_im_ana2 = function_ana2_xx_im(value)   
-    y_im_ana3 = function_ana3_xx_im(value)   
+
+    y_im_ana_v1 = function_ana_xx_im_v1(value)       
+    y_im_ana_v2 = function_ana_xx_im_v2(value)   
+#    y_im_ana3 = function_ana3_xx_im(value)   
     y_im_num = function_num_xx_im(value)
-    y_im_pole_aprox = function_pole_aprox_xx_im(value)
+    y_im_pole_aprox_v1 = function_pole_aprox_xx_im_v1(value)
+    y_im_pole_aprox_v2 = function_pole_aprox_xx_im_v2(value)
 
-    listy_im_ana.append(y_im_ana)
-    listy_im_ana2.append(y_im_ana2)
-    listy_im_ana3.append(y_im_ana3)
+    listy_im_ana_v1.append(y_im_ana_v1)
+    listy_im_ana_v2.append(y_im_ana_v2)
+#    listy_im_ana3.append(y_im_ana3)
     listy_im_num.append(y_im_num)
-    listy_im_pole_aprox.append(y_im_pole_aprox)
-    
+    listy_im_pole_aprox_v1.append(y_im_pole_aprox_v1)
+    listy_im_pole_aprox_v2.append(y_im_pole_aprox_v2)    
     
     
 #%%
+
+label1 = r'$r_{\rm p} = k_\parallel/(k_\parallel - k_{\rm p})$'    
+label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'   
+
 graph(title,labelx,r'Re(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_re_ana2,'.-',ms = ms+1,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_re_ana_v1,'.-',ms = ms+1,color = 'purple',label = 'PP ana 1 ' +  label1)
+plt.plot(listx,listy_re_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_re_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_re_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+plt.plot(listx,listy_re_pole_aprox_v1,'.-',ms = 3,color = 'darkred',label = 'PP num 1')
+plt.plot(listx,listy_re_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
 os.chdir(path_save)
-plt.savefig( 'Re_Gself' + label1 + '.png', format='png')   
+plt.savefig( 'Re_Gself' + labelp + '.png', format='png')   
 
 
 graph(title,labelx,r'Im(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'purple',label = 'PP analytical 3')
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_im_ana2,'.-',ms = ms+1,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_im_ana_v2,'.-',ms = ms+1,color = 'purple',label = 'PP ana 1 ' +  label1)
+plt.plot(listx,listy_im_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_im_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_im_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+plt.plot(listx,listy_im_pole_aprox_v1,'.-',ms = 3,color = 'darkred',label = 'PP num 1')
+plt.plot(listx,listy_im_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
 os.chdir(path_save)
-plt.savefig( 'Im_Gself' + label1 + '.png', format='png')   
+plt.savefig( 'Im_Gself' + labelp + '.png', format='png')   
 
 
 #%%

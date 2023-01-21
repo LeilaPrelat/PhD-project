@@ -30,7 +30,7 @@ if not os.path.exists(path_save):
 err = 'fieldE_direct_numerical.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_anav2_resonance, dipole_moment_pole_aprox_resonance, dipole_moment_num_resonance
+    from dipole_moment import dipole_moment_ana_resonance_v1, dipole_moment_ana_resonance_v2, dipole_moment_pole_aprox_resonance_v1, dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance
 except ModuleNotFoundError:
     print(err)
 
@@ -59,11 +59,11 @@ int_v = 10
 #v = c/int_v
 #omega = 0.7*1e12
 
-zp = 0
+zp = 0.05
 b = -0.01
 
 
-d_nano = 1
+d_nano = 0.1
 
 #omega0THz = 65
 #omega0 = omega0THz*1e12 
@@ -72,14 +72,14 @@ d_nano = 1
     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title4 = r'v = c/%i, $z_p$=%i nm, b = %i nm, d = %i nm' %(int_v, zp*1e3,b*1e3,d_nano)
+title4 = r'v = c/%i, $z_p$=%i nm, b = %i nm, d = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano)
 labelp = r'_res_d%inm' %(d_nano)
 
 N = 75
 
     # z0 = 0.06*1e3
 labelx = r'$\hbar\omega$ [eV]'   
-label1 = 'vs_E' + labelp
+labelp = 'vs_E' + labelp
 
 x1 = 0.09260651629072682 
 x2 = 0.10112781954887218
@@ -99,6 +99,10 @@ listx = np.linspace(x1 + 1e-3, x4 - 1e-3,N)
 
 title =  title4 
 
+
+
+#%%
+
 def function_num(energy0):
     omegac0 = energy0/aux 
 
@@ -109,20 +113,47 @@ def function_num(energy0):
     return np.sqrt(rta)
 
 
-def function_anav2(energy0):
+#%%
+
+def function_ana_v1(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f  = dipole_moment_anav2_resonance(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f  = dipole_moment_ana_resonance_v1(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
     
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
     
     return np.sqrt(rta)
 
 
-def function_pole_approx(energy0):
+
+
+def function_ana_v2(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f  = dipole_moment_ana_resonance_v2(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    
+    rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
+    
+    return np.sqrt(rta)
+
+#%%
+
+def function_pole_approx_v1(energy0):
+    omegac0 = energy0/aux 
+
+    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance_v1(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    
+    rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
+    
+    return np.sqrt(rta)
+
+
+
+
+def function_pole_approx_v2(energy0):
+    omegac0 = energy0/aux 
+
+    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance_v2(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
     
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
     
@@ -155,37 +186,52 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
 
 #%%
 
-listy_re_ana = []
-listy_re_anav2 = []
-listy_re_num = []
-listy_re_pole = []
+listy_ana_v1 = []
+listy_ana_v2 = []
+
+listy_pole_v1 = []
+listy_pole_v2 = []
+
+listy_num = []
 
 for value in listx: 
-
-#    y_re_ana = function_ana(value)       
-    y_re_anav2 = function_anav2(value)  
     
-    y_re_num = function_num(value)
-    y_re_pole = function_pole_approx(value)
+
+    y_ana_v1 = function_ana_v1(value)     
+    y_ana_v2 = function_ana_v2(value)  
+    
+    y_pole_v1 = function_pole_approx_v1(value)
+    y_pole_v2 = function_pole_approx_v2(value)
+    
+    y_num = function_num(value)
     
 #    listy_re_ana.append(y_re_ana)
     
-    listy_re_anav2.append(y_re_anav2)
-
-    listy_re_num.append(y_re_num)
-    listy_re_pole.append(y_re_pole)
+    listy_ana_v1.append(y_ana_v1)
+    listy_ana_v2.append(y_ana_v2)
+    listy_num.append(y_num)
+    
+    listy_pole_v1.append(y_pole_v1)
+    listy_pole_v2.append(y_pole_v2)
 
 #Emax = listx[np.argmax(listy_re_num)]
 #print(Emax)
 
 #%%
+
+label1 = r'$r_{\rm p} = k_\parallel/(k_\parallel - k_{\rm p})$'    
+label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'    
+
+
 graph(title,labelx,r'$|p|$/e',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #    plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'analytical')
-plt.plot(listx,listy_re_anav2,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_re_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_re_pole,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+plt.plot(listx,listy_ana_v1,'.',ms = ms,color = 'purple',label = 'PP ana 1 ' +  label1)
+#plt.plot(listx,listy_ana_v2,'--',ms = ms,color = 'purple',label = 'PP ana 2 ' +  label2)
+plt.plot(listx,listy_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
+plt.plot(listx,listy_pole_v1,'.-',ms = 3,color = 'darkred',label = 'PP num 1' )
+plt.plot(listx,listy_pole_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2'  )
 
-ejey_aux = np.linspace(np.min([np.min(listy_re_anav2),np.min(listy_re_num)]), np.max([np.max(listy_re_anav2[0:-2]),np.max(listy_re_num[0:-2])]) , 10)
+ejey_aux = np.linspace(np.min([np.min(listy_pole_v1),np.min(listy_num)]), np.max([np.max(listy_pole_v1[0:-2]),np.max(listy_num[0:-2])]) , 10)
 for x in [x1,x2,x3]:
     plt.plot(x*np.ones(10), ejey_aux,'--',color = 'grey' )
 
@@ -194,6 +240,6 @@ plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.05,handletext
 plt.tight_layout()
 plt.yscale('log')
 os.chdir(path_save)
-plt.savefig( 'p_tot' + label1 + '.png', format='png')   
+plt.savefig( 'p_tot' + labelp + '.png', format='png')   
 
 #%%

@@ -21,14 +21,14 @@ path_constants =  path_basic.replace('/potential_field/potential_and_electric_fi
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_anav2_resonance, dipole_moment_pole_aprox_resonance, dipole_moment_num_resonance,dipole_moment_anav2_for_decay_rate_resonance
+    from dipole_moment import dipole_moment_ana_resonance_v1,dipole_moment_ana_resonance_v2, dipole_moment_pole_aprox_resonance_v1,dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance,dipole_moment_anav1_for_decay_rate_resonance
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_basic)
 
 
 try:
     sys.path.insert(1, path_basic)
-    from green_self_image import green_self_ana2,green_self_num_integral_inside_light_cone,green_self_pole_aprox,green_self_num
+    from green_self_image import green_self_ana_v1,green_self_ana_v2,green_self_num_integral_inside_light_cone,green_self_pole_aprox_v1,green_self_num
 except ModuleNotFoundError:
     print('green_self_image.py no se encuentra en ' + path_basic)
 
@@ -77,10 +77,10 @@ def EELS_film_ana_f(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana2(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano,zp)
     rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
@@ -135,10 +135,10 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana2(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano,zp)
     rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
@@ -156,7 +156,7 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    cte_aux = cte_aux*1e9 ### cambiar unidades
 
     gamma = np.sqrt(1 - (int_v)**(-2))**(-1)
-    alpha = -3*epsi1/(4*1j*k1**3)
+    alpha = -3*epsi_silica(E)/(4*1j*k1**3)
 
     arg = np.abs(b)*omegac*int_v/gamma
     K1 = special.kn(1,arg)
@@ -169,56 +169,6 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):
     gamma0 = factor_gamma0*(K0**2/gamma**2 + K1**2)*np.imag(alpha)/np.pi  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
     
     return cte_aux*np.imag(Green_self)/gamma0
-
-def EELS_dir_ana_f(omegac,epsi_silica,d_nano,int_v,b,zp):     
-    """    
-    Parameters
-    ----------
-    omegac : omega/c = k0 en 1/micrometros    
-    epsi1 : epsilon del medio de arriba del plano
-    epsi2 : epsilon del medio de abajo del plano
-    hbmu : chemical potential in eV  
-    hbgama : collision frequency in eV
-    z : coordenada z
-    xD : coordenada x del dipolo 
-    yD : coordenada y del dipolo
-    zD : coordenada z del dipolo 
-    zp : posicion del plano (>0)
-    px : coordenada x del dipolo 
-    py : coordenada y del dipolo
-    pz : coordenada z del dipolo
-    Returns
-    -------
-    formula del potencial electric con QE approximation, rp con 
-    aproximacion del polo y con aprox de principal value para las integrales
-    con rp
-    """
-
-    E = omegac*aux
-
-#    k0 = omegac #=omega/c
-    # x_y = ky/k0
-
-    n1 = epsi1*mu1
-    cte1 = np.sqrt(n1)
-    k1 = omegac*cte1
-    k_3 = k1**3
-
-#    k1_2 = (k0*cte1)**2
- #   n_v1 = int_v/cte1
-#    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_anav2_resonance(omegac,epsi_silica,d_nano,zp)
-    
-    tot = np.abs(px_v)**2 + np.abs(py_v)**2  + np.abs(pz_v)**2
- 
-###################################################################################################
-    
-    
-    cte_aux = k_3*alfac*(int_v**2)/(3*(np.pi**2)*c)
-
-    cte_aux = cte_aux*1e9 ## cambiar unidades
-    
-    return cte_aux*tot 
 
 
 #%%
@@ -312,10 +262,10 @@ def EELS_film_pole_aprox_f(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x, rtaself_y, rtaself_z  =  green_self_pole_aprox(omegac,epsi_silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
     
     Green_self = rtaself_x*(np.abs(px_v)**2) + rtaself_y*(np.abs(py_v)**2)  + rtaself_z*(np.abs(pz_v)**2)
 #    print(rtaself_x)

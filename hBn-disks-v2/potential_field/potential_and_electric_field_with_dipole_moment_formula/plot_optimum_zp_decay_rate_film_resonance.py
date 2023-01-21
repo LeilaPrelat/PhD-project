@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 0
-load_data = 1
+create_data = 1
+load_data = 0
 
 #%%
 
@@ -37,7 +37,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_film3.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_film_resonance import EELS_film_ana_f
+    from decay_rate_film_resonance import EELS_film_ana_f, EELS_film_pole_aprox_f
 except ModuleNotFoundError:
     print(err)
 
@@ -73,7 +73,7 @@ print('Definir parametros del problema')
 
 b = -0.01
 
-d_nano = 0.4
+d_nano = 0.1
 int_v = 10
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
@@ -105,14 +105,18 @@ x4 = 0.19937343358395992
 
 #########################
 
-N = 60
+N = 50
 listx = np.linspace(0.09,0.195,N)  
-if primer_intervalo == 1:
-    listx = np.linspace(x1*1.01,x2*0.99,N)
-else:
-    listx = np.linspace(0.171,0.195,N)
-    
-listx = np.linspace(0.1525 , 0.162, N )
+#if primer_intervalo == 1:
+#    listx = np.linspace(x1*1.01,x2*0.99,N)
+#else:
+#    listx = np.linspace(0.171,0.195,N)
+#
+#listx = np.linspace(0.095 , 0.162, N )
+   
+listx = np.linspace(0.1525 , 0.162, N ) ## para d = 0.4 nm
+
+listx = np.linspace(0.095 , 0.162, N ) ## para d = 0.1 nm
 
 #%%
 
@@ -123,7 +127,7 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
 #        listx = np.linspace(50,450,100)
 #    else:
 #        listx = np.linspace(200,600,100)
-    N = 300
+    N = 400
     if d_nano == 1:    
 #        if energy0 <= 0.187:
 #            listx = np.linspace(300,700,N) # segundo intervalo
@@ -136,14 +140,14 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
             list_zp_nano = np.linspace(100,400,N)    
         
     else:
-        list_zp_nano = np.linspace(60,600,N)
+        list_zp_nano = np.linspace(10,400,N)
         
         
         
     listy = []
     for zp_nano in list_zp_nano:
         zp = zp_nano*1e-3
-        rta = EELS_film_ana_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+        rta = EELS_film_pole_aprox_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
         listy.append(rta)
 #    print(energy0,v_sobre_c)
     
