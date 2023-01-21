@@ -116,7 +116,7 @@ listx = np.linspace(0.09,0.195,N)
    
 listx = np.linspace(0.1525 , 0.162, N ) ## para d = 0.4 nm
 
-listx = np.linspace(0.095 , 0.162, N ) ## para d = 0.1 nm
+listx = np.linspace(0.093 , 0.1625, N ) ## para d = 0.1 nm
 
 #%%
 

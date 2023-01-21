@@ -187,10 +187,10 @@ if plot_vs_E ==1 :
 
 
 if plot_vs_zp == 1 : 
-    E0 = 0.095 # eV
+    E0 = 0.093 # eV
 #    E0 = xf # eV
 #    E0 = 0.143
-#    E0 = 0.162
+    E0 = 0.1625
     int_v0 = 10
     lambbda_p = np.real(lambda_p(E0))
 
