@@ -42,10 +42,16 @@ except ModuleNotFoundError:
     print(err)
 try:
     sys.path.insert(1, path_constants)
-    from hBn_PP import hBn_lambda_p
+    from hBn_PP import hBn_lambda_p,epsilon_x
 except ModuleNotFoundError:
     print(err)
-    
+
+try:
+    sys.path.insert(1, path_basic)
+    from Silica_epsilon import epsilon_Silica
+except ModuleNotFoundError:
+    print('Silica_epsilon.py no se encuentra en ' + path_basic)
+
 try:
     sys.path.insert(1, path_constants)
     from constants import constantes
@@ -68,7 +74,6 @@ print('Definir parametros del problema')
 
 #v = c/int_v
 
-epsi1,epsi3 = 1,1
 
 zp = 0.05
 b = -0.01
@@ -89,7 +94,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0(omegac0,epsi1,epsi3,d_nano,int_v,b,zp)
+    rta1 = EELS_film_ana_f_div_gamma0(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
 #    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
 #    print(rta1)
@@ -112,13 +117,28 @@ def function_imag_ana(energy0,int_v,zp_nano):
 #    return rta    
     
 
-def lambda_p(energy0):
+def lambda_p_v2(energy0):
     
 #    d_micros = d_nano*1e-3
-    lambda_p_v = hBn_lambda_p(energy0,epsi1,epsi3)*d_nano
+    lambda_p_v = hBn_lambda_p(energy0,epsilon_Silica)*d_nano
 
     return lambda_p_v ## en nano
 
+
+def lambda_p(energy0): ## creo que esta no tiene mucho que ver 
+    
+    epsi_x = epsilon_x(energy0)
+    epsi_HBN_par = epsi_x
+    epsi_silica = epsilon_Silica(energy0)        
+    
+    omegac = energy0/aux
+#    d_micros = d_nano*1e-3
+    d_micro = d_nano*1e-3
+    alfa_p = epsi_silica*2/(omegac*d_micro*(epsi_HBN_par-1))
+    kp = alfa_p*omegac
+      
+
+    return (2*np.pi/kp)*1e3 ## en micro
 
 if plot_vs_c == 1 :
     E0 = 44 # meV
@@ -145,6 +165,7 @@ if plot_vs_E ==1 :
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
     E0 = 0.175 # eV
+    E0 = 0.1
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
@@ -152,7 +173,7 @@ if plot_vs_zp == 1 :
 #    listx = np.linspace(0.0001,2,N)
     if d_nano == 1:
         if E0 <= 0.187:
-            listx = np.linspace(10,500,N)
+            listx = np.linspace(10,650,N)
         else:
             listx = np.linspace(25,400,N)
 
@@ -232,6 +253,7 @@ elif plot_vs_zp == 1:
      
     
 #%%
+        
 peaks, _ = find_peaks(listy_im_ana, height=0)
 maxi = listx[peaks]
 listy_aux  = np.linspace(np.min(listy_im_ana), np.max(listy_im_ana), 10)

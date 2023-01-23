@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 0
-load_data = 1
+create_data = 1
+load_data = 0
 
 #%%
 
@@ -131,6 +131,7 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
 #    else:
 #        listx = np.linspace(200,600,100)
     N = 400
+    N = 270
     if d_nano == 1:    
 #        if energy0 <= 0.187:
 #            listx = np.linspace(300,700,N) # segundo intervalo
@@ -144,6 +145,7 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
         
     else:
         list_zp_nano = np.linspace(10,400,N)
+        list_zp_nano = np.linspace(10,200,N)
         
         
         

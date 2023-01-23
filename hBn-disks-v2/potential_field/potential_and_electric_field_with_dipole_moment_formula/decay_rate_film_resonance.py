@@ -129,16 +129,22 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):
     E = omegac*aux
 #    k0 = omegac #=omega/c
     # x_y = ky/k0
-    n1 = epsi1*mu1
-    cte1 = np.sqrt(n1)
-    k1 = omegac*cte1
+#    n1 = epsi1*mu1
+#    cte1 = np.sqrt(n1)
+    k1 = omegac
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
+#    px_v,py_v,pz_v = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano,zp)
+    
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)
+#    print(px_v,py_v,pz_v)
+#    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
+
+#    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano,zp)
     rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
@@ -265,8 +271,11 @@ def EELS_film_pole_aprox_f(omegac,epsi_silica,d_nano,int_v,b,zp):
     px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x, rtaself_y, rtaself_z  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
     
+    rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+   
     Green_self = rtaself_x*(np.abs(px_v)**2) + rtaself_y*(np.abs(py_v)**2)  + rtaself_z*(np.abs(pz_v)**2)
 #    print(rtaself_x)
 
