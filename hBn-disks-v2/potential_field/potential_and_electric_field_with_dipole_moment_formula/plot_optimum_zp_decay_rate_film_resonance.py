@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 1
-load_data = 0
+create_data = 0
+load_data = 1
 
 #%%
 
@@ -118,7 +118,7 @@ listx = np.linspace(0.1525 , 0.162, N ) ## para d = 0.4 nm y primer intervalo
 
 listx = np.linspace(0.093 , 0.1625, N ) ## para d = 0.1 nm y primer intervalo 
 
-listx = np.linspace(0.093 , 0.1, N ) ## para d = 0.1 nm y primer intervalo 
+#listx = np.linspace(0.093 , 0.1, N ) ## para d = 0.1 nm y primer intervalo 
 
 
 #%%
@@ -201,7 +201,7 @@ def lambda_p_v2(energy0): ## creo que esta no tiene mucho que ver
     kp = alfa_p*omegac
       
 
-    return (2*np.pi/kp)*1e3 ## en micro
+    return (2*np.pi/kp)*1e3 ## en nano
 
 
 #%%
@@ -297,6 +297,11 @@ if load_data == 1:
     plt.savefig( 'zp_optimum_for_decay_rate_hBN_disks_resonance' + labelp + '.png',bbox_inches='tight',pad_inches = 0.01, format='png', dpi=dpi)  
 
 #
+#    graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#    plt.plot(listx_2,np.array(listy),'-',ms = ms,color = 'purple')
+#    plt.plot(listx_2,np.array(list_lambda_p),'--',ms = ms,color = 'lightseagreen')
+##    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+#    plt.tight_layout()
 
 #
 
