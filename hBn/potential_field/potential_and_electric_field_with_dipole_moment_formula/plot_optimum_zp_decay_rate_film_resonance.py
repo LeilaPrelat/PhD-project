@@ -230,9 +230,9 @@ if load_data == 1:
     list_zp_div_lambda_p = np.array(listy)/np.array(list_lambda_p)
     
     labely = 'Surface-dipole' + '\n' +  r'distance  $z_{\rm 0}$/$\lambda_{\rm p}$'
-    labelx = r'Frequency $\omega$/$\sqrt{\omega_\parallel}$'
+    labelx = r'Frequency $\omega/\omega_\parallel$'
     
-    omega_D = np.sqrt(170.1*1e-3)  ## eV sin el hbar porque se cancela con el listx 
+    omega_D = 170.1*1e-3  ## eV sin el hbar porque se cancela con el listx 
     
     listx_2 = np.array(listx)/omega_D ## sin el hbar porque se cancela con el listx 
     
@@ -245,7 +245,7 @@ if load_data == 1:
     plt.tight_layout()
     os.chdir(path_save)
     
-    plt.savefig( 'zp_optimum_for_decay_rate_Silver_resonance' + labelp + '.png',bbox_inches='tight',pad_inches = 0.01, format='png', dpi=dpi)  
+    plt.savefig( 'zp_optimum_for_decay_rate_hBn_resonance' + labelp + '.png',bbox_inches='tight',pad_inches = 0.01, format='png', dpi=dpi)  
 
 #
 

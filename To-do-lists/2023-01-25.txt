@@ -1,0 +1,34 @@
+** miercoles 25 de enero **
+
+
+- sobre hBN : 
+	
+	- green self image tensor <--- nuevas formulas. done 
+	- dipole moment. tengo nuevas formulas porque cambia rp  <---- nuevas formulas. done
+	- decay rate for 1 dipole .  <---- nuevas formulas. done
+	- optimal zp for 1 dipole .  <---- nuevas formulas. done
+
+######################################################################################################################################
+
+	1- sobre hBN disks: 
+		- higher freq: la parte imaginara de rp es despreciable : complica la convergencia. 
+
+	
+	2- cosas para hacer : 
+	
+		- phi_p del hbN disks para 1 dipolo : chequear formula analitica . done 
+		- phi_p del hbN disks para inf dipolo : chequear formula analitica 
+	
+
+		- corregir fig de hbN disks (typo en labelx) 	
+		- agregar otros materiales en una seccion suplementaria 
+	
+######################################################################################################################################
+
+
+* subir el coso de cleo europe. done 
+
+
+* reunion jueves 26 de enero a las 4pm con Javier y Eduardo . 
+
+
