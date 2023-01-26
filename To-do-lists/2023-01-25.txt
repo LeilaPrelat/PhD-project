@@ -36,7 +36,6 @@ cambiar el eje x de los decay rate de inf dipoles (es zo/lambdap) :
 	- graphene. done
 	- silver. done
 	- hBN. done
-	- hBN disks 
+	- hBN disks ---> no se separan los picos con el "n" 	
 	
 	
-	falta revisar la fig de decay rate normalised para silver : pico no coincide con el resto 

@@ -34,7 +34,7 @@ theta3 = 90*np.pi/180
 def background_theta(x,y):
     
     def gaussian1(theta,sigma):
-        exponente = (x*np.cos(theta) - y*np.sin(theta))**2/(sigma**2)
+        exponente = (x*np.cos(theta) - y*np.sin(theta) )**2/(sigma**2)
         return np.exp(-exponente)
 
 
@@ -145,12 +145,24 @@ color11 = '#FAD019'
 color12 = '#FCCE04'
 
 ### primera paleta https://coolors.co/gradient-palette/e6e6e6-ffdb3a?number=5
-paleta1 = ["#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
+#paleta1 = ["#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
+#
+####  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
+#paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
+#
+#
 
-###  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
+## primera paleta https://coolors.co/gradient-palette/e6e6e6-f75c14?number=5
+paleta1 = ["#E6E6E6","#EAC4B2","#EFA17D","#F37F49","#F75C14"]
+
+####  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
 paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
 
+           
+paleta2 = list(reversed(paleta2)) 
+
 colors = paleta1 + paleta2
+       
 cmap = mcolors.ListedColormap(colors)
 norm = mcolors.Normalize(vmin = np.min(Z_num) ,vmax = np.max(Z_num) )
 
