@@ -16,16 +16,17 @@ from scipy import integrate
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
+path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
 #print('Importar modulos necesarios para este codigo')
 try:
-    sys.path.insert(1, path_basic)
+    sys.path.insert(1, path_constants)
     from rp_coefficient import rp_fresnel_num, rp_pole_aprox, epsilon_x, epsilon_z
 except ModuleNotFoundError:
     print('hBn_PP.py no se encuentra en ' + path_basic)
 
 
 try:
-    sys.path.insert(1, path_basic)
+    sys.path.insert(1, path_constants)
     from constants import constantes
 except ModuleNotFoundError:
     print('constants.py no se encuentra en ' + path_basic)

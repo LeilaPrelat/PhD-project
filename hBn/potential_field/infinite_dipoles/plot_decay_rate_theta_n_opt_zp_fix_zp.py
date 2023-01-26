@@ -155,10 +155,10 @@ def function_real_ana(energy0_meV,zp_nano,Nmax):
 
 
 tamfig = [2.5, 2]
-tamletra = 7
-tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamletra = 9
+tamtitle  = 9
+tamnum = 7
+tamlegend = 7
 labelpady = 2
 labelpadx = 3
 pad = 2.5
@@ -167,7 +167,6 @@ ms = 1
 hp = 0.5
 length_marker = 1.5
 dpi = 500
-
 
 #%%
     
@@ -205,9 +204,16 @@ for n in list_n:
     maxis.append(maxi)
     print(n,maxi)
 #    list_y_re = np.array(list_y_re)/maxi
-     
-maxis = []
+
+listx_3 = []
+for ind in range(len(listy_2)):
+    listx_3.append(listy_2[ind]/listz_2[ind])
     
+listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),N)
+
+   
+maxis = []
+  
 graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 for n in list_n:
     
@@ -228,7 +234,7 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)*1e14
     
     listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_3,np.array(list_y_re)*1e-4,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_4,np.array(list_y_re)*1e-4,'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)

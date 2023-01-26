@@ -66,15 +66,15 @@ int_v = 10
 
 Nmax = 4
 
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^4$'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^{15}$'
 #labely = r'Emission probability (eV$^{-1}$)'
 
-tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance_d%.2fnm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
+tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance_d%.2fnm_v%i_all.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
-zp_nano = listy[0]
-zp_nano = 0.01
+zp_nano = listy[20]
+zp_nano = 0.05
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -88,11 +88,11 @@ a_min = np.real(lambda_SP_1)*Nmax/(int_v - 1)
 a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
-
-a = 5*1e-3
+a = 0.5*1e-3
+#a = 5*1e-3
 #a = 150*1e-3
-
-a_nm = a*1e3
+#
+#a_nm = a*1e3
 
 
 labelx = r'Surface-dipole distance, $z_{\rm 0}/\lambda_{\rm p}$'  
@@ -121,7 +121,7 @@ f2 = interp1d(listx, listz)
 
 N = 50
 lim1,lim2 = 18,-60
-lim1,lim2 = 15,-30
+lim1,lim2 = 14,-30
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 #listx_2 = np.linspace(listx[lim1], 0.2, N)
 #
@@ -149,13 +149,13 @@ title =  title2 + '\n' +  title3  + title4
 #%%
 
 
-def function_real_ana(energy0_meV,zp_nano,Nmax):
+def function_real_ana(energy0_meV,zp_nano,n):
     
 #    a = a_nano*1e-3
     omegac0 = energy0_meV/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,Nmax)
+    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,n)
 
     return rta
 
@@ -215,8 +215,8 @@ for n in list_n:
     #%%
     
 maxis = []
-    
-graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+list_y_re_tot = []
+
 for n in list_n:
     
     list_y_re = []
@@ -235,14 +235,36 @@ for n in list_n:
 
 #    list_y_re = np.array(list_y_re)*1e14
     
-    listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_3,np.array(list_y_re)*1e-4,'.-',ms = ms, label = 'n = %i'%(n))
+    list_y_re_tot.append(list_y_re)
+
+    #%%
+list_y_re_tot_v0 = list_y_re_tot[1]
+list_y_re_tot_v1 = list_y_re_tot[2]
+list_y_re_tot_v2 =  list_y_re_tot[3]
+list_y_re_tot_v3 =  list_y_re_tot[4]
+list_y_re_tot_v4 =  list_y_re_tot[0]
+   
+list_y_re_tot_v2 = [list_y_re_tot_v0,list_y_re_tot_v1,list_y_re_tot_v2,list_y_re_tot_v3,list_y_re_tot_v4]
+
+listx_3 = []
+for ind in range(len(listy_2)):
+    listx_3.append(listy_2[ind]/listz_2[ind])
     
+listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),N)
+
+ #%% 
+listx_3 = np.array(listy_2)/np.array(listz_2)
+graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+k = 0
+for n in list_n:
+    
+    plt.plot(listx_4,np.array(list_y_re_tot_v2[k])*1e-15,'.-',ms = ms, label = 'n = %i'%(n))
+    k = k + 1
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
 plt.tight_layout()
 
-#plt.yscale('log')
+#plt.xlim([0,200])
 os.chdir(path_save)
 plt.savefig('decay_rate_fix_zp_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
 

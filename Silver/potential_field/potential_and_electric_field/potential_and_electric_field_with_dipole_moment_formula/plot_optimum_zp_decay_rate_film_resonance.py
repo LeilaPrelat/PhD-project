@@ -242,7 +242,7 @@ if load_data == 1:
     list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 71, 3)
 
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-    plt.plot(listx,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple')
+    plt.plot(listx_2,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple')
 #    plt.plot(listx,np.array(list_lambda_p)*1e-3,'--',ms = ms,color = 'lightseagreen')
 #    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
     plt.tight_layout()

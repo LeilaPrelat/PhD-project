@@ -114,7 +114,7 @@ labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 200
+N = 250
 lim1,lim2 = 18,-60
 lim1,lim2 = 27,-57
 #lim1,lim2 = 0,-1
@@ -157,10 +157,10 @@ def function_real_ana(energy0_meV,Nmax):
 
 
 tamfig = [2.5, 2]
-tamletra = 7
-tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamletra = 9
+tamtitle  = 9
+tamnum = 7
+tamlegend = 7
 labelpady = 2
 labelpadx = 3
 pad = 2.5
@@ -185,7 +185,7 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
     return  
  
 #%%
-
+from scipy.signal import savgol_filter
 maxis = []
 list_n = [0,1,2,3,4]   
 #    if theta_degree != 0:     
@@ -209,8 +209,8 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)/maxi
      
 maxis = []
-    
-graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+list_y_re_tot = []
+
 for n in list_n:
     
     list_y_re = []
@@ -228,9 +228,24 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)/np.max(maxis)
 
 #    list_y_re = np.array(list_y_re)*1e14
+#    list_y_re = savgol_filter(list_y_re, 49, 3)  
     
-    listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_3,np.array(list_y_re)*1e-11,'-',ms = ms, label = 'n = %i'%(n))
+    list_y_re_tot.append(list_y_re)
+    
+#%%
+
+listx_3 = []
+for ind in range(len(listy_2)):
+    listx_3.append(listy_2[ind]/listz_2[ind])
+    
+listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),len(list_y_re_tot[0]))
+
+graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)    
+k = 0
+for n in list_n:   
+
+    plt.plot(listx_4,np.array(list_y_re_tot[k])*1e-11,'-',ms = ms, label = 'n = %i'%(n))
+    k = k + 1
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)

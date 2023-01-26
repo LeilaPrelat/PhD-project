@@ -145,7 +145,8 @@ if plot_vs_E ==1 :
 
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
-    E0 = 2 #eV
+    E0 = 3.5 #eV
+    E0 = 1.5
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)

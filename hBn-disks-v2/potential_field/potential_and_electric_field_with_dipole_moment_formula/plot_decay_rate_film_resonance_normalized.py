@@ -78,7 +78,7 @@ print('Definir parametros del problema')
 zp = 0.05
 b = -0.01
 
-d_nano = 1
+d_nano = 0.1
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
@@ -174,11 +174,12 @@ if plot_vs_zp == 1 :
     if d_nano == 1:
         if E0 <= 0.187:
             listx = np.linspace(10,650,N)
+            listx = np.linspace(10,950,N)
         else:
             listx = np.linspace(25,400,N)
 
     else:
-        listx = np.linspace(5,700,N)
+        listx = np.linspace(5,600,N)
     
     
 #    print(minimum_function(E0,int_v0)*1e3)

@@ -19,16 +19,25 @@ path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
 #print('Importar modulos necesarios para este codigo')
 
 try:
-    sys.path.insert(1, path_basic)
-    from hBn_PP import hBn_lambda_p,hBn_Rp,epsilon_x
+    sys.path.insert(1, path_constants)
+    from hBn_PP import epsilon_x,hBn_lambda_p,hBn_Rp
 except ModuleNotFoundError:
-    print('graphene_sigma.py no se encuentra en ' + path_constants)
+    print('hBn_PP.py no se encuentra en ' + path_constants)
+
 
 try:
-    sys.path.insert(1, path_constants)
-    from dipole_moment import dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_pole_aprox_for_decay_rate_resonance_v1
+    sys.path.insert(1, path_basic)
+    from dipole_moment import dipole_moment_pole_aprox_for_decay_rate_resonance_v1
 except ModuleNotFoundError:
-    print('dipole_moment.py no se encuentra en ' + path_constants)
+    print('potential.py no se encuentra en ' + path_basic)
+
+
+
+try:
+    sys.path.insert(1, path_basic)
+    from potential_induced import potential_ana_resonance_v1,potential_num_resonance
+except ModuleNotFoundError:
+    print('potential_induced.py no se encuentra en ' + path_basic)
     
 try:
     sys.path.insert(1, path_constants)
@@ -42,100 +51,7 @@ aux = c*hb
 #%%
 
 
-#%%
-
-#
-#
-#def decay_rate_theta_inf_dipoles_ana_res_old(omegac,epsi1,epsi3,d_nano,int_v,zp,a,b,n,theta):     
-#    """    
-#    Parameters
-#    ----------
-#    omegac : omega/c = k0 en 1/micrometros    
-#    epsi1 : epsilon del medio de arriba del plano
-#    epsi2 : epsilon del medio de abajo del plano
-#    hbmu : chemical potential in eV  
-#    hbgama : collision frequency in eV
-#    z : coordenada z
-#    xD : coordenada x del dipolo 
-#    yD : coordenada y del dipolo
-#    zD : coordenada z del dipolo 
-#    zp : posicion del plano (>0)
-#    px : coordenada x del dipolo 
-#    py : coordenada y del dipolo
-#    pz : coordenada z del dipolo
-#    Returns
-#    -------
-#    formula del potencial electric con QE approximation, rp con 
-#    aproximacion del polo y con aprox de principal value para las integrales
-#    con rp
-#    """
-#
-#    x, y, z = 0,0,0
-#    E = omegac*aux
-#    n1 = epsi1*mu1
-#    cte1 = np.sqrt(n1)
-#    k1 = omegac*cte1
-#   
-#    d_micros = d_nano*1e-3
-#    Rp = hBn_Rp(E,epsi1,epsi3)
-#    lambda_p_v = hBn_lambda_p(E,epsi1,epsi3)*d_micros
-#    kp = 2*np.pi/lambda_p_v
-#    alfa_p = kp/omegac 
-#    
-#    
-#    px,py,pz  = dipole_moment_sin_integrar_en_y_resonance(omegac,epsi1,epsi3,d_nano,int_v,b,zp,theta)  
-##    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
-##            
-#    kx = omegac*int_v + 2*np.pi*n/a     
-#    expo_kx = np.exp(1j*kx*x)
-#    
-#    
-#    ky = kp*np.sin(theta)
-#    term_den = np.sqrt(ky**2 + kx**2)
-##    den_dir = np.sqrt(np.abs(z)**2 + np.abs(y)**2)
-##    K0 = special.kn(0,kx*den_dir)
-##    K1 = special.kn(1,kx*den_dir)
-#    
-#    exp_electron = np.exp(-term_den*(2*zp - z))*np.exp(1j*ky*np.abs(y))*expo_kx
-#
-##    term1 =  -2*1j*px*kx*K0 + 2*py*kx*np.abs(y)*K1/den_dir  + pz*np.sign(z)*2*kx*np.abs(z)*K1/den_dir
-#
-#
-#    rp = Rp*kp/(term_den - kp)
-#    term2 = 1j*px*kx*rp/term_den
-#    
-#    term3 = 1j*py*ky*rp/term_den
-#    
-#    term4 = -pz*kp*rp
-#    
-# 
-#
-#    final =  (term2 + term3 + term4)*exp_electron
-#
-#    Ex = 1j*kx*final
-#    Ey = 1j*ky*final
-#    Ez = term_den*final
-#
-#    final_2 = np.conjugate(px)*Ex + np.conjugate(py)*Ey + np.conjugate(pz)*Ez
-#
-#
-#    cte = 1/((2*np.pi)**2*a)
-#    
-#   # return np.imag(final_2*cte*kp*np.cos(theta))
-#
-#    
-#    return np.imag(final_2*cte)
-
-
-#%%
-
-
-
-
-
-
-
-def decay_rate_theta_inf_dipoles_ana_res(omegac,epsi1,epsi3,d_nano,int_v,zp,a,b,n):     
+def decay_rate_theta_inf_dipoles_ana_res(omegac,epsi_silica,d_nano,int_v,zp,a,b,n):     
     """    
     Parameters
     ----------
@@ -165,17 +81,17 @@ def decay_rate_theta_inf_dipoles_ana_res(omegac,epsi1,epsi3,d_nano,int_v,zp,a,b,
     cte1 = np.sqrt(n1)
     k1 = omegac*cte1
    
-    d_micros = d_nano*1e-3
-    Rp = hBn_Rp(E,epsi1,epsi3)
-    lambda_p_v = hBn_lambda_p(E,epsi1,epsi3)*d_micros
-    kp = 2*np.pi/lambda_p_v
-    alfa_p = kp/omegac 
+#    d_micros = d_nano*1e-3
+#    Rp = hBn_Rp(E,epsi1,epsi3)
+#    lambda_p_v = hBn_lambda_p(E,epsi1,epsi3)*d_micros
+#    kp = 2*np.pi/lambda_p_v
+#    alfa_p = kp/omegac 
     
     #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
-#   
-    theta_degree = 45
-    theta = theta_degree*np.pi/180
-    px,py,pz  = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi1,epsi3,d_nano,int_v,b,zp)  
+    Rp = 1
+#    theta_degree = 45
+#    theta = theta_degree*np.pi/180
+    px,py,pz  = dipole_moment_pole_aprox_for_decay_rate_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -198,18 +114,17 @@ def decay_rate_theta_inf_dipoles_ana_res(omegac,epsi1,epsi3,d_nano,int_v,zp,a,b,
 #    cte = 1/((2*np.pi)**2*a)
     
 #    cte2 = alfac*int_v*1e15/(np.pi) ## cambio de unidades + agregar lo que faltaba en el momento dipolar
-    den = np.sqrt(kp**2 - kx**2)
-   # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+    x, y, z = 0,0,0
+    phi_n = potential_num_resonance(omegac,epsi_silica,d_nano,int_v,b,zp,x,y,z,a,n)
     
     rta = cte_final*a*np.abs(phi_n)**2/(2*np.pi*np.real(Rp))
     
-    try: 
-        
-        rta>0
-        
-    except ValueError: 
-        print(zp/lambda_p_v)
+#    try: 
+#        
+#        rta>0
+#        
+#    except ValueError: 
+#        print(zp/lambda_p_v)
     
     return rta
 
@@ -264,7 +179,8 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
     lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
     kp = 2*np.pi/lambda_p_v
     alfa_p = kp/omegac 
-        
+#    Rp = 1
+#        
     
     px,py,pz  = dipole_moment_pole_aprox_for_decay_rate_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
@@ -290,9 +206,17 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
 #    cte = 1/((2*np.pi)**2*a)
     
 #    cte2 = alfac*int_v*1e15/(np.pi) ## cambio de unidades + agregar lo que faltaba en el momento dipolar
+#    den = np.sqrt(kp**2 - kx**2)
+   # return np.imag(final_2*cte*kp*np.cos(theta))
+#   
+#    x, y, z = 0,0,0
+#    phi_n = potential_ana_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp,x,y,z,a,n)
+    
     den = np.sqrt(kp**2 - kx**2)
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)    
+    
+    
     
     rta = a*np.abs(phi_n)**2/(2*np.pi*np.abs(Rp))
     

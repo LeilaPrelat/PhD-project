@@ -31,4 +31,12 @@
 
 * reunion jueves 26 de enero a las 4pm con Javier y Eduardo . 
 
+cambiar el eje x de los decay rate de inf dipoles (es zo/lambdap) : 
 
+	- graphene. done
+	- silver. done
+	- hBN. done
+	- hBN disks 
+	
+	
+	falta revisar la fig de decay rate normalised para silver : pico no coincide con el resto 

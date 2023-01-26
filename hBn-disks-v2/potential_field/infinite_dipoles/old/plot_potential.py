@@ -21,7 +21,7 @@ sns.set()
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field/potential_and_electric_field_with_dipole_moment_formula','')
+path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
 path_save = path_basic + '/' + 'potential'
 if not os.path.exists(path_save):
     print('Creating folder to save graphs')
@@ -69,15 +69,16 @@ d_nano = 0.1
 #omega0 = omega0THz*1e12 
 
  
-x, y, z = 0.05, 0.05, -0.05  #en micrones 
+x, y, z = 0.5, 0.5, -0.05  #en micrones 
+x, y, z = 0, 0, 0  #en micrones 
 
-a = 0.5
+a = 0.1
 
 
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
 title1 = r'v = c/%i, $z_p$=%i nm, b = %i nm, d = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano)
-title4 = r'x = %i nm, y = %i nm, z = %i' %(x*1e3,y*1e3,z*1e3)
+title4 = r'x = %i nm, y = %i nm, z = %i nm, a = %i nm' %(x*1e3,y*1e3,z*1e3,a*1e3)
 
 Nmax = 1
 

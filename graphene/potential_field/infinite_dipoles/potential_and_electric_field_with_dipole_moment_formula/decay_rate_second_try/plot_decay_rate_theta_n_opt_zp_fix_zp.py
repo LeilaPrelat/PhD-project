@@ -63,6 +63,7 @@ Nmax = 1
 
 labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
 labely = 'Decay rate of surface' + '\n' + r'plasmons $\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt', delimiter='\t', skiprows=1)
@@ -119,9 +120,10 @@ f2 = interp1d(listx, listz)
 
 N = 5000
 lim1,lim2 = 16,-80
+lim1,lim2 = 16,-80
 #lim1,lim2 = 10,-63
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
-listx_2 = np.linspace(30,70,N)
+listx_2 = np.linspace(38,70,N)
 
 listy_2 = f1(listx_2)
 listz_2 = f2(listx_2)  
@@ -181,7 +183,7 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
     plt.xlabel(labelx,fontsize=tamletra,labelpad =labelpadx)
     plt.ylabel(labely,fontsize=tamletra,labelpad =labelpady)
     plt.tick_params(labelsize = tamnum, length = 2 , width=1, direction="in", pad = pad)
-    plt.tick_params(labelsize = tamnum, length = 4 , width=1, direction="in", pad = pad) ### para cleo europe
+#    plt.tick_params(labelsize = tamnum, length = 4 , width=1, direction="in", pad = pad) ### para cleo europe
 #    plt.title(title,fontsize=int(tamtitle*0.9))
 
     return  
@@ -220,6 +222,12 @@ for n in list_n:
    
     
 #%%
+listx_3 = []
+for ind in range(len(listy_2)):
+    listx_3.append(listy_2[ind]/listz_2[ind])
+    
+listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),N)
+
     
 graph(title,'Energy [meV]',labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 for n in list_n:
@@ -251,8 +259,8 @@ for n in list_n:
 #        x = 43 #meV
         list_y_re.append(function_real_ana(x,n))
             
-    listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_3,np.array(list_y_re)*1e-8,'-',ms = ms, label = 'n = %i'%(n))
+    listx_3 = np.array(listy_2)/np.array(listz_2)
+    plt.plot(listx_4,np.array(list_y_re)*1e-8,'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
