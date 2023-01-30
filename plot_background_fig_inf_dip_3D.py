@@ -25,11 +25,12 @@ if not os.path.exists(path_save):
 
 
 sigma = 0.15
-yx_ratio = 2
+yx_ratio = 1
 
 theta1 = 30*np.pi/180
 theta2 = 60*np.pi/180
 theta3 = 90*np.pi/180
+theta4  = 0
 
 def background_theta(x,y):
     
@@ -42,14 +43,32 @@ def background_theta(x,y):
         exponente = (x*np.cos(theta) + y*np.sin(theta))**2/(sigma**2)
         return np.exp(-exponente)
 
+    def gaussian3(sigma):
+        exponente = (x**2 + y**2)/(sigma**2)
+        return np.exp(-exponente)
 
+    def gaussian4(sigma):
+        exponente = (x + y)**2/(sigma**2)
+        return np.exp(-exponente)
+    
+   
     rta1 = gaussian1(theta1,sigma) + gaussian1(theta2,sigma) + gaussian1(theta3,sigma)
-    rta2 = gaussian2(theta1,sigma) + gaussian2(theta2,sigma) 
+    rta2 = gaussian2(theta1,sigma) + gaussian2(theta2,sigma)  
+    rta3 = gaussian3(sigma)  
 
     amplitud = np.sqrt(x**2 + (y/yx_ratio)**2)
+    
+    amplitud2 = np.sqrt(x**2 + y**2)
 
-    return (rta1 + rta2)*amplitud
+#    a = np.sqrt(0.7)
+#    b = np.sqrt(0.95)
+#
+#    if (x/a)**2 + (y/b)**2 <= 1 :
+#        cte = 0.5
+#    else:
+#        cte = 0
 
+    return (rta1 + rta2+rta3)*amplitud  
 
 #%%
     
@@ -71,7 +90,7 @@ dpi = 500
 
 
 #%% 
-N = 1e3
+N = 2*1e3
 listx = np.linspace(-1.5,1.5,N)
 listy = np.linspace(-2.5,2.5,N)
 
@@ -151,17 +170,28 @@ color12 = '#FCCE04'
 #paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
 #
 #
+paleta1 = ["#E6E6E6","#F75C14","#F37F49","#EFA17D","#EAC4B2"]
 
-## primera paleta https://coolors.co/gradient-palette/e6e6e6-f75c14?number=5
-paleta1 = ["#E6E6E6","#EAC4B2","#EFA17D","#F37F49","#F75C14"]
+### primera paleta https://coolors.co/gradient-palette/e6e6e6-ffdb3a?number=5
+#paleta1 = ["#E6E6E6","#E6E6E6","#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
+#
+#####  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
+#paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
+#
+#           
+#paleta2 = list(reversed(paleta2)) 
+#
+#colors = paleta1 + paleta2
 
-####  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
+### primera paleta https://coolors.co/gradient-palette/e6e6e6-ffdb3a?number=5
+#paleta1 = ["#E6E6E6","#E6E6E6","#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
+
+###  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
 paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
 
-           
-paleta2 = list(reversed(paleta2)) 
-
 colors = paleta1 + paleta2
+#
+#colors = list(reversed(colors))
        
 cmap = mcolors.ListedColormap(colors)
 norm = mcolors.Normalize(vmin = np.min(Z_num) ,vmax = np.max(Z_num) )

@@ -212,19 +212,67 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):
 #    cte_aux = cte_aux*1e9 ### cambiar unidades
 
     gamma = np.sqrt(1 - (int_v)**(-2))**(-1)
+#    gamma = 1
     alpha = -3*epsi1/(4*1j*k1**3)
 
     arg = np.abs(b)*omegac*int_v/gamma
     K1 = special.kn(1,arg)
     K0 = special.kn(0,arg)
-    
-    print(K1)
    
 
     factor_gamma0 = (2*omegac*int_v/(v*gamma))**2
     gamma0 = factor_gamma0*(K0**2/gamma**2 + K1**2)*np.imag(alpha)/np.pi  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
     
-    return cte_aux*np.imag(Green_self)/gamma0
+#    gamma0 = 1
+    rta_v1 = cte_aux*np.imag(Green_self)/gamma0
+    
+    alpha = 3*epsi1/(2*k1**3)
+    return rta_v1
+#    
+#    rta_v2 = np.imag(Green_self)*(v*gamma)**2/(8*np.pi*(K0**2 + K1**2)*alpha)
+#
+#    return rta_v2
+
+
+def EELS_film_ana_f_div_gamma0_simpler(omegac,epsi1,epsi2,hbmu,hbgama,zp):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    formula del potencial electric con QE approximation, rp con 
+    aproximacion del polo y con aprox de principal value para las integrales
+    con rp
+    """
+
+    k = omegac
+    k_3 = k**3
+
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana2(omegac,epsi1,epsi2,hbmu,hbgama,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi1,epsi2,hbmu,hbgama,zp)
+    
+    rtaself_x, rtaself_y, rtaself_z  = rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+    
+    
+    
+    rta = 3*(rtaself_x + rtaself_y + rtaself_z)/(2*k_3*np.sqrt(epsi1))
+   
+    
+    return np.imag(rta)
+
 
 #%%
 

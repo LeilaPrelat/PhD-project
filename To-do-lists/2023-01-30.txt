@@ -1,0 +1,20 @@
+despues de la reunion del 25/01/2023 con javier y eduardo : 
+
+--> Lunes 30 de enero : 
+
+* gamma_SP/gamma_0 : el factor es muy alto : 
+	
+	- hacer un overleaf aparte para ver bien la formula ---> ver cual es el Gamma0 al que Javier se estaba refiriendo 
+	
+	- graficar por separado en python
+
+* invertir colores del grafico de infinitos dipolos (mostrar a eduardo) 
+
+
+--> Martes 31 de enero : 
+
+* hBN disks : no se separan los picos 
+
+*44th PIERS: abstract deadline ??
+
+*SPP10: abstract deadline ? 
