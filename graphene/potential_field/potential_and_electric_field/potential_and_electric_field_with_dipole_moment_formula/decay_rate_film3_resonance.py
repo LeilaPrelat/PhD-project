@@ -280,22 +280,33 @@ def EELS_film_ana_f_div_gamma0_v2(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):
     
     Green_self = rtaself_x*(np.abs(px_v)**2) + rtaself_y*(np.abs(py_v)**2)  + rtaself_z*(np.abs(pz_v)**2)
 
+    usar_dif_p = 1
+    usar_mismo_p = 0
 
-    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)
+    if usar_dif_p == 1:  
+        
+        px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)
+        
+        denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
-    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp) # multiplicar por e/(2*pi*v)
+        rta = np.imag(Green_self*2*(omegac**3)/denominador)    
     
+    if usar_mismo_p == 1: ## aca los momentos p se cancelan  
+        
+        px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp) # multiplicar por e/(2*pi*v)
 
-    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+        denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
+        alffa_eff_x = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_x))**(-1)
+        alffa_eff_y = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_y))**(-1)
+        alffa_eff_z = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_z))**(-1)
+    
+        alfa_eff = np.abs(alffa_eff_x)**2 + np.abs(alffa_eff_y)**2 + np.abs(alffa_eff_z)**2 
 
-    alffa_eff_x = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_x))**(-1)
-    alffa_eff_y = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_y))**(-1)
-    alffa_eff_z = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_z))**(-1)
+    
+        rta = np.imag(Green_self*alfa_eff*2*(omegac**3)/denominador )
 
-    alfa_eff = np.abs(alffa_eff_x)**2 + np.abs(alffa_eff_y)**2 + np.abs(alffa_eff_z)**2 
-
-    return np.imag(Green_self)*alfa_eff*2*(omegac**3)/denominador
+    return rta 
 
 
 

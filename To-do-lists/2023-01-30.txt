@@ -16,19 +16,26 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 --> Martes 31 de enero : 
 
 	 - el Gamma0 al que Javier se estaba refiriendo para normalizar Gamma_SP es un poco diferente al del paper 149 
-	 - 
+	 	- grafeno. done (hay que agregar el momento dipolar directo) 
+		- silver. done (hay que agregar el momento dipolar directo) 
+		- hBN. 
+		
+	- hacer la presentacion 
 		
 --> Mierc 1 de enero : 
 
-	- deadline 44th PIERS : 
+	- deadline 44th PIERS : abstract de 1 pagina  (similar to Cleo) 
 	
 --> Jueves 2 de feb : homeoffice : 
 	- ir a la comisaria (pedir empadronamiento) + hacer lo de Digi de nuevo 
 
 --> Viernes 3 de feb: 
 
+
+
 * hBN disks : no se separan los picos . preparar una presentacion al respecto . 
 
 * invertir colores del grafico de infinitos dipolos (mostrar a eduardo) 
+	- https://www.geeksforgeeks.org/visualizing-the-bivariate-gaussian-distribution-in-python/
 
 * SPP10: abstract deadline ? 

@@ -290,7 +290,7 @@ omega_omega_D = E0*1e-3/hbmu
 #
 #title = title1 + ', ' + title2
 
-graph(title,labelx,r'($\Gamma_{\rm SP}/\Gamma_{\rm EELS}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.title(title,fontsize=int(tamtitle*0.9))
 plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')

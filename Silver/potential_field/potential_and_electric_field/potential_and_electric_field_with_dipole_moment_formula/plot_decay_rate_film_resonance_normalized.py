@@ -37,7 +37,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_film3.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0
+    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0_v2
 except ModuleNotFoundError:
     print(err)
 
@@ -90,7 +90,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0(omegac0,epsi1,epsi3,d_nano,int_v,b,zp)
+    rta1 = EELS_film_ana_f_div_gamma0_v2(omegac0,epsi1,epsi3,d_nano,int_v,b,zp)
 #    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
 #    print(rta1)
@@ -150,9 +150,9 @@ if plot_vs_zp == 1 :
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
-    label1 = 'vs_zp' + labelp + '_E%ieV' %(E0)
+    label1 = 'vs_zp' + labelp + '_E%imeV' %(E0*1e3)
 #    listx = np.linspace(0.0001,2,N)
-    listx = np.linspace(0.1,100,N)
+    listx = np.linspace(0.1,140,N)
     
 #    print(minimum_function(E0,int_v0)*1e3)
 #    print(np.abs(minimum_function(E0,int_v0))*2*1e3)
@@ -236,27 +236,27 @@ maxi2 = maxi/lambda_p_value
 omegaD_silver = 9.17
 omega_omega_D = E0/(omegaD_silver)
 
-if E0 == 1.5 and int_v0 == 10:
-    zp_crit_lambda_p_value =  0.668862744709979  ## for     E0 = 45 # meV  int_v0 = 10
- #   zp_max_lambda_p_value = 0.5683173512332572
-elif E0 == 3.5 and int_v0 == 10: 
-    zp_crit_lambda_p_value = 0.7268042897014039
+#if E0 == 1.5 and int_v0 == 10:
+#    zp_crit_lambda_p_value =  0.668862744709979  ## for     E0 = 45 # meV  int_v0 = 10
+# #   zp_max_lambda_p_value = 0.5683173512332572
+#elif E0 == 3.5 and int_v0 == 10: 
+#    zp_crit_lambda_p_value = 0.7268042897014039
+#
+#elif E0 == 2.5 and int_v0 == 10:  
+#    zp_crit_lambda_p_value = 0.8682877458439457
+#    
+#title1 = r'$z^{\rm crit}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f'%(zp_crit_lambda_p_value)  ### from plot_decay_rate ... simpler 
+#title2 = r'$z^{\rm opt}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f' %(maxi2[0])
+#
+#title = title1 + ', ' + title2
 
-elif E0 == 2.5 and int_v0 == 10:  
-    zp_crit_lambda_p_value = 0.8682877458439457
-    
-title1 = r'$z^{\rm crit}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f'%(zp_crit_lambda_p_value)  ### from plot_decay_rate ... simpler 
-title2 = r'$z^{\rm opt}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f' %(maxi2[0])
-
-title = title1 + ', ' + title2
-
-graph(title,labelx,r'($\Gamma_{\rm SP}/\Gamma_{\rm EELS}$) $\times$ $10^{12}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-plt.plot(listx_2,np.array(listy_im_ana)*1e-12,'-',ms = ms,color = 'purple')
-plt.title(title,fontsize=int(tamtitle*0.9))
+graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
+#plt.title(title,fontsize=int(tamtitle*0.9))
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
-plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
+#plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
 plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
-plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+plt.legend(loc = 'upper right',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=0)
 plt.tight_layout()
 #if plot_vs_c == 1:
 #    plt.yscale('log')
