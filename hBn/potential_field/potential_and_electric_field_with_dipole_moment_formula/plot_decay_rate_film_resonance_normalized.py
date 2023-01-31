@@ -171,17 +171,17 @@ title =  title4
 #%%
     
 tamfig = [2.5, 2]
-tamletra = 7
+tamletra = 9
 tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamnum = 7
+tamlegend = 8
 labelpady = 2
 labelpadx = 3
-pad = 2.5
+pad = 3
 mk = 1
 ms = 2
 hp = 0.3
-length_marker = 1.5
+length_marker = 0
 dpi = 500
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
@@ -242,7 +242,7 @@ maxi2 = maxi/lambda_p_value
 omegaD_silver = 170.1*1e-3
 omega_omega_D = E0/(omegaD_silver)
 
-graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm 0}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k',label = r'$z^{\rm opt}_{\rm o}$/$\lambda_{\rm p}$')

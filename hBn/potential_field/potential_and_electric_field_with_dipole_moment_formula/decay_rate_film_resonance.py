@@ -222,8 +222,8 @@ def EELS_film_ana_f_div_gamma0_v2(omegac,epsi1,epsi3,d_nano,int_v,b,zp):
 #    alfa_p = np.real(alfa_p)  ### neglecting the imaginary part of kp para la formula de EELS (la del campo)
  
 ###################################################################################################
-    usar_dif_p = 1
-    usar_mismo_p = 0
+    usar_dif_p = 0
+    usar_mismo_p = 1
 
     if usar_dif_p == 1:  
         

@@ -18,7 +18,11 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 	 - el Gamma0 al que Javier se estaba refiriendo para normalizar Gamma_SP es un poco diferente al del paper 149 
 	 	- grafeno. done (hay que agregar el momento dipolar directo) 
 		- silver. done (hay que agregar el momento dipolar directo) 
-		- hBN. 
+		- hBN. done  (hay que agregar el momento dipolar directo) 
+		
+		---> Graficar grafeno vs silver 
+		
+	
 		
 	- hacer la presentacion 
 		

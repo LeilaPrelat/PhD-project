@@ -37,7 +37,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_film3.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0
+    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0,EELS_film_ana_f_div_gamma0_v2
 except ModuleNotFoundError:
     print(err)
 try:
@@ -84,7 +84,7 @@ d_nano = 0.1
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
 title4 = r'b = %i nm' %(b*1e3)
-labelp = r'_res_d%inm' %(d_nano) 
+labelp = r'_res_d%.2fnm' %(d_nano) 
 
 N = 350
 
@@ -94,7 +94,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    rta1 = EELS_film_ana_f_div_gamma0_v2(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
 #    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
 #    print(rta1)
@@ -193,17 +193,17 @@ title =  title4
 #%%
     
 tamfig = [2.5, 2]
-tamletra = 7
+tamletra = 9
 tamtitle  = 8
-tamnum = 6
-tamlegend = 6
-labelpady = 2
+tamnum = 7
+tamlegend = 8
+labelpady = 3
 labelpadx = 3
-pad = 2.5
+pad = 3
 mk = 1
 ms = 2
 hp = 0.3
-length_marker = 1.5
+length_marker = 0
 dpi = 500
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
@@ -265,8 +265,8 @@ maxi2 = maxi/lambda_p_value
 omegaD_silver = 170.1*1e-3
 omega_omega_D = E0/(omegaD_silver)
 
-graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^{12}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-plt.plot(listx_2,np.array(listy_im_ana)*1e-12,'-',ms = ms,color = 'purple')
+graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k',label = r'$z^{\rm opt}_{\rm o}$/$\lambda_{\rm p}$')
 plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
