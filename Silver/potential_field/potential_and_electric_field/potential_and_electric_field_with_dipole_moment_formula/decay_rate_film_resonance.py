@@ -184,6 +184,49 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi1,epsi3,d_nano,int_v,b,zp):
     return cte_aux*np.imag(Green_self)/gamma0
 
 
+
+
+def EELS_film_ana_f_div_gamma0_simpler(omegac,epsi1,epsi3,d_nano,zp):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    formula del potencial electric con QE approximation, rp con 
+    aproximacion del polo y con aprox de principal value para las integrales
+    con rp
+    """
+
+    k = omegac
+    k_3 = k**3
+
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_num(omegac,epsi1,epsi3,d_nano,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi1,epsi3,d_nano,zp)
+    
+    rtaself_x, rtaself_y, rtaself_z  = rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+    
+    
+    
+    rta = 3*(rtaself_x + rtaself_y + rtaself_z)/(2*k_3*np.sqrt(epsi1))
+   
+    
+    return np.imag(rta)
+
+
+
 def EELS_film_ana_f_sin_integrar(omegac,epsi1,epsi3,d_nano,int_v,b,zp):     
     """    
     Parameters

@@ -309,6 +309,43 @@ def dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi1,epsi2,hbmu,hbgama,
     return px, py, pz
 
 
+def dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    px,py,pz en unidades de k*alfa_eff
+    """
+
+    arg = np.abs(b)*omegac*int_v
+    K1 = special.kn(1,arg)
+    K0 = special.kn(0,arg)
+
+    px = 1j*omegac*int_v*K0
+    
+    py = -2*omegac*int_v*K1
+    
+    pz = -omegac*int_v*K1
+    
+    return px, py, pz
+
+
+
+
 #%%
 
 def dipole_moment_num(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp,omega0,kappa_factor_omega0,kappa_r_factor):     

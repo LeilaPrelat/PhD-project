@@ -145,14 +145,14 @@ if plot_vs_E ==1 :
 
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
-    E0 = 3.5 #eV
-    E0 = 1.5
+    E0 = 1.5 #eV
+#    E0 = 1.5
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
     label1 = 'vs_zp' + labelp + '_E%ieV' %(E0)
 #    listx = np.linspace(0.0001,2,N)
-    listx = np.linspace(0.1,75,N)
+    listx = np.linspace(0.1,100,N)
     
 #    print(minimum_function(E0,int_v0)*1e3)
 #    print(np.abs(minimum_function(E0,int_v0))*2*1e3)
@@ -164,18 +164,19 @@ title =  title4
 
 #%%
     
+    
 tamfig = [2.5, 2]
-tamletra = 7
+tamletra = 9
 tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamnum = 7
+tamlegend = 8
 labelpady = 2
 labelpadx = 3
-pad = 2.5
+pad = 3
 mk = 1
 ms = 2
 hp = 0.3
-length_marker = 1.5
+length_marker = 0
 dpi = 500
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
@@ -184,7 +185,7 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
     plt.ylabel(labely,fontsize=tamletra,labelpad =labelpadx)
     plt.tick_params(labelsize = tamnum, length = 2 , width=1, direction="in", pad = pad)
 #    plt.title(title,fontsize=int(tamtitle*0.9))
-
+#
     return   
 
 
@@ -235,10 +236,25 @@ maxi2 = maxi/lambda_p_value
 omegaD_silver = 9.17
 omega_omega_D = E0/(omegaD_silver)
 
-graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^{12}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+if E0 == 1.5 and int_v0 == 10:
+    zp_crit_lambda_p_value =  0.668862744709979  ## for     E0 = 45 # meV  int_v0 = 10
+ #   zp_max_lambda_p_value = 0.5683173512332572
+elif E0 == 3.5 and int_v0 == 10: 
+    zp_crit_lambda_p_value = 0.7268042897014039
+
+elif E0 == 2.5 and int_v0 == 10:  
+    zp_crit_lambda_p_value = 0.8682877458439457
+    
+title1 = r'$z^{\rm crit}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f'%(zp_crit_lambda_p_value)  ### from plot_decay_rate ... simpler 
+title2 = r'$z^{\rm opt}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f' %(maxi2[0])
+
+title = title1 + ', ' + title2
+
+graph(title,labelx,r'($\Gamma_{\rm SP}/\Gamma_{\rm EELS}$) $\times$ $10^{12}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 plt.plot(listx_2,np.array(listy_im_ana)*1e-12,'-',ms = ms,color = 'purple')
+plt.title(title,fontsize=int(tamtitle*0.9))
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
-#plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k')
+plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
 plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 plt.tight_layout()
