@@ -145,14 +145,14 @@ if plot_vs_E ==1 :
 
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
-    E0 = 1.5 #eV
+    E0 = 1.3755 #eV
 #    E0 = 1.5
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
     label1 = 'vs_zp' + labelp + '_E%imeV' %(E0*1e3)
 #    listx = np.linspace(0.0001,2,N)
-    listx = np.linspace(0.1,140,N)
+    listx = np.linspace(0.1,160,N)
     
 #    print(minimum_function(E0,int_v0)*1e3)
 #    print(np.abs(minimum_function(E0,int_v0))*2*1e3)
@@ -250,6 +250,13 @@ omega_omega_D = E0/(omegaD_silver)
 #
 #title = title1 + ', ' + title2
 
+os.chdir(path_basic)
+tabla = np.loadtxt('decay_rate_normalized_grafeno_vs_zp_res_E45meV.txt' , delimiter='\t', skiprows=1)
+tabla = np.transpose(tabla)
+[listx_2_grafeno,listy_im_ana_grafeno] = tabla
+
+
+
 graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.title(title,fontsize=int(tamtitle*0.9))
@@ -264,3 +271,18 @@ os.chdir(path_save)
 plt.savefig( 'EELS_film_' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.01, dpi=dpi)   
 
 
+
+
+graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple',label = 'silver')
+plt.plot(listx_2_grafeno,np.array(listy_im_ana_grafeno),'.-',ms = ms,color = 'darkred',label = 'grafeno')
+#plt.title(title,fontsize=int(tamtitle*0.9))
+#plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
+#plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
+plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
+plt.legend(loc = 'upper right',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+plt.tight_layout()
+#if plot_vs_c == 1:
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'EELS_film_v2_' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.01, dpi=dpi)   

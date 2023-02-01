@@ -304,3 +304,10 @@ os.chdir(path_save)
 plt.savefig( 'EELS_film_' + label1 + 'omega_omega_D%.2f'%(omega_omega_D) + '.png', format='png',bbox_inches='tight',pad_inches = 0.01, dpi=dpi)   
 
 
+tabla = np.array([np.real(np.array(listx_2)),np.real(np.array(listy_im_ana))])
+tabla = np.transpose(tabla)
+info_title = title4
+info = 'decay rate normalized grafeno' 
+header1 = 'z0/lambda_p     Gamma_SP/Gamma_EELS' + info_title + ', ' + ', '  +  info + ', ' + name_this_py
+np.savetxt('decay_rate_normalized_grafeno_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
+
