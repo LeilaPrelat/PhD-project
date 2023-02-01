@@ -13,6 +13,9 @@ import numpy as np
 import os 
 import matplotlib.pyplot as plt
 
+
+AGREGAR MAS AMARILLOS PERO NO TOCAR MAS ESTO QUE ESTA FUNCIONANDO
+
 #%%
 
 name_this_py = os.path.basename(__file__)
@@ -24,8 +27,8 @@ if not os.path.exists(path_save):
     os.mkdir(path_save)
 
 
-sigma = 0.22
-yx_ratio = 1
+sigma = 0.2
+yx_ratio = 0.5
 
 theta1 = 30*np.pi/180
 theta2 = 60*np.pi/180
@@ -35,12 +38,12 @@ theta4  = 0
 def background_theta(x,y):
     
     def gaussian1(theta,sigma):
-        exponente = (x*np.cos(theta) - y*np.sin(theta) )**2/(sigma**2)
+        exponente = (x*np.cos(theta) - y*yx_ratio*np.sin(theta) )**2/(sigma**2)
         return np.exp(-exponente)
 
 
     def gaussian2(theta,sigma):
-        exponente = (x*np.cos(theta) + y*np.sin(theta))**2/(sigma**2)
+        exponente = (x*np.cos(theta) + y*yx_ratio*np.sin(theta))**2/(sigma**2)
         return np.exp(-exponente)
 
     def gaussian3(sigma):
@@ -67,8 +70,15 @@ def background_theta(x,y):
 #        cte = 0.5
 #    else:
 #        cte = 0
+    
+    rta_final = (rta1 + rta2)
 
-    return (rta1 + rta2+rta3)*amplitud  
+    if rta_final >= 0.001:
+        
+        return rta_final
+    
+    else:
+        return 0
 
 #%%
     
@@ -169,8 +179,8 @@ color12 = '#FCCE04'
 ####  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
 #paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
 #
-#
-paleta1 = ["#E6E6E6","#F75C14","#F37F49","#EFA17D","#EAC4B2"]
+#            gris     rojo osccuro  rojo grisaceo
+paleta1 = ["#E6E6E6","#F75C14","#F37F49","#F37F49","#EFA17D","#EAC4B2"]
 
 ### primera paleta https://coolors.co/gradient-palette/e6e6e6-ffdb3a?number=5
 #paleta1 = ["#E6E6E6","#E6E6E6","#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
@@ -210,7 +220,22 @@ colors = paleta1 + list(reversed(paleta2))
 
 colors = paleta1 
 
+
+
+
+
+### primera paleta https://coolors.co/gradient-palette/e6e6e6-ffdb3a?number=5
+paleta1 = ["#E6E6E6","#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
+
+###  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
+paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
+
+colors = paleta1 + paleta2
+
+
+
 cmap = mcolors.ListedColormap(colors)
+
 norm = mcolors.Normalize(vmin = np.min(Z_num) ,vmax = np.max(Z_num) )
 
 
