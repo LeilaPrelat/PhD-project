@@ -135,9 +135,9 @@ path_save = path_basic + '/' + 'disp_relation_graphene'
 
 tamfig = [2.5, 2]
 tamletra = 9
-tamtitle  = 8
+tamtitle  = 9
 tamnum = 7
-tamlegend = 6
+tamlegend = 7
 labelpady = 15
 labelpadx = 5.5
 pad = 2.5
@@ -189,7 +189,7 @@ for int_v in [0.08]:
         list_y2_im.append(valuey_e.imag)  
     ##  
     if int_v != 1:
-        plt.plot(list_y2_re[0:-30],list_omegaTHz[0:-30],'-', color = list_colours[3],lw = ms) # , label = 'v= %.2fc' %(int_v)
+        plt.plot(list_y2_re[0:-30],list_omegaTHz[0:-30],'-', color = list_colours[3],lw = ms,label = r'$k_\parallel = \omega/v$') # , label = 'v= %.2fc' %(int_v)
     else:
         plt.plot(list_y2_re,list_omegaTHz,'-', color = list_colours[j], lw = ms, label = 'light')
         
@@ -198,9 +198,9 @@ plt.plot(omegaD_THz*1e12/v,omegaD_THz,'.',ms = 2,color = 'blue')
 list_extra = np.linspace(-0.12,omegaD_THz*1e12/v,10)
 plt.xlim([-0.12,2.6])
 plt.plot(list_extra,np.ones(10)*omegaD_THz,'--',lw = 1,color = 'blue')
-plt.xlabel('Parallel wave-vector $k_\parallel = 2\pi/\lambda_{p}$',fontsize=tamletra, labelpad = labelpadx)
-plt.ylabel('Frequency $\omega$',fontsize=tamletra, labelpad = labelpady)
-plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+plt.xlabel(r'Parallel wave-vector $k_\parallel = 2\pi/\lambda_{\rm p}$',fontsize=tamletra, labelpad = labelpadx)
+plt.ylabel(r'Frequency $\omega$',fontsize=tamletra, labelpad = labelpady)
+plt.legend(loc = [0.6,0.41],markerscale=mk,fontsize=tamletra,frameon=False,handletextpad=hp, handlelength=0)
 plt.tick_params(labelsize = tamnum, length = 2 , width=1, direction="in", pad = pad)
 #    plt.title(title,fontsize=int(tamtitle*0.9))
 #plt.grid(1)
@@ -209,6 +209,8 @@ plt.yticks([])
 plt.tight_layout()
 # os.chdir(path_save)
 plt.savefig('disp_relation_graphene_real_vs_mEv_2.png', bbox_inches='tight',pad_inches = 0.01, dpi=dpi)
+
+#%%
 
 plt.figure(figsize=tamfig)      
 plt.title(title1 + ', ' + title2,fontsize=tamtitle)

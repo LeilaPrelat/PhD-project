@@ -20,7 +20,7 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 		- silver. done (hay que agregar el momento dipolar directo) 
 		- hBN. done  (hay que agregar el momento dipolar directo) 
 		
-		---> Graficar grafeno vs silver 
+		---> Graficar grafeno vs silver . done
 		
 	
 		
@@ -29,17 +29,19 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 --> Mierc 1 de enero : 
 
 	- deadline 44th PIERS : abstract de 1 pagina  (similar to Cleo) 
+
+        - invertir colores del grafico de infinitos dipolos (mostrar a eduardo) 
+	    - https://www.geeksforgeeks.org/visualizing-the-bivariate-gaussian-distribution-in-python/
+        
+        - poner las figuras en el reporte. 
 	
 --> Jueves 2 de feb : homeoffice : 
 	- ir a la comisaria (pedir empadronamiento) + hacer lo de Digi de nuevo 
 
 --> Viernes 3 de feb: 
-
+        - 9.30 cita en sabadell cerca de icfo 
 
 
 * hBN disks : no se separan los picos . preparar una presentacion al respecto . 
 
-* invertir colores del grafico de infinitos dipolos (mostrar a eduardo) 
-	- https://www.geeksforgeeks.org/visualizing-the-bivariate-gaussian-distribution-in-python/
 
-* SPP10: abstract deadline ? 

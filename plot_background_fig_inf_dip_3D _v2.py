@@ -12,6 +12,7 @@ graficar mapa de color x,y
 import numpy as np
 import os 
 import matplotlib.pyplot as plt
+from scipy.stats import multivariate_normal
 
 #%%
 
@@ -24,7 +25,7 @@ if not os.path.exists(path_save):
     os.mkdir(path_save)
 
 
-sigma = 0.22
+sigma = 0.15
 yx_ratio = 1
 
 theta1 = 30*np.pi/180
@@ -32,43 +33,42 @@ theta2 = 60*np.pi/180
 theta3 = 90*np.pi/180
 theta4  = 0
 
-def background_theta(x,y):
-    
-    def gaussian1(theta,sigma):
-        exponente = (x*np.cos(theta) - y*np.sin(theta) )**2/(sigma**2)
-        return np.exp(-exponente)
-
-
-    def gaussian2(theta,sigma):
-        exponente = (x*np.cos(theta) + y*np.sin(theta))**2/(sigma**2)
-        return np.exp(-exponente)
-
-    def gaussian3(sigma):
-        exponente = (x**2 + y**2)/(sigma**2)
-        return np.exp(-exponente)
-
-    def gaussian4(sigma):
-        exponente = (x + y)**2/(sigma**2)
-        return np.exp(-exponente)
-    
-   
-    rta1 = gaussian1(theta1,sigma) + gaussian1(theta2,sigma) + gaussian1(theta3,sigma)
-    rta2 = gaussian2(theta1,sigma) + gaussian2(theta2,sigma)  
-    rta3 = gaussian3(sigma)  
-
-    amplitud = np.sqrt(x**2 + (y/yx_ratio)**2)
-    
-    amplitud2 = np.sqrt(x**2 + y**2)
-
-#    a = np.sqrt(0.7)
-#    b = np.sqrt(0.95)
+#def background_theta(x,y):
+#    
+#    def gaussian1(theta,sigma):
+#        exponente = (x*np.cos(theta) - y*np.sin(theta) )**2/(sigma**2)
+#        return np.exp(-exponente)
 #
-#    if (x/a)**2 + (y/b)**2 <= 1 :
-#        cte = 0.5
-#    else:
-#        cte = 0
+#
+#    def gaussian2(theta,sigma):
+#        exponente = (x*np.cos(theta) + y*np.sin(theta))**2/(sigma**2)
+#        return np.exp(-exponente)
+#
+#    def gaussian3(sigma):
+#        exponente = (x**2 + y**2)/(sigma**2)
+#        return np.exp(-exponente)
+#
+#    def gaussian4(sigma):
+#        exponente = (x + y)**2/(sigma**2)
+#        return np.exp(-exponente)
+#    
+#   
+#    rta1 = gaussian1(theta1,sigma) + gaussian1(theta2,sigma) + gaussian1(theta3,sigma)
+#    rta2 = gaussian2(theta1,sigma) + gaussian2(theta2,sigma)  
+#    rta3 = gaussian3(sigma)  
+#
+#    amplitud = np.sqrt(x**2 + (y/yx_ratio)**2)
+#    
+#    amplitud2 = np.sqrt(x**2 + y**2)
+#
+##    a = np.sqrt(0.7)
+##    b = np.sqrt(0.95)
+##
+##    if (x/a)**2 + (y/b)**2 <= 1 :
+##        cte = 0.5
+#    return (rta1 + rta2+rta3)*amplitud  
+    
 
-    return (rta1 + rta2+rta3)*amplitud  
 
 #%%
     
@@ -90,13 +90,22 @@ dpi = 500
 
 
 #%% 
-N = 1e3
-listx = np.linspace(-1.5,1.5,N)
-listy = np.linspace(-2.5,2.5,N)
+N = 2*1e3
+listx = np.linspace(-6,6,N)
+listy = np.linspace(-6.5,6.5,N)
 
 X, Y = np.meshgrid(listx, listy)
-f_num = np.vectorize(background_theta)
-Z_num = f_num(X, Y)
+pos = np.dstack((X, Y))
+
+
+rv9 = multivariate_normal(mean=[3, 3], cov=[[1, 0.8],[0.8, 1]])
+
+rv6 = multivariate_normal(mean=[-3, 3], cov=[[1, -0.8],[-0.8, 1]])
+
+
+rv5 = multivariate_normal(mean=[-3, 0], cov=[[1, -0.3],[-0.3, 0.5]])
+
+Z_num = rv9.pdf(pos)   + rv6.pdf(pos) + rv5.pdf(pos)
 
 #%% 
 import matplotlib.colors as mcolors
@@ -191,24 +200,16 @@ paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312"
 
 colors = paleta1 + paleta2
 #
-#colors = list(reversed(colors))
-
-
 
 ### primera paleta https://coolors.co/gradient-palette/e6e6e6-ffdb3a?number=5
-paleta1 = ["#E6E6E6","#EAC4B2","#EFA17D","#F37F49","#F75C14","#F75C14","#F75C14"]
-paleta1 = ["#E6E6E6","#F75C14","#F86F11","#F9820F","#FA950C","#FAA809","#FBBB07"]  ## https://coolors.co/gradient-palette/f75c14-fcce04?number=7
-           #E6E6E6, #EAC4B2, #EFA17D, #F37F49, #F75C14
+paleta1 = ["#E6E6E6","#E6E6E6","#E6E6E6","#ECE3BB","#F3E190","#F9DE65","#FFDB3A"]
 
-#F75C14, #F86F11, #F9820F, #FA950C, #FAA809, #FBBB07, #FCCE04
-
-           
 ###  segunda paleta https://coolors.co/gradient-palette/fcce04-f75c14?number=8
 paleta2 = ["#FCCE04","#FBC106","#FBB509","#FAA80B","#F99C0D","#F88F0F","#F88312","#F77614"]
 
-colors = paleta1 + list(reversed(paleta2))
+colors = paleta1 + paleta2
 
-colors = paleta1 
+#colors = list(reversed(colors))
 
 cmap = mcolors.ListedColormap(colors)
 norm = mcolors.Normalize(vmin = np.min(Z_num) ,vmax = np.max(Z_num) )
