@@ -164,18 +164,19 @@ labelx = r'Plasmon energy $\hbar\omega$ (eV)'
 labely = r'optimal $z_p$ [nm]'
     
 tamfig = [2.5, 2]
-tamletra = 7
+tamletra = 9
 tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamnum = 7
+tamlegend = 8
 labelpady = 2
 labelpadx = 3
-pad = 2.5
+pad = 3
 mk = 1
 ms = 2
 hp = 0.3
-length_marker = 1.5
+length_marker = 0
 dpi = 500
+
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
     plt.figure(figsize=tamfig)

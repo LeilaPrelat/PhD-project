@@ -21,8 +21,8 @@ sns.set()
 
 paper = 1
 primer_intervalo = 0
-create_data = 1
-load_data = 0
+create_data = 0
+load_data = 1
 
 #%%
 
@@ -187,6 +187,22 @@ mk = 2
 ms = 4
 hp = 0.3
 length_marker = 1
+
+
+tamfig = [2.5, 2]
+tamletra = 9
+tamtitle  = 8
+tamnum = 7
+tamlegend = 8
+labelpady = 2
+labelpadx = 3
+pad = 3
+mk = 1
+ms = 2
+hp = 0.3
+length_marker = 0
+dpi = 500
+
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
     plt.figure(figsize=tamfig)

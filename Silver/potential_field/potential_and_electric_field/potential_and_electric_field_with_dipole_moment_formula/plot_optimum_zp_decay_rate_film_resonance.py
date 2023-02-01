@@ -141,18 +141,19 @@ def lambda_p(energy0):
 labelx = r'Plasmon energy $\hbar\omega$ (eV)'
 labely = r'optimal $z_p$ [nm]'
     
+    
 tamfig = [2.5, 2]
-tamletra = 7
+tamletra = 9
 tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamnum = 7
+tamlegend = 8
 labelpady = 2
 labelpadx = 3
-pad = 2.5
+pad = 3
 mk = 1
 ms = 2
 hp = 0.3
-length_marker = 1.5
+length_marker = 0
 dpi = 500
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
@@ -222,7 +223,7 @@ if load_data == 1:
     from scipy.signal import savgol_filter
     
     os.chdir(path_save)
-    tabla = np.loadtxt('zp_optimum_for_decay_rate_resonance' + labelp + '.txt' , delimiter='\t', skiprows=1)
+    tabla = np.loadtxt('zp_optimum_for_decay_rate_resonance_Silver' + labelp + '.txt' , delimiter='\t', skiprows=1)
     tabla = np.transpose(tabla)
     [listx,listy,list_lambda_p] = tabla
 
@@ -230,33 +231,51 @@ if load_data == 1:
     labely = 'Optimal dipole-surface \n separation ($\mu$m)'
 
 
+    tabla_grafeno = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt' , delimiter='\t', skiprows=1)
+    tabla_grafeno = np.transpose(tabla_grafeno)
+    [listx_grafeno,listy_grafeno,list_lambda_p_grafeno] = tabla_grafeno
+
+
+
     list_zp_div_lambda_p = np.array(listy)/np.array(list_lambda_p)
+    list_zp_div_lambda_p_grafeno = np.array(listy_grafeno)/np.array(list_lambda_p_grafeno)
     
     labely = 'Surface-dipole' + '\n' +  r'distance  $z_{\rm 0}$/$\lambda_{\rm p}$'
     labelx = r'Frequency $\omega$/$\omega_{\rm D}$'
     
-    omega_D = 9.17  ## eV sin el hbar porque se cancela con el listx 
-    
-    listx_2 = np.array(listx)/omega_D ## sin el hbar porque se cancela con el listx 
-    
+    omega_D_silver = 9.17  ## eV sin el hbar porque se cancela con el listx 
+    listx_2 = np.array(listx)/omega_D_silver ## sin el hbar porque se cancela con el listx 
     list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 71, 3)
+    
+    
+    omega_D_grafeno = 0.3 ## sin el hbar porque se cancela con el listx 
+    listx_2_grafeno = np.array(listx_grafeno)*1e-3/omega_D_grafeno ## sin el hbar porque se cancela con el listx 
+    list_zp_div_lambda_p_grafeno = savgol_filter(list_zp_div_lambda_p_grafeno, 81, 3)
+
+
 
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-    plt.plot(listx_2,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple')
+    plt.plot(listx_2,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple',label = 'silver')
 #    plt.plot(listx,np.array(list_lambda_p)*1e-3,'--',ms = ms,color = 'lightseagreen')
-#    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+#    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
     plt.tight_layout()
     os.chdir(path_save)
     
     plt.savefig( 'zp_optimum_for_decay_rate_Silver_resonance' + labelp + '.png',bbox_inches='tight',pad_inches = 0.01, format='png', dpi=dpi)  
-#plt.yscale('log')
 
 
 
-#
+    graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+    plt.plot(listx_2,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple',label = 'silver')
+    plt.plot(listx_2_grafeno,np.array(list_zp_div_lambda_p_grafeno),'.-',ms = ms,color = 'darkred',label = 'graphene')    
+#    plt.plot(listx,np.array(list_lambda_p)*1e-3,'--',ms = ms,color = 'lightseagreen')
+    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+    plt.tight_layout()
+    os.chdir(path_save)
+    
+    plt.savefig( 'zp_optimum_for_decay_rate_Silver_resonance_v2' + labelp + '.png',bbox_inches='tight',pad_inches = 0.01, format='png', dpi=dpi)  
 
 
-#
 
 #
 

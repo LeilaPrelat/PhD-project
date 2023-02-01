@@ -275,12 +275,12 @@ plt.savefig( 'EELS_film_' + label1 + '.png', format='png',bbox_inches='tight',pa
 
 graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple',label = 'silver')
-plt.plot(listx_2_grafeno,np.array(listy_im_ana_grafeno),'.-',ms = ms,color = 'darkred',label = 'grafeno')
+plt.plot(listx_2_grafeno,np.array(listy_im_ana_grafeno),'.-',ms = ms,color = 'darkred',label = 'graphene')
 #plt.title(title,fontsize=int(tamtitle*0.9))
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
 plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
-plt.legend(loc = 'upper right',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 plt.tight_layout()
 #if plot_vs_c == 1:
 #    plt.yscale('log')
