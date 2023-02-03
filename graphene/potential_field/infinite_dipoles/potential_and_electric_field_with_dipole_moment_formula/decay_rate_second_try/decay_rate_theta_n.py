@@ -29,7 +29,15 @@ try:
     from dipole_moment import dipole_moment_sin_integrar_en_y, dipole_moment_sin_integrar_en_y_resonance, dipole_moment_anav2_res,dipole_moment_anav2_for_decay_rate_res, dipole_moment_anav2_for_decay_rate_resonance_dir
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_basic)
+
+try:
+    sys.path.insert(1, path_basic)
+    from green_self_image import green_self_num,green_self_ana2,green_self_num_integral_inside_light_cone ## la parte imaginaria analitica del Green self image funciona bastante bien
     
+except ModuleNotFoundError:
+    print('graphene_sigma.py no se encuentra en ' + path_basic)
+
+
 try:
     sys.path.insert(1, path_constants)
     from constants import constantes
@@ -432,31 +440,36 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v2(omegac,epsi1,epsi2,hbmu,h
 
     cte_formula = a/(2*np.pi*Rp)
     
-#    usar_dif_p = 1
-#    usar_mismo_p = 0
-#    if usar_dif_p == 1:  
+    usar_dif_p = 1
+    usar_mismo_p = 0
+    if usar_dif_p == 1:  
         
-    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)
+        px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)
     
-    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+        denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
-    rta = np.abs(phi_n)**2*(omegac**3)*cte_formula/denominador    
+        rta = (np.abs(phi_n)**2)*(omegac**3)*cte_formula/denominador    
     
-#    if usar_mismo_p == 1: ## aca los momentos p se cancelan  
+    if usar_mismo_p == 1: ## aca los momentos p se cancelan  
 #        
-#        px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp) # multiplicar por e/(2*pi*v)
+        px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp) # multiplicar por e/(2*pi*v)
 #
-#        denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
-#
-#        alffa_eff_x = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_x))**(-1)
-#        alffa_eff_y = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_y))**(-1)
-#        alffa_eff_z = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_z))**(-1)
-#    
-#        alfa_eff = np.abs(alffa_eff_x)**2 + np.abs(alffa_eff_y)**2 + np.abs(alffa_eff_z)**2 
-#
-#    
-#        rta = np.imag(Green_self*alfa_eff*2*(omegac**3)/denominador )
+        denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
+        rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana2(omegac,epsi1,epsi2,hbmu,hbgama,zp)
+        rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi1,epsi2,hbmu,hbgama,zp)
+        
+        rtaself_x, rtaself_y, rtaself_z  = rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+
+        alffa_eff_x = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_x))**(-1)
+        alffa_eff_y = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_y))**(-1)
+        alffa_eff_z = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_z))**(-1)
+#    
+        alfa_eff = np.abs(alffa_eff_x)**2 + np.abs(alffa_eff_y)**2 + np.abs(alffa_eff_z)**2  ## alfa_eff**2
+#
+        
+        rta = np.abs(phi_n)**2*(omegac**3)*cte_formula*alfa_eff/denominador    
+        
     return rta 
 
 

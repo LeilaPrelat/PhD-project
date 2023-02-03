@@ -41,9 +41,17 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 --> Viernes 3 de feb: 
         - 9.30 cita en sabadell cerca de icfo 
 	- normalizar decay rate de inf dipoles : 
-		- grafeno. done 
+		- grafeno. done . da 10^{-6}, sino probar aproximando el mismo dip moment 
 		- silver
 		- hBN
+		
+		
+	- comparar la formula de Gamma_EELS del paper 149 con la de javier aproximada (con la cual esta funcionando el decay rate) 
+		- grafeno 
+		- silver 
+		- hBN 
+
+
 
 ---> Lunes 6/02: 
 

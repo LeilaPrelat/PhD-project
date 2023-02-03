@@ -14,14 +14,12 @@ import sys
 import os 
 import matplotlib.pyplot as plt
 from scipy import special
-from scipy.signal import find_peaks
-#import seaborn as sns
-#sns.set()
+
 
 #%%
-plot_vs_E = 0
+plot_vs_E = 1
 plot_vs_c = 0
-plot_vs_zp = 1
+plot_vs_zp = 0
 
 #%%
 
@@ -34,18 +32,12 @@ if not os.path.exists(path_save):
     print('Creating folder to save graphs')
     os.mkdir(path_save)
 
-err = 'decay_rate_film3.py no se encuentra en ' + path_basic
-try:
-    sys.path.insert(1, path_basic)
-    from decay_rate_film3_resonance import EELS_film_ana_f_div_gamma0,EELS_film_ana_f_div_gamma0_v3
-except ModuleNotFoundError:
-    print(err)
 
 try:
-    sys.path.insert(1, path_constants)
-    from graphene_sigma import sigma_DL
+    sys.path.insert(1, path_basic)
+    from dipole_moment import dipole_moment_anav2_for_decay_rate_resonance_dir
 except ModuleNotFoundError:
-    print('graphene_sigma.py no se encuentra en ' + path_basic)
+    print('dipole_moment.py no se encuentra en ' + path_basic)
 
 try:
     sys.path.insert(1, path_constants)
@@ -84,84 +76,26 @@ labelp = r'_res'
 
 N = 200
 
-
-
 def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0*1e-3/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0_v3(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
-#    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
-    
-#    print(rta1)
-    return rta1
-#
-#def function_imag_ana(energy0,int_v,zp_nano):
-#    omegac0 = energy0*1e-3/aux 
-#    zp = zp_nano*1e-3
-#
-#    rta = EELS_film_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
-#    
-#    return rta
+    cte = 24*np.pi*(omegac0**2)
 
 
-#def function_parallel_ana(energy0,int_v,zp_nano):
-#    omegac0 = energy0*1e-3/aux 
-#    zp = zp_nano*1e-3 
-#    rta = EELS_parallel_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,L_nano,int_v,b,zp)
-#    
-#    return rta    
-    
-
-
-def minimum_function(energy0,int_v):
-    
-    omegac = energy0*1e-3/aux 
-    arg = np.abs(b)*omegac*int_v
+    arg = np.abs(b)*omegac0*int_v
     K1 = special.kn(1,arg)
     K0 = special.kn(0,arg)
-
-    E = omegac*aux
-    cond = 4*np.pi*alfac*sigma_DL(E,hbmu,hbgama)
-    Rp = 2*epsi1/(epsi1 + epsi2)
-    alfa_p = 1j*(epsi1 + epsi2)/(cond)
-    kp = alfa_p*omegac
-
-
-    omegav = omegac*int_v
-    omegav_2 = omegav**2
     
-    kp_2 = kp**2
-    Rp_2 = Rp**2
+    rta_K = K0**2 + K1**2
+    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac0,int_v,b,zp)
+    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
     
-    expo_2_menos = np.exp(-2*kp*np.abs(b))
-    expo_2_mas = np.exp(2*kp*np.abs(b))
+    rta1 = rta_K*cte/denominador
     
-    num1 = -4*kp*Rp*omegav*K1 
-
-    num_aux = -9*expo_2_menos*kp_2*(np.abs(K0)**2 + 6*np.abs(K1)**2)/(kp_2 - omegav_2) + 16*np.abs(K1)**2                 
-    num2 = np.sqrt(kp_2*Rp_2*omegav_2*num_aux)
-
-    kp_4 = kp**4
-
-    tot = -(num1 + num2)*expo_2_mas*(kp - omegav)*(kp + omegav)/(18*kp_4*np.pi*Rp_2)
-
-
-    return -np.log(tot)/(2*kp)
-
-
-def lambda_p(energy0):
+#    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
-    E = energy0*1e-3
-    
-    omegac = E/aux
-    
-    cond = 4*np.pi*alfac*sigma_DL(E,hbmu,hbgama)
-    alfa_p = 1j*(epsi1 + epsi2)/(cond)
-    kp = alfa_p*omegac
-
-    return (2*np.pi/kp)*1e3 ## en nano
-
+    return rta1
 
 if plot_vs_c == 1 :
     E0 = 44 # meV
@@ -195,10 +129,6 @@ if plot_vs_zp == 1 :
 #    listx = np.linspace(0.0001,2,N)
     listx = np.linspace(10,4000,N)
     
-    print(minimum_function(E0,int_v0)*1e3)
-    print(np.abs(minimum_function(E0,int_v0))*2*1e3)
-    lambda_p_value = lambda_p(E0)
-
 
 title =  title4 
 
@@ -266,48 +196,16 @@ elif plot_vs_zp == 1:
         
      
     
-#%%
-        
-        
-peaks, _ = find_peaks(listy_im_ana, height=0)
-maxi = listx[peaks]
-listy_aux  = np.linspace(np.min(listy_im_ana), np.max(listy_im_ana), 10)
-listx_2 = np.array(listx)/lambda_p_value
-maxi2 = maxi/lambda_p_value
+#%%ç
 
-omega_omega_D = E0*1e-3/hbmu
-
-#if E0 == 45 and int_v0 == 10:
-#    zp_crit_lambda_p_value =  0.7361932072984527  ## for     E0 = 45 # meV  int_v0 = 10
-#    zp_max_lambda_p_value = 0.63902942
-#elif E0 == 43 and int_v0 == 10: 
-#    zp_crit_lambda_p_value = 0.7268042897014039
-#elif E0 == 35 and int_v0 == 10:     
-#    zp_crit_lambda_p_value = 0.6759424385432607
-
-#title1 = r'$z^{\rm crit}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f'%(zp_crit_lambda_p_value)  ### from plot_decay_rate ... simpler 
-#title2 = r'$z^{\rm opt}_{\rm 0}$/$\lambda_{\rm p}$ = %.2f' %(maxi2[0])
-#
-#title = title1 + ', ' + title2
-
-graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'$\Gamma^{\#149}_{0}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.title(title,fontsize=int(tamtitle*0.9))
-plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
+plt.plot(listx,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-4,'--k')
-plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
-plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=0)
+
 plt.tight_layout()
 #if plot_vs_c == 1:
 #    plt.yscale('log')
 os.chdir(path_save)
-plt.savefig( 'EELS_film_' + label1 + 'omega_omega_D%.2f'%(omega_omega_D) + '.png', format='png',bbox_inches='tight',pad_inches = 0.01, dpi=dpi)   
-
-
-tabla = np.array([np.real(np.array(listx_2)),np.real(np.array(listy_im_ana))])
-tabla = np.transpose(tabla)
-info_title = title4
-info = 'decay rate normalized grafeno' 
-header1 = 'z0/lambda_p     Gamma_SP/Gamma_EELS' + info_title + ', ' + ', '  +  info + ', ' + name_this_py
-np.savetxt('decay_rate_normalized_grafeno_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
-
+plt.savefig( 'Gamma_compared_' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.01, dpi=dpi)   

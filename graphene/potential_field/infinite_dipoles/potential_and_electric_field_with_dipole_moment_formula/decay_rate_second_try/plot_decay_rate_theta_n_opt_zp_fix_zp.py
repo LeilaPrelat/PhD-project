@@ -63,7 +63,7 @@ Nmax = 1
 
 labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
 labely = 'Decay rate of surface' + '\n' + r'plasmons $\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
-labely = r'($\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$) $\times$ $10^{-6}$'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-6}$)'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt', delimiter='\t', skiprows=1)
