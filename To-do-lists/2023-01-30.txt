@@ -28,7 +28,7 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 		
 --> Mierc 1 de enero : 
 
-	- deadline 44th PIERS : abstract de 1 pagina  (similar to Cleo) 
+	- deadline 44th PIERS : abstract de 1 pagina  (similar to Cleo)  https://piers.org/piers2023Prague/submit/submit_new.php
 
         - invertir colores del grafico de infinitos dipolos (mostrar a eduardo) 
 	    - https://www.geeksforgeeks.org/visualizing-the-bivariate-gaussian-distribution-in-python/
@@ -40,7 +40,12 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 
 --> Viernes 3 de feb: 
         - 9.30 cita en sabadell cerca de icfo 
+	- normalizar decay rate de inf dipoles : 
+		- grafeno. done 
+		- silver
+		- hBN
 
+---> Lunes 6/02: 
 
 * hBN disks : no se separan los picos . preparar una presentacion al respecto . 
 

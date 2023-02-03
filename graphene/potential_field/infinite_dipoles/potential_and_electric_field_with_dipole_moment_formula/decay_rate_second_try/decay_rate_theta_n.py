@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_sin_integrar_en_y, dipole_moment_sin_integrar_en_y_resonance, dipole_moment_anav2_res,dipole_moment_anav2_for_decay_rate_res
+    from dipole_moment import dipole_moment_sin_integrar_en_y, dipole_moment_sin_integrar_en_y_resonance, dipole_moment_anav2_res,dipole_moment_anav2_for_decay_rate_res, dipole_moment_anav2_for_decay_rate_resonance_dir
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_basic)
     
@@ -365,6 +365,99 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi1,epsi2,hbmu,hbga
     gamma0 = factor_gamma0*(K0**2/gamma**2 + K1**2)*np.imag(alpha)/np.pi  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
     
     return rta/(gamma0*hb)
+
+
+
+def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v2(omegac,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,b,n):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    formula del potencial electric con QE approximation, rp con 
+    aproximacion del polo y con aprox de principal value para las integrales
+    con rp
+    """
+
+#    x, y, z = 0,0,0
+    E = omegac*aux
+    n1 = epsi1*mu1
+    cte1 = np.sqrt(n1)
+    k1 = omegac*cte1
+   
+    cond = 4*np.pi*alfac*sigma_DL(E,hbmu,hbgama)
+    Rp = 2*epsi1/(epsi1 + epsi2)
+    alfa_p = 1j*(epsi1 + epsi2)/(cond*cte1)
+    kp = alfa_p*k1
+    
+    
+    px,py,pz  = dipole_moment_anav2_for_decay_rate_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)  
+#    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
+#            
+    kx = omegac*int_v + 2*np.pi*n/a     
+#    expo_kx = np.exp(1j*kx*x)
+#
+    ### cte que falta en dip moment : e/(2*np.pi*v)
+#    charge_e_cgs = 1.602176634*1e-20
+#    
+#    hbar_cgs = 1.054571817*1e-27
+
+    
+#    px,py,pz = px*cte_dip, py*cte_dip, pz*cte_dip
+    
+#    cte_final = (charge_e_cgs/(hbar_cgs*c))**2
+#    print(cte_final)
+#    
+#    ky = kp*np.sin(theta)
+
+#    cte = 1/((2*np.pi)**2*a)
+    
+#    cte2 = alfac*int_v*1e15/(np.pi) ## cambio de unidades + agregar lo que faltaba en el momento dipolar
+    den = np.sqrt(kp**2 - kx**2)
+   # return np.imag(final_2*cte*kp*np.cos(theta))
+    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+
+    cte_formula = a/(2*np.pi*Rp)
+    
+#    usar_dif_p = 1
+#    usar_mismo_p = 0
+#    if usar_dif_p == 1:  
+        
+    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)
+    
+    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+
+    rta = np.abs(phi_n)**2*(omegac**3)*cte_formula/denominador    
+    
+#    if usar_mismo_p == 1: ## aca los momentos p se cancelan  
+#        
+#        px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp) # multiplicar por e/(2*pi*v)
+#
+#        denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+#
+#        alffa_eff_x = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_x))**(-1)
+#        alffa_eff_y = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_y))**(-1)
+#        alffa_eff_z = 1j*(2*omegac**3/(3*epsi1) +  np.imag(rtaself_z))**(-1)
+#    
+#        alfa_eff = np.abs(alffa_eff_x)**2 + np.abs(alffa_eff_y)**2 + np.abs(alffa_eff_z)**2 
+#
+#    
+#        rta = np.imag(Green_self*alfa_eff*2*(omegac**3)/denominador )
+
+    return rta 
 
 
 

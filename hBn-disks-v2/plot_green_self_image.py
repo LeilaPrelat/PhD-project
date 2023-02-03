@@ -60,13 +60,13 @@ zp_nano = 50
 
 d_nano = 0.1
 
-title = r'$z_p$=%inm, d = %.2f nm' %(zp_nano,d_nano)
+title = r'$z_{\rm p}$ = %i nm, d = %.2f nm' %(zp_nano,d_nano)
 
 N = 100
 
     # z0 = 0.06*1e3
 labelx = r'$\hbar\omega$ [eV]'   
-labelp = 'vs_E_d%inm' %(d_nano) 
+labelp = 'vs_E_d%.2fnm' %(d_nano) 
 
 
 listx = np.linspace(0.087, 0.8, N)
@@ -258,11 +258,11 @@ label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'
 graph(title,labelx,r'Re(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_re_ana_v1,'.-',ms = ms+1,color = 'purple',label = 'PP ana 1 ' +  label1)
-plt.plot(listx,listy_re_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
+plt.plot(listx,listy_re_ana_v1,'.-',ms = ms+1,color = 'purple',label = 'PP ana ' +  label1)
+#plt.plot(listx,listy_re_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_re_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_re_pole_aprox_v1,'.-',ms = 3,color = 'darkred',label = 'PP num 1')
-plt.plot(listx,listy_re_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
+plt.plot(listx,listy_re_pole_aprox_v1,'.-',ms = 3,color = 'darkred',label = 'PP num')
+#plt.plot(listx,listy_re_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
@@ -273,11 +273,11 @@ plt.savefig( 'Re_Gself' + labelp + '.png', format='png')
 graph(title,labelx,r'Im(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'purple',label = 'PP analytical 3')
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_im_ana_v2,'.-',ms = ms+1,color = 'purple',label = 'PP ana 1 ' +  label1)
-plt.plot(listx,listy_im_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
+plt.plot(listx,listy_im_ana_v2,'.-',ms = ms+1,color = 'purple',label = 'PP ana ' +  label1)
+#plt.plot(listx,listy_im_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_im_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_im_pole_aprox_v1,'.-',ms = 3,color = 'darkred',label = 'PP num 1')
-plt.plot(listx,listy_im_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
+plt.plot(listx,listy_im_pole_aprox_v1,'.-',ms = 3,color = 'darkred',label = 'PP num')
+#plt.plot(listx,listy_im_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
