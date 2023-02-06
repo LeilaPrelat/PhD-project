@@ -30,7 +30,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_theta_n.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res,decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v2
+    from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res,decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3
 except ModuleNotFoundError:
     print(err)
 
@@ -63,7 +63,7 @@ Nmax = 1
 
 labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
 labely = 'Decay rate of surface' + '\n' + r'plasmons $\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-6}$)'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt', delimiter='\t', skiprows=1)
@@ -154,7 +154,7 @@ def function_real_ana(energy0_meV,Nmax):
     omegac0 = energy0_meV*1e-3/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v2(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,b,Nmax)
+    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,b,Nmax)
 
     return rta
 
@@ -241,7 +241,7 @@ for n in list_n:
 #        x = 43 #meV
         list_y_re.append(function_real_ana(x,n))
             
-    plt.plot(listx_2,np.array(list_y_re)*1e6,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_2,np.array(list_y_re)*1e2,'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
@@ -260,7 +260,7 @@ for n in list_n:
         list_y_re.append(function_real_ana(x,n))
             
     listx_3 = np.array(listy_2)/np.array(listz_2)
-    plt.plot(listx_4,np.array(list_y_re)*1e6,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_4,np.array(list_y_re)*1e2,'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)

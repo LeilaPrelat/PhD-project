@@ -37,7 +37,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_film3.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0,EELS_film_ana_f_div_gamma0_v2
+    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0,EELS_film_ana_f_div_gamma0_v3
 except ModuleNotFoundError:
     print(err)
 try:
@@ -94,7 +94,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0_v2(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    rta1 = EELS_film_ana_f_div_gamma0_v3(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
 #    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
 #    print(rta1)

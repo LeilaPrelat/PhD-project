@@ -37,7 +37,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_film3.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0_v2
+    from decay_rate_film_resonance import EELS_film_ana_f_div_gamma0_v3
 except ModuleNotFoundError:
     print(err)
 
@@ -90,7 +90,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0_v2(omegac0,epsi1,epsi3,d_nano,int_v,b,zp)
+    rta1 = EELS_film_ana_f_div_gamma0_v3(omegac0,epsi1,epsi3,d_nano,int_v,b,zp)
 #    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
 #    print(rta1)
@@ -262,8 +262,9 @@ plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.title(title,fontsize=int(tamtitle*0.9))
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
-plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
-plt.legend(loc = 'upper right',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=0)
+#plt.plot([],[],'.w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
+plt.text(0.85,0.03,r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
+plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=0)
 plt.tight_layout()
 #if plot_vs_c == 1:
 #    plt.yscale('log')
@@ -279,7 +280,7 @@ plt.plot(listx_2_grafeno,np.array(listy_im_ana_grafeno),'.-',ms = ms,color = 'da
 #plt.title(title,fontsize=int(tamtitle*0.9))
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-12,'--k')
-plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
+plt.text(0.85,0.03,r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 plt.tight_layout()
 #if plot_vs_c == 1:

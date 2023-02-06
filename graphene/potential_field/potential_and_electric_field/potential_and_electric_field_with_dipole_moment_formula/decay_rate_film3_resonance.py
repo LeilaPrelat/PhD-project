@@ -235,7 +235,7 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):
 
 
 
-def EELS_film_ana_f_div_gamma0_v2(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):     
+def EELS_film_ana_f_div_gamma0_v2(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):     ## normalizando con la formula mas sencilla de Javier
     """    
     Parameters
     ----------
@@ -313,7 +313,7 @@ def EELS_film_ana_f_div_gamma0_v2(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):
 
 
 
-def EELS_film_ana_f_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):     
+def EELS_film_ana_f_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):     ## normalizando con el paper 149
     """    
     Parameters
     ----------
@@ -367,9 +367,8 @@ def EELS_film_ana_f_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp):
     factor_K = K0**2 + K1**2  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
 
     
-    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)
-        
-    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+#    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
+#    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
     k_prima = omegac*np.sqrt(epsi1)
     
