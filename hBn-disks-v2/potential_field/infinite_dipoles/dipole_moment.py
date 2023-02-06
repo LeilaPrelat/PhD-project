@@ -20,7 +20,7 @@ path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
 
 try:
     sys.path.insert(1, path_constants)
-    from hBn_PP import epsilon_x, epsilon_z
+    from hBn_PP import epsilon_x, epsilon_z,hBn_lambda_p
 except ModuleNotFoundError:
     print('hBn_PP.py no se encuentra en ' + path_constants)
 
@@ -285,6 +285,12 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
 
+
+    d_micros = d_nano*1e-3
+    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+    kp = 2*np.pi/lambda_p_v
+    alfa_p = kp/omegac 
+#    Rp = 1
 
       
     arg = np.abs(b)*omegac*int_v

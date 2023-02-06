@@ -515,14 +515,22 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
     px,py,pz  = dipole_moment_anav2_for_decay_rate_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
-    kx = omegac*int_v + 2*np.pi*n/a     
+    kx = omegac*int_v + 2*np.pi*n/a
+    
+    delta_n = 2*np.pi/a
+    print(delta_n/kx)
+
     den = np.sqrt(kp**2 - kx**2)
    # return np.imag(final_2*cte*kp*np.cos(theta))
     phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
-
+    
     cte_formula = a/(48*(np.pi**2)*Rp)
     
-    cte_formula = a/(2*Rp)  ## hay un extra 1/(2pi) en la formula de phi 
+#    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
+    
+#    cte_formula = a*np.pi/Rp  ## hay un extra 1/(2pi) en la formula de phi. necesario para grafeno  
+#
+
 
     arg = np.abs(b)*omegac*int_v
     K1 = special.kn(1,arg)
@@ -535,11 +543,13 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
 #    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
+    cte_extra = (a*omegac)**4
+
     k_prima = omegac*np.sqrt(epsi1)
         
-    rta = np.abs(phi_n)**2*omegac*cte_formula*k_prima/factor_K    
+    rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    
         
-    return rta 
+    return rta*cte_extra
 
 
 

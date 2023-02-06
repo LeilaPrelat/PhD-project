@@ -30,7 +30,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_theta_n.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res,decay_rate_theta_inf_dipoles_ana_res_div_gamma0
+    from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res,decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3
 except ModuleNotFoundError:
     print(err)
 
@@ -60,7 +60,7 @@ int_v = 10
 
 Nmax = 4
 
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^4$'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_resonance_d%inm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
@@ -84,7 +84,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max])
 
 #a = 8000*1e-3
-a = 150*1e-3
+a = 185*1e-3
 
 a_nm = a*1e3
 
@@ -149,7 +149,7 @@ def function_real_ana(energy0_meV,zp_nano,Nmax):
     omegac0 = energy0_meV/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac0,epsi1,epsi3,d_nano,int_v,zp,a,b,Nmax)
+    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsi1,epsi3,d_nano,int_v,zp,a,b,Nmax)
 
     return rta
 
@@ -234,7 +234,7 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)*1e14
     
     listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_4,np.array(list_y_re)*1e-4,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_4,np.array(list_y_re)*1e2,'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)

@@ -224,7 +224,6 @@ label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'
 
 
 graph(title,labelx,r'$|p|$/e',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-#    plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'analytical')
 plt.plot(listx,listy_ana_v1,'.',ms = ms,color = 'purple',label = 'PP ana 1 ' +  label1)
 #plt.plot(listx,listy_ana_v2,'--',ms = ms,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')

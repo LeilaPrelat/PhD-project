@@ -27,7 +27,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_pole_aprox_for_decay_rate_resonance_v1
+    from dipole_moment import dipole_moment_pole_aprox_for_decay_rate_resonance_v1,dipole_moment_ana_resonance_v1,dipole_moment_anav1_for_decay_rate_resonance
 except ModuleNotFoundError:
     print('potential.py no se encuentra en ' + path_basic)
 
@@ -169,17 +169,12 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
 
     epsi_HBN_par = epsi_x
    
-#    d_micro = d_nano*1e-3
-#    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
-#    kp = alfa_p*omegac
-#    Rp = 1
+    d_micro = d_nano*1e-3
+    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+    kp = alfa_p*omegac
+    Rp = 1
 
-    d_micros = d_nano*1e-3
-    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
-    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-    kp = 2*np.pi/lambda_p_v
-    alfa_p = kp/omegac 
-#    Rp = 1
+
 #        
     
     px,py,pz  = dipole_moment_pole_aprox_for_decay_rate_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
@@ -240,6 +235,85 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
 
     return np.real(rta/(gamma0*hb))
 
+
+
+
+
+
+# normalizado con el paper 149 
+def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano,int_v,zp,a,b,n):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    formula del potencial electric con QE approximation, rp con 
+    aproximacion del polo y con aprox de principal value para las integrales
+    con rp
+    """
+
+#    x, y, z = 0,0,0
+    E = omegac*aux
+    
+    d_micros = d_nano*1e-3
+    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
+    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+    kp = 2*np.pi/lambda_p_v
+    alfa_p = kp/omegac 
+#    Rp = 1
+
+#    epsi_x = epsilon_x(E)
+#    epsi_HBN_par = epsi_x
+#    d_micro = d_nano*1e-3
+#    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+#    kp = alfa_p*omegac
+    
+    px,py,pz  = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)  
+#    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
+#            
+    kx = omegac*int_v + 2*np.pi*n/a     
+    den = np.sqrt(kp**2 - kx**2)
+   # return np.imag(final_2*cte*kp*np.cos(theta))
+    phi_n = np.exp(-2*kp*zp)*np.abs(Rp)*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+
+    
+    cte_formula = a/(48*np.pi**2*np.abs(Rp)) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+    
+    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
+    
+    cte_formula = a*192*2*np.pi**4/np.abs(Rp)  ## hay un extra (1/(2pi))^N en la formula de phi. necesario para grafeno  
+#
+
+
+    arg = np.abs(b)*omegac*int_v
+    K1 = special.kn(1,arg)
+    K0 = special.kn(0,arg)
+
+    
+    factor_K = K0**2 + K1**2  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
+
+    
+#    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
+#    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+
+    k_prima = omegac*np.sqrt(epsi_silica(E))
+        
+    rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    
+        
+    return rta
 
 
 

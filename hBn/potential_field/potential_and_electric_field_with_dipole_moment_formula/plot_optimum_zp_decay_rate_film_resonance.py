@@ -21,8 +21,8 @@ from scipy.signal import find_peaks
 
 paper = 1
 primer_intervalo = 0
-create_data = 0
-load_data = 1
+create_data = 1
+load_data = 0
 
 #%%
 
@@ -69,7 +69,7 @@ epsi1,epsi3 = 1,1
 b = -0.01
 
 d_nano = 1
-int_v = 10
+int_v = 5
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 

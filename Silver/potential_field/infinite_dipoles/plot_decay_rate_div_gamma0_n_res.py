@@ -35,7 +35,7 @@ if not os.path.exists(path_save):
 err = 'decay_rate_theta_n.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v2
+    from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3
 except ModuleNotFoundError:
     print(err)
 
@@ -157,7 +157,7 @@ def function_real_ana(zp_nano,energy0,Nmax):
     omegac0 = energy0/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac0,epsi3,d_nano,int_v,zp,a,b,n)
+    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsi1,epsi3,d_nano,int_v,zp,a,b,n)
 
     return rta
 
@@ -197,16 +197,14 @@ graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,p
 for n in [0,1,2,3,4]:
     
     list_y_re = []
-    if plot_vs_theta == 1:
+
+    if plot_vs_zp == 1:
         for x in listx:
-            list_y_re.append(function_real_ana(x,zp,E,n))
-    elif plot_vs_zp == 1:
-        for x in listx:
-            list_y_re.append(function_real_ana(theta,x,E,n))
+            list_y_re.append(function_real_ana(x,E,n))
         
     elif plot_vs_freq == 1:
         for x in listx:
-            list_y_re.append(function_real_ana(theta,zp,x,n))
+            list_y_re.append(function_real_ana(zp,x,n))
         
     maxi = np.max(list_y_re)
     print(n,maxi)

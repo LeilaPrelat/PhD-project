@@ -85,7 +85,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max])
 
 a = 15
-
+#a = 1
 #a = 500*1e-3
 #a = 5031*1e-3
 
@@ -120,10 +120,14 @@ f2 = interp1d(listx, listz)
 
 N = 5000
 lim1,lim2 = 16,-80
-lim1,lim2 = 16,-80
+if a == 15: 
+    lim1,lim2 = 16,-80
 #lim1,lim2 = 10,-63
-listx_2 = np.linspace(listx[lim1], listx[lim2], N)
-listx_2 = np.linspace(38,70,N)
+    listx_2 = np.linspace(listx[lim1], listx[lim2], N)
+    listx_2 = np.linspace(38,70,N)
+else:
+    lim1,lim2 = 16,-1
+    listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 
 listy_2 = f1(listx_2)
 listz_2 = f2(listx_2)  

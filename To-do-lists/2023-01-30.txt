@@ -41,11 +41,11 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 --> Viernes 3 de feb: 
         - 9.30 cita en sabadell cerca de icfo 
 		
-	***** codigos **************************
+	***** codigos .py **************************
 	*plot_comparar_EELS_paper_149: comparar la formula de Gamma_EELS del paper 149 con la de javier aproximada (con la cual esta funcionando el decay rate)  
 	*EELS_film_ana_f_div_gamma0_v2 : normalizar con la formula aproximada
 	*EELS_film_ana_f_div_gamma0_v3 : normalizar el decay rate con el paper 149
-	***** codigos **************************
+	***** codigos .py **************************
 	
 	- comparar la formula de Gamma_EELS del paper 149 con la de javier aproximada (con la cual esta funcionando el decay rate) 
 		- grafeno . da del orden 10^{-1} entonces la formula del paper 149 tiene que funcionar ---> funciona !
@@ -57,12 +57,16 @@ despues de la reunion del 31/01/2023 con javier y eduardo :
 		- hBN disks . done 
 	
 
-	- normalizar decay rate de inf dipoles : 
-		- grafeno. done . da 10^{-6}, sino probar aproximando el mismo dip moment 
-		- silver 
-		- hBN
-		- hBN disks 
+	- normalizar decay rate de inf dipoles con el paper 149: 
+		- grafeno. done . da 10^{-2} mas chico que 1 dipolo
+		- silver : da 10^{-2} mas chico que 1 dipolo
+		- hBN : da 10^{-3} mas chico que 1 dipolo
+		- hBN disks :
 
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ---> Martes 7/02: 
 

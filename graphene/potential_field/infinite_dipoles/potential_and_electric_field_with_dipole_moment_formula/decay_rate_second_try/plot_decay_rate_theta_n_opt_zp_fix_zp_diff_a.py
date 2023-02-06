@@ -21,7 +21,7 @@ from scipy.interpolate import interp1d
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
+path_constants =  path_basic.replace('/potential_field/infinite_dipoles/potential_and_electric_field_with_dipole_moment_formula/decay_rate_second_try','')
 path_save = path_basic + '/' + 'decay_rate_theta_n'
 if not os.path.exists(path_save):
     print('Creating folder to save graphs')
@@ -31,12 +31,6 @@ err = 'decay_rate_theta_n.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
     from decay_rate_theta_n import decay_rate_theta_inf_dipoles_ana_res,decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3
-except ModuleNotFoundError:
-    print(err)
-
-try:
-    sys.path.insert(1, path_constants)
-    from Silica_epsilon import epsilon_Silica
 except ModuleNotFoundError:
     print(err)
 
@@ -53,35 +47,35 @@ aux2 = 1e12/c
 
 #%%
 
-epsi1, epsi3 = 1,1
+epsi1, epsi2 = 1,1
+hbmu, hbgama = 0.3,0.0001
 
 print('Definir parametros del problema')
 
 
 b = - 0.01
 
-d_nano = 0.1
 
+int_v = 20
 int_v = 10
 
-Nmax = 4
+Nmax = 1
 
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
+labely = 'Decay rate of surface' + '\n' + r'plasmons $\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
+labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$'
 #labely = r'Emission probability (eV$^{-1}$)'
 
-tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance_d%.2fnm_v%i_all.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
+tabla = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt', delimiter='\t', skiprows=1)
 tabla = np.transpose(tabla)
-[listx,listy,listz] = tabla
+[listx,listy,listz] = tabla ## energy and zp 
 
-zp_nano = listy[20]
-zp_nano = 0.05
-zp_nano = 0.1
+zp_nano = listy[-20]
 
-#zp_nano = listy[-20]
-omegac0_1 = np.max(listx)/(c*hb)
+omegac0_1 = np.max(listx)*1e-3/(c*hb)
 lambda_SP_1 = 2*np.pi/omegac0_1
 
-omegac0_2 = np.min(listx)/(c*hb)
+omegac0_2 = np.min(listx)*1e-3/(c*hb)
 lambda_SP_2 = 2*np.pi/omegac0_2
 
 
@@ -89,22 +83,23 @@ a_min = np.real(lambda_SP_1)*Nmax/(int_v - 1)
 a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
-a = 0.5*1e-3
-a = 185*1e-3
-#a = 5*1e-3
-
-#a = 150*1e-3
-#
-#a_nm = a*1e3
 
 
-labelx = r'Surface-dipole distance, $z_{\rm 0}/\lambda_{\rm p}$'  
+list_a_nano = np.linspace(0.000001,1,25)*1e3
+
+#a = 500*1e-3
+#a = 5031*1e-3
+
+
+
+
+labelx = r'a [nm]'  
     
 title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3) 
-title3 = r'a = %i nm' %(a*1e3)
+title3 = r'n = %i' %(Nmax)
 title4 = r', $z_p$ = $z^{opt}_p$' 
 
-labelp = r'_a%.2fnm_zp%.2fnm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
+labelp = r'_n%i_zp%inm' %(Nmax,zp_nano)
 #label1 = 'vs_zp_lambda_p'  + labelp
 
 
@@ -122,13 +117,13 @@ labelp = r'_a%.2fnm_zp%.2fnm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 50
-lim1,lim2 = 18,-60
-lim1,lim2 = 14,-30
-#lim1,lim2 = 14,-1
+N = 5000
+lim1,lim2 = 16,-80
+lim1,lim2 = 16,-80
+#lim1,lim2 = 10,-63
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
-#listx_2 = np.linspace(listx[lim1], 0.2, N)
-#
+listx_2 = np.linspace(38,70,N)
+
 listy_2 = f1(listx_2)
 listz_2 = f2(listx_2)  
 
@@ -153,22 +148,22 @@ title =  title2 + '\n' +  title3  + title4
 #%%
 
 
-def function_real_ana(energy0_meV,zp_nano,n):
-    
-#    a = a_nano*1e-3
-    omegac0 = energy0_meV/(c*hb)  
+def function_real_ana(energy0_meV,a_nano):
+                
+    omegac0 = energy0_meV*1e-3/(c*hb)  
     zp = zp_nano*1e-3
+    a = a_nano*1e-3
          
-    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,n)
+    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,b,Nmax)
 
     return rta
 
 
 tamfig = [2.5, 2]
-tamletra = 7
-tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamletra = 9
+tamtitle  = 9
+tamnum = 7
+tamlegend = 7
 labelpady = 2
 labelpadx = 3
 pad = 2.5
@@ -186,92 +181,71 @@ dpi = 500
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
     plt.figure(figsize=tamfig)
     plt.xlabel(labelx,fontsize=tamletra,labelpad =labelpadx)
-    plt.ylabel(labely,fontsize=tamletra,labelpad =labelpadx)
+    plt.ylabel(labely,fontsize=tamletra,labelpad =labelpady)
     plt.tick_params(labelsize = tamnum, length = 2 , width=1, direction="in", pad = pad)
+#    plt.tick_params(labelsize = tamnum, length = 4 , width=1, direction="in", pad = pad) ### para cleo europe
 #    plt.title(title,fontsize=int(tamtitle*0.9))
 
     return  
  
 #%%
+from scipy.signal import find_peaks
 
-maxis = []
-list_n = [0,1,2,3,4]   
-#    if theta_degree != 0:     
-#        listx_2 = listx
-#        listy_2 = listy
-#        listz_2 = listz
-for n in list_n:
+maxis_energy_meV = []
+maxis_value_y = []
+for a in list_a_nano:
     
     list_y_re = []
 
 
     for ind in range(len(listx_2)):
-#        zp_nano = listy_2[ind]
+#        zp = listy_2[ind]
         x =  listx_2[ind]
 #        x = 43 #meV
-        list_y_re.append(function_real_ana(x,zp_nano,n))
+        list_y_re.append(function_real_ana(x,a))
         
-    maxi = np.max(list_y_re)
-    maxis.append(maxi)
-    print(n,listx_2[int(np.argmax(list_y_re))],maxi)
+    maxi, _ = find_peaks(list_y_re, height=0)
+    if len(maxi)>1:
+        list_maximos = []
+        for maxis in maxi: 
+            list_maximos.append(list_y_re[maxis])
+            
+        index_max = np.argmax(list_maximos)
+        maxis_energy_meV.append(listx_2[maxi[int(index_max)]])
+        print('hay mas de 1 maximo')
+    else:
+        print(int(maxi))
+        maxis_energy_meV.append(listx_2[int(maxi)])
+        maxis_value_y.append(function_real_ana(x,a))
+    print(a,maxis_energy_meV)
+
+
+#%%    
 #    list_y_re = np.array(list_y_re)/maxi
-     
-    #%%
-    
-maxis = []
-list_y_re_tot = []
+graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+plt.plot(listx_2,np.array(list_y_re),'-',ms = ms, label = 'n = %i'%(Nmax))
+plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+#    plt.grid(1)
+plt.tight_layout()
 
-for n in list_n:
-    
-    list_y_re = []
-
-
-    for ind in range(len(listx_2)):
-#        zp_nano = listy_2[ind]
-        x =  listx_2[ind]
-#        x = 43 #meV
-        list_y_re.append(function_real_ana(x,zp_nano,n))
-        
-    maxi = np.max(list_y_re)
-    maxis.append(maxi)
-#    print(n,maxi)
-#    list_y_re = np.array(list_y_re)/np.max(maxis)
-
-#    list_y_re = np.array(list_y_re)*1e14
-    
-    list_y_re_tot.append(list_y_re)
-
-    #%%
-#list_y_re_tot_v0 = list_y_re_tot[1]
-#list_y_re_tot_v1 = list_y_re_tot[2]
-#list_y_re_tot_v2 =  list_y_re_tot[3]
-#list_y_re_tot_v3 =  list_y_re_tot[4]
-#list_y_re_tot_v4 =  list_y_re_tot[0]
-   
-#list_y_re_tot_v2 = [list_y_re_tot_v0,list_y_re_tot_v1,list_y_re_tot_v2,list_y_re_tot_v3,list_y_re_tot_v4]
-
+#%%
 listx_3 = []
 for ind in range(len(listy_2)):
     listx_3.append(listy_2[ind]/listz_2[ind])
     
 listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),N)
 
- #%% 
-listx_3 = np.array(listy_2)/np.array(listz_2)
-graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-k = 0
-for n in list_n:
     
-    plt.plot(listx_4,np.array(list_y_re_tot[k])*1e-2,'.-',ms = ms, label = 'n = %i'%(n))
-    k = k + 1
+graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+plt.plot(list_a_nano,np.array(maxis_value_y),'-',ms = ms, label = 'n = %i'%(Nmax))
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
 plt.tight_layout()
 
-#plt.xlim([0,200])
+plt.yscale('log')
 os.chdir(path_save)
-plt.savefig('decay_rate_fix_zp_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
-
+#plt.savefig('decay_rate_fix_zp_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
+plt.savefig('decay_rate_rate_vs_a_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
 
 #%%
 
