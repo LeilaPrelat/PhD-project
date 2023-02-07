@@ -26,6 +26,12 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_basic)
+    from hBn_PP import hBn_lambda_p,hBn_Rp
+except ModuleNotFoundError:
+    print('graphene_sigma.py no se encuentra en ' + path_basic)
+    
+try:
+    sys.path.insert(1, path_basic)
     from constants import constantes
 except ModuleNotFoundError:
     print('constants.py no se encuentra en ' + path_basic)
@@ -81,6 +87,11 @@ def green_self_num(omegac,epsi_silica,d_nano,zp_micro):
     d_micro = d_nano*1e-3
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     
+    
+#    d_micros = d_nano*1e-3
+#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+#    kp = 2*np.pi/lambda_p_v  
+#    alfa_p = kp/omegac
 
 
 

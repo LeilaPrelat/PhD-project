@@ -229,11 +229,11 @@ def dipole_moment_anav2_resonance(omegac,epsi1,epsi3,d_nano,int_v,b,zp):
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - np.pi*1j*Rp*kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 - 2*np.pi*1j*Rp*kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - np.pi*1j*Rp*kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - 2*np.pi*1j*Rp*kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + np.pi*1j*Rp*(kp**2)*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 + 2*np.pi*1j*Rp*(kp**2)*expo/ky )
     
     return px, py, pz
 
@@ -314,11 +314,11 @@ def dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi1,epsi3,d_nano,int_v
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - np.pi*1j*Rp*kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 - 2*np.pi*1j*Rp*kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - np.pi*1j*Rp*kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - 2*np.pi*1j*Rp*kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + np.pi*1j*Rp*(kp**2)*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 + 2*np.pi*1j*Rp*(kp**2)*expo/ky )
     
     return px, py, pz
 

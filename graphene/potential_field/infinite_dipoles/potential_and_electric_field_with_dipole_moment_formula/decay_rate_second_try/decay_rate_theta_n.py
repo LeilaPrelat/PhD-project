@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_sin_integrar_en_y, dipole_moment_sin_integrar_en_y_resonance, dipole_moment_anav2_res,dipole_moment_anav2_for_decay_rate_res, dipole_moment_anav2_for_decay_rate_resonance_dir
+    from dipole_moment import dipole_moment_sin_integrar_en_y, dipole_moment_sin_integrar_en_y_resonance, dipole_moment_anav2_res,dipole_moment_anav2_for_decay_rate_res, dipole_moment_anav2_for_decay_rate_resonance_dir,dipole_moment_num_res
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_basic)
 
@@ -521,8 +521,12 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
     print(delta_n/kx)
 
     den = np.sqrt(kp**2 - kx**2)
+    
+    kp_2 = np.sqrt(kp**2)
+    term_kp = 1 + kp/kp_2
+    term_kp_2 = kp_2 + kp
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+    phi_n = -np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
     
     cte_formula = a/(48*(np.pi**2)*Rp)
     

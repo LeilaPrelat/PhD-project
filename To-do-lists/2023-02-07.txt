@@ -23,17 +23,47 @@
 *******************************************************  Martes 7 de febrero  ********************************************************
 
 	Edu 2023/02/06: 
-	1- El tema es que esto Gamma_{SP,n} va como 1/a y tiene kx = omega/v + 2*pi*n/a, entonces a mayor "a" menor Gamma_{SP,n}. Hacer un grafico de Gamma_{SP,n}/Gamma_{EELS} vs "a" para n = 0 para el zp_opt de 1 dipolo (que no depende de "a" asi que es fijo): 
+	1- El tema es que esto Gamma_{SP,n} va como 1/a y tiene kx = omega/v + 2*pi*n/a, entonces a mayor "a" menor Gamma_{SP,n}. Hacer un grafico de Gamma_{SP,n}/Gamma_{EELS} vs "a" para n = 0 para el zp_opt de 1 dipolo (que no depende de "a" si n = 0 asi que es fijo): 
 	   - hecho para grafeno  
 
 	2- Comparar cada cantidad hBN esferas vs hBN disks en el mismo grafico : do ** 2023/02/07 martes before lunch **
-		- Im Gself  ----> done para d = 0.1 nm y d = 1 nm . parece que se parecen un poquito mas para d = 1 nm
-		- calcular el zp optimum para hBN disks para d = 1 nm 
-		- dipole moment ---->              para d = 0.1 nm y d = 1 nm 
-		- potential (inf disks)  ---->     para d = 0.1 nm y d = 1 nm
+		- Im Gself. Con alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1)) y coinciden muy bien (ana y numerico)
+		       ----> done para d = 0.1 nm y d = 1 nm . parece que se parecen un poquito mas para d = 1 nm
+		       
+		* calcular el zp optimum para hBN disks para d = 1 nm + hacer un barrido mas fino dentro de la primera banda de hBN *
+		
+		- dipole moment ---->   done . para d = 0.1 nm y d = 1 nm 
+		con alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1)) y rp = lambda u: alpha_parallel(u)/(alpha_parallel(u)*(1-r*expB_self(u)) - alfa_p)
+		
+		
+		- potential (inf disks)  ---->           para d = 0.1 nm y d = 1 nm
 	
+	
+		- decay rate inf dipoles: 
+			- potential phi_n:
+			con alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+			
+			- dip moment for decay rate: 
+			con alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+			
 
-	as a function of hbar*omega. 
+
+		*** REVISAR POSIBLE TYPO EN PHI_N (inf dipoles) : 
+		    - grafeno. rehecho <--- cambiado en decay_rate_n version 3 
+		    - silver. rehecho <--- cambiado en decay_rate_n version 3 
+		    - hBN
+		    - hBN disks 
+		    
+		    tambien hay algo raro qeu es que el momento dipolar de hBN para decay rate tiene un factor 2 en la parte de residuos que no es de 1 dipolo 
+		    	chequear que sea el mismo momento dip para 1 dipolo que para inf dipolos: 
+		    		- grafeno. done , es con un factor 2 en la parte de residuos tanto para 1 dipolo como para inf dipolos.  
+		    		- silver. tambien tiene un factor 2 en la parte de residuos pero da lo mismo el momento dip con o sin el factor 2.  
+				- hBN. la vesion analitica del momento dipolar no funciona en la primera banda pero justo uso la segunda banda (entre x3 y x4). 
+				la 2da banda da lo mismo con o sin el factor 2 en los residuos pero la sol analitica en la primera banda se aleja muuucho de la sol num con el factor 2 (igual da mal sin el factor 2). Da casi lo mismo con el factor 2. 
+					
+				- hBN disks 
+		
+		
 	Diametro de los discos (D) = 120 nm, muy grande ?. Pero "D" aparece dentro de la polarizabilidad y en el caso de resonancia y lossless creo que vale la misma constante de siempre. Lo que sí cambia es el fresnel coeffiecient. 
 		
 		

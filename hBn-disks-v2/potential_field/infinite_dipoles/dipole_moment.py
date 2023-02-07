@@ -151,11 +151,11 @@ def dipole_moment_ana_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp):     ##
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - np.pi*1j*term_kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 - 2*np.pi*1j*term_kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - np.pi*1j*term_kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - 2*np.pi*1j*term_kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + np.pi*1j*kp_2*term_kp*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 + 2*np.pi*1j*kp_2*term_kp*expo/ky )
     
     
     return px, py, pz
@@ -286,10 +286,10 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v
     kp = alfa_p*omegac
 
 
-    d_micros = d_nano*1e-3
-    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-    kp = 2*np.pi/lambda_p_v
-    alfa_p = kp/omegac 
+#    d_micros = d_nano*1e-3
+#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+#    kp = 2*np.pi/lambda_p_v
+#    alfa_p = kp/omegac 
 #    Rp = 1
 
       

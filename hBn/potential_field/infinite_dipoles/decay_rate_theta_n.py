@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_constants)
-    from dipole_moment import dipole_moment_sin_integrar_en_y, dipole_moment_sin_integrar_en_y_resonance,dipole_moment_anav2_res,dipole_moment_anav2_for_decay_rate_resonance
+    from dipole_moment import dipole_moment_anav2_resonance,dipole_moment_anav2_for_decay_rate_resonance,dipole_moment_num_resonance,dipole_moment_pole_aprox_resonance
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_constants)
     
@@ -422,14 +422,21 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
     
     
     
-    px,py,pz  = dipole_moment_anav2_res(omegac,epsi1,epsi3,d_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi1,epsi3,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
     den = np.sqrt(kp**2 - kx**2)
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+#    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
 
+    kp_2 = np.sqrt(kp**2)
+    term_kp = 1 + kp/kp_2
+    term_kp_2 = kp_2 + kp
+   # return np.imag(final_2*cte*kp*np.cos(theta))
+    phi_n = np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
+#    phi_n = -np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a) ## aprox
+    
     
     cte_formula = a/(24*np.pi*Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
     

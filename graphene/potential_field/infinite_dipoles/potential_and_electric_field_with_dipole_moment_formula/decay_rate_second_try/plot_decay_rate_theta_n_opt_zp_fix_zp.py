@@ -84,7 +84,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
 
-a = 15
+a = 1.5
 #a = 1
 #a = 500*1e-3
 #a = 5031*1e-3

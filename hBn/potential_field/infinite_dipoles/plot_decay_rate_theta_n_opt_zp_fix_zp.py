@@ -113,7 +113,7 @@ labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 500
+N = 100
 lim1,lim2 = 18,-60
 lim1,lim2 = 0,-70
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)

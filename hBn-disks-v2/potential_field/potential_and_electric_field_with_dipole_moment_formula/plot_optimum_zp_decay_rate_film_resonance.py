@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 1
-load_data = 0
+create_data = 0
+load_data = 1
 
 #%%
 
@@ -146,7 +146,7 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
             list_zp_nano = np.linspace(100,400,N)    
     elif d_nano == 1:
         list_zp_nano = np.linspace(90,290,N) ## para todo el intervalo 
-        
+        list_zp_nano = np.linspace(150,250,N) ## para una parte del intervalo (un zoom)
     else:
         list_zp_nano = np.linspace(10,400,N)
         list_zp_nano = np.linspace(10,200,N)
@@ -293,13 +293,13 @@ if load_data == 1:
     omega_D = 170.1*1e-3  ## eV sin el hbar porque se cancela con el listx 
     
     listx_2 = np.array(listx)/omega_D ## sin el hbar porque se cancela con el listx 
-    
-    list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 27, 3)
-
     if d_nano == 0.1:
+        list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 27, 3)
         lim = -1
+        
     elif d_nano == 1:
-        lim = -1
+        list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 15, 3)
+        lim = -13
 
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
     plt.plot(listx_2[0:lim],np.array(list_zp_div_lambda_p[0:lim]),'-',ms = ms,color = 'purple')

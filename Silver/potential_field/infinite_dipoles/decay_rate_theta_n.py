@@ -540,8 +540,14 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
     kx = omegac*int_v + 2*np.pi*n/a     
     den = np.sqrt(kp**2 - kx**2)
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+#    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
 
+    
+    kp_2 = np.sqrt(kp**2)
+    term_kp = 1 + kp/kp_2
+    term_kp_2 = kp_2 + kp
+    phi_n = -np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
+    
     cte_formula = a/(48*(np.pi**2)*Rp)
     
 #    cte_formula = a*np.pi/Rp  ## hay un extra 1/(2pi) en la formula de phi. necesario para grafeno  

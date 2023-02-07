@@ -50,7 +50,7 @@ print('Definir parametros del problema')
 epsi1,epsi3 = 1,1
 
 
-energy0 = 2 # eV
+energy0 = 3.5 # eV
 d_nano = 1
 hbar_omega_bulk = 9.17
 hbar_gamma_in = 21*1e-3

@@ -60,7 +60,7 @@ print('Definir parametros del problema')
 zp_nano = 50
 
 
-d_nano = 1
+d_nano = 0.1
 
 title = r'$z_{\rm p}$ = %i nm, d = %.2f nm' %(zp_nano,d_nano)
 
@@ -284,7 +284,7 @@ if comparar_otro_hBN == 1:
 label1 = r'$r_{\rm p} = k_\parallel/(k_\parallel - k_{\rm p})$'    
 label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'   
 
-graph(title,labelx,r'Re{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Re{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_re_ana_v1,'--',ms = ms,color = 'purple',label = 'PP ana')
@@ -305,7 +305,7 @@ os.chdir(path_save)
 plt.savefig( 'Re_Gself' + labelp + '.png', format='png')   
 
 
-graph(title,labelx,r'Im{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Im{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'purple',label = 'PP analytical 3')
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_im_ana_v2,'--',ms = ms,color = 'purple',label = 'PP ana')

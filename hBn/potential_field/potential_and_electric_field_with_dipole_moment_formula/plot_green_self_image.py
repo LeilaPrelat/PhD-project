@@ -54,9 +54,9 @@ epsi1,epsi3 = 1,1
 zp = 0.05
 
 
-d_nano = 1
+d_nano = 20
 
-title = r'$z_p$=%inm, d = %i nm' %(zp*1e3,d_nano)
+title = r'$z_p$=%inm, d = %.2f nm' %(zp*1e3,d_nano)
 
 N = 100
 

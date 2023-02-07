@@ -268,18 +268,19 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
 #    x, y, z = 0,0,0
     E = omegac*aux
     
-    d_micros = d_nano*1e-3
-    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
-    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-    kp = 2*np.pi/lambda_p_v
-    alfa_p = kp/omegac 
-#    Rp = 1
-
-#    epsi_x = epsilon_x(E)
-#    epsi_HBN_par = epsi_x
-#    d_micro = d_nano*1e-3
-#    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
-#    kp = alfa_p*omegac
+#    d_micros = d_nano*1e-3
+#    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
+#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+#    kp = 2*np.pi/lambda_p_v
+#    alfa_p = kp/omegac 
+    
+    
+    Rp = 1
+    epsi_x = epsilon_x(E)
+    epsi_HBN_par = epsi_x
+    d_micro = d_nano*1e-3
+    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+    kp = alfa_p*omegac
     
     px,py,pz  = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
@@ -287,7 +288,12 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
     kx = omegac*int_v + 2*np.pi*n/a     
     den = np.sqrt(kp**2 - kx**2)
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*np.abs(Rp)*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+
+    kp_2 = np.sqrt(kp**2)
+#    term_kp = 1 + kp/kp_2
+    term_kp_2 = kp_2 + kp
+    
+    phi_n = -np.exp(-2*kp*zp)*np.abs(Rp)*(px*kx*term_kp_2/den + py*term_kp_2 + 1j*pz*kp_2*term_kp_2/den )/(4*np.pi*a)
 
     
     cte_formula = a/(48*np.pi**2*np.abs(Rp)) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 

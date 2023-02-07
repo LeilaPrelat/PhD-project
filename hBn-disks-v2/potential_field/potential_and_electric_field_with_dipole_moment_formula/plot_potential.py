@@ -22,7 +22,7 @@ name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
 path_constants =  path_basic.replace('/potential_field/potential_and_electric_field_with_dipole_moment_formula','')
-path_save = path_basic + '/' + 'dipole_moment'
+path_save = path_basic + '/' + 'potential'
 if not os.path.exists(path_save):
     print('Creating folder to save graphs')
     os.mkdir(path_save)

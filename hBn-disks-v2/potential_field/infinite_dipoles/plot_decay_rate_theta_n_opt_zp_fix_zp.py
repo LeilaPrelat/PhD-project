@@ -73,9 +73,9 @@ tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance_d%.2fnm_v%i_al
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
-zp_nano = listy[20]
+zp_nano = listy[-20]
 zp_nano = 0.05
-zp_nano = 0.1
+zp_nano = 15
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -122,9 +122,9 @@ labelp = r'_a%.2fnm_zp%.2fnm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 50
+N = 25
 lim1,lim2 = 18,-60
-lim1,lim2 = 14,-30
+lim1,lim2 = 14,-1
 #lim1,lim2 = 14,-1
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 #listx_2 = np.linspace(listx[lim1], 0.2, N)

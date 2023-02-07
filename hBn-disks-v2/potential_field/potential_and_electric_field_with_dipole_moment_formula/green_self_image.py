@@ -16,16 +16,22 @@ from scipy import integrate
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field/potential_and_electric_field_with_dipole_moment_formula','')
+#print('Importar modulos necesarios para este codigo')
 try:
-    sys.path.insert(1, path_constants)
+    sys.path.insert(1, path_basic)
     from rp_coefficient import rp_fresnel_num, rp_pole_aprox, epsilon_x, epsilon_z
 except ModuleNotFoundError:
     print('hBn_PP.py no se encuentra en ' + path_basic)
 
 
 try:
-    sys.path.insert(1, path_constants)
+    sys.path.insert(1, path_basic)
+    from hBn_PP import hBn_lambda_p,hBn_Rp
+except ModuleNotFoundError:
+    print('graphene_sigma.py no se encuentra en ' + path_basic)
+    
+try:
+    sys.path.insert(1, path_basic)
     from constants import constantes
 except ModuleNotFoundError:
     print('constants.py no se encuentra en ' + path_basic)
@@ -81,6 +87,11 @@ def green_self_num(omegac,epsi_silica,d_nano,zp_micro):
     d_micro = d_nano*1e-3
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     
+    
+#    d_micros = d_nano*1e-3
+#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+#    kp = 2*np.pi/lambda_p_v  
+#    alfa_p = kp/omegac
 
 
 
@@ -474,13 +485,16 @@ def green_self_ana_v1(omegac,epsi_silica,d_nano,zp_micro):
 
     
 
-    arg = -2*kp*zp_micro  #NO ESTOY SEGURA DE ESTA EXPONENCIAL EH 
-    expo_self = np.exp(arg) 
+    arg = -2*kp*zp_micro  
+    
+    try:
 
+        dif_term = kp*special.exp1(arg)*np.exp(arg) + (2*zp_micro)**(-1)
+    except RuntimeWarning:
+        dif_term = kp*np.pi*1j*np.exp(arg)
+        
     
-    
-    
-    rtaself_x = 0.5*( 2*(2*zp_micro)**(-3) + kp*(2*zp_micro)**(-2) + kp**2*( kp*special.exp1(arg)*expo_self + (2*zp_micro)**(-1)  ))
+    rtaself_x = 0.5*( 2*(2*zp_micro)**(-3) + kp*(2*zp_micro)**(-2) + kp**2*dif_term   )
     
     
 

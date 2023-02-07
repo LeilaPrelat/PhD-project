@@ -57,8 +57,7 @@ zp = 0.05
 b = -0.01
 
 
-d_nano = 1
-
+d_nano = 0.1
 #omega0THz = 65
 #omega0 = omega0THz*1e12 
 
@@ -66,8 +65,8 @@ d_nano = 1
     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title4 = r'v = c/%i, $z_p$=%i nm, b = %i nm, d = %i nm' %(int_v, zp*1e3,b*1e3,d_nano)
-labelp = r'_res_d%inm' %(d_nano)
+title4 = r'v = c/%i, $z_p$=%i nm, b = %i nm, d = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano)
+labelp = r'_res_d%.2fnm' %(d_nano)
 
 N = 100
 
@@ -81,7 +80,7 @@ x3 = 0.17030075187969923
 x4 = 0.19937343358395992
 
 listx = np.linspace(0.09,0.195,N)
-listx = np.linspace(x1+1e-3,x4-1e-3,N)
+listx = np.linspace(x1 + 1e-3,x4 - 1e-3,N)
 #listx = np.linspace(x1,x2,N)
 
 ## entre x1 y x2, y entre x3 y x4 ##
@@ -194,5 +193,26 @@ plt.tight_layout()
 plt.yscale('log')
 os.chdir(path_save)
 plt.savefig( 'p_tot' + label1 + '.png', format='png')   
+
+
+
+tabla = np.array([listx,listy_re_num])
+tabla = np.transpose(tabla)
+header1 = 'E [eV]     |p|' + ', ' + title + ', ' + name_this_py
+np.savetxt( 'dip_mom_hBN_num_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
+
+
+tabla = np.array([listx,listy_re_anav2])
+tabla = np.transpose(tabla)
+header1 = 'E [eV]     |p|' + ', ' + title + ', ' + name_this_py
+np.savetxt( 'dip_mom_hBN_ana_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
+
+
+tabla = np.array([listx,listy_re_pole])
+tabla = np.transpose(tabla)
+header1 = 'E [eV]     |p|' + ', ' + title + ', ' + name_this_py
+np.savetxt( 'dip_mom_hBN_pole_aprox_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
+
+
 
 #%%

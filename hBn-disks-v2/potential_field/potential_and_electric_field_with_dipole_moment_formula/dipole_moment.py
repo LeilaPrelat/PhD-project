@@ -134,10 +134,10 @@ def dipole_moment_ana_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp):     ##
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
 
-    d_micros = d_nano*1e-3
-    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-    kp = 2*np.pi/lambda_p_v
-    alfa_p = kp/omegac 
+#    d_micros = d_nano*1e-3
+#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+#    kp = 2*np.pi/lambda_p_v
+#    alfa_p = kp/omegac 
 
       
     arg = np.abs(b)*omegac*int_v
@@ -424,6 +424,7 @@ def dipole_moment_num_resonance(omegac,epsi_silica,d_nano,int_v,b,zp):
     
     d_micro = d_nano*1e-3
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+
 
     rp = lambda u: alpha_parallel(u)/(alpha_parallel(u)*(1-r*expB_self(u)) - alfa_p)
  
