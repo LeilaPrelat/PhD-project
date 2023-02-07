@@ -54,22 +54,22 @@ print('Definir parametros del problema')
 #v = c/int_v
 #omega = 0.7*1e12
 epsi1,epsi3 = 1,1
-d_nano = 1
+d_nano = 0.1
 
 if plot_vs_E == 1:
     zp0_nano = 0.25*1e3
     listx = np.linspace(0.001,3.5,100)
-    title = r'$z_p$ = %inm, d = %i nm' %(zp0_nano,d_nano)
+    title = r'$z_p$ = %inm, d = %.2f nm' %(zp0_nano,d_nano)
     labelx = r'$\hbar\omega$ [eV]'   
-    label1 = '_vs_E_d%inm' %(d_nano) 
+    label1 = '_vs_E_d%.2fnm' %(d_nano) 
 
 
 elif plot_vs_zp == 1:
     E0 = 3
     listx = np.linspace(10,400,100)
-    title = r'$\hbar\omega$ = %i eV, d = %i nm' %(E0,d_nano)
+    title = r'$\hbar\omega$ = %i eV, d = %.2f nm' %(E0,d_nano)
     labelx = r'$z_p$ [nm]'   
-    label1 = '_vs_zp_d%inm' %(d_nano) 
+    label1 = '_vs_zp_d%.2fnm' %(d_nano) 
 
 
 N = 100

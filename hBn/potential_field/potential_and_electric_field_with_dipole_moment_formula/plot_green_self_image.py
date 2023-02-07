@@ -226,7 +226,7 @@ for value in listx:
 #%%
 graph(title,labelx,r'Re{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
-#plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_re_ana2,'.',ms = ms+1,color = 'darkorange',label = 'PP analytical 2')
 plt.plot(listx,listy_re_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
 plt.plot(listx,listy_re_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
@@ -239,7 +239,7 @@ plt.savefig( 'Re_Gself' + label1 + '.png', format='png')
 
 graph(title,labelx,r'Im{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
-#plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_im_ana2,'.',ms = ms+1,color = 'darkorange',label = 'PP analytical 2')
 plt.plot(listx,listy_im_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
 plt.plot(listx,listy_im_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
