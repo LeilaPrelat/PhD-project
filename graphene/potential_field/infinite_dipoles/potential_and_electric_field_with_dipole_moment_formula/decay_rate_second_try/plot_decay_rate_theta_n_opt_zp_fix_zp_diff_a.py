@@ -95,9 +95,8 @@ list_a_nano = np.linspace(0.000001,1,25)*1e3
 
 labelx = r'a [nm]'  
     
-title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3) 
-title3 = r'n = %i' %(Nmax)
-title4 = r', $z_p$ = $z^{opt}_p$' 
+title2 = r'v = c/%i, b = %i nm, n = %i' %(int_v,b*1e3,Nmax) 
+title4 = r'$z_0$ = $z^{\rm opt}_0$, $\hbar\omega = \hbar\omega^{\rm opt}$' 
 
 labelp = r'_n%i_zp%inm' %(Nmax,zp_nano)
 #label1 = 'vs_zp_lambda_p'  + labelp
@@ -129,9 +128,7 @@ listz_2 = f2(listx_2)
 
 
 
-title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3) 
-title3 = r'a = %i nm' %(a*1e3)
-title4 = r', $z_p$ = $z^{opt}_p$'
+
 
 
 #labelp = r'_a%inm_zp_opt' %(a*1e3)
@@ -141,7 +138,7 @@ title4 = r', $z_p$ = $z^{opt}_p$'
 
 #title1 = r'$\kappa$ = %.2f$\omega_o$, $\kappa_r$ = %.2f$\kappa$, $\hbar\omega_o$ = %i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)   
  
-title =  title2 + '\n' +  title3  + title4
+title =  title2 + '\n'  + title4
 
 
 
@@ -184,7 +181,7 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
     plt.ylabel(labely,fontsize=tamletra,labelpad =labelpady)
     plt.tick_params(labelsize = tamnum, length = 2 , width=1, direction="in", pad = pad)
 #    plt.tick_params(labelsize = tamnum, length = 4 , width=1, direction="in", pad = pad) ### para cleo europe
-#    plt.title(title,fontsize=int(tamtitle*0.9))
+    plt.title(title,fontsize=int(tamtitle*0.9))
 
     return  
  
@@ -229,19 +226,13 @@ plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handlete
 plt.tight_layout()
 
 #%%
-listx_3 = []
-for ind in range(len(listy_2)):
-    listx_3.append(listy_2[ind]/listz_2[ind])
-    
-listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),N)
-
     
 graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 plt.plot(list_a_nano,np.array(maxis_value_y),'-',ms = ms, label = 'n = %i'%(Nmax))
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
 plt.tight_layout()
-
+#
 plt.yscale('log')
 os.chdir(path_save)
 #plt.savefig('decay_rate_fix_zp_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)

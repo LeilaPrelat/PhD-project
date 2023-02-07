@@ -30,7 +30,7 @@ if not os.path.exists(path_save):
 err = 'fieldE_direct_numerical.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from green_self_image import green_self_ana,green_self_pole_aprox, green_self_ana2, green_self_num, green_self_ana3
+    from green_self_image import green_self_ana,green_self_pole_aprox_parallel_num,green_self_pole_aprox, green_self_ana2, green_self_num, green_self_ana3,green_self_ana_parallel_num
 except ModuleNotFoundError:
     print(err)
 
@@ -54,7 +54,7 @@ epsi1,epsi3 = 1,1
 zp = 0.05
 
 
-d_nano = 20
+d_nano = 10
 
 title = r'$z_p$=%inm, d = %.2f nm' %(zp*1e3,d_nano)
 
@@ -97,6 +97,14 @@ def function_ana_xx_re(energy0):
     return np.real(rtaself_x)
 
 
+def function_ana_xx_re_parallel_num(energy0):
+    omegac0 = energy0/aux 
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_ana_parallel_num(omegac0,epsi1,epsi3,d_nano,zp)
+    
+    return np.real(rtaself_x)
+
+
 def function_ana2_xx_re(energy0):
     omegac0 = energy0/aux 
 
@@ -120,6 +128,12 @@ def function_ana_xx_im(energy0):
     
     return np.imag(rtaself_x)
 
+def function_ana_xx_im_parallel_num(energy0):
+    omegac0 = energy0/aux 
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_ana_parallel_num(omegac0,epsi1,epsi3,d_nano,zp)
+    
+    return np.imag(rtaself_x)
 
 
 def function_ana2_xx_im(energy0):
@@ -155,26 +169,48 @@ def function_pole_aprox_xx_im(energy0):
     return np.imag(rtaself_x)
 
 
+
+
+def function_pole_aprox_xx_re_parallel_num(energy0):
+    omegac0 = energy0/aux 
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_parallel_num(omegac0,epsi1,epsi3,d_nano,zp)
+    
+    return np.real(rtaself_x)
+
+
+
+def function_pole_aprox_xx_im_parallel_num(energy0):
+    omegac0 = energy0/aux 
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_parallel_num(omegac0,epsi1,epsi3,d_nano,zp)
+    
+    return np.imag(rtaself_x)
+
+
 #%%
     
-tamfig = (4.5,3.5)
-tamlegend = 12
-tamletra = 12
-tamtitle = 11
-tamnum = 10
-labelpady = -1.5
-labelpadx = 2
-pad = 0
-mk = 2
-ms = 4
-hp = 0.3
-length_marker = 1
+tamfig = [3.5,3]
+tamletra = 9
+tamtitle  = 9
+tamnum = 7
+tamlegend = 7
+labelpady = 2
+labelpadx = 3
+pad = 2.5
+mk = 1
+ms = 3
+hp = 0.5
+length_marker = 1.5
+dpi = 500
+
+
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
     plt.figure(figsize=tamfig)
     plt.xlabel(labelx,fontsize=tamletra,labelpad =labelpadx)
-    plt.ylabel(labely,fontsize=tamletra,labelpad =labelpadx)
-    plt.tick_params(labelsize = tamnum, pad = pad)
+    plt.ylabel(labely,fontsize=tamletra,labelpad =labelpady)
+    plt.tick_params(labelsize = tamnum, length = 2 , width=1, direction="in", pad = pad)
     plt.title(title,fontsize=int(tamtitle*0.9))
 
     return   
@@ -184,52 +220,67 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
 listy_re_ana = []
 listy_re_ana2 = []
 listy_re_ana3 = []
+listy_re_ana_parallel_num = []
 listy_re_num = []
 listy_re_pole_aprox = []
-
+listy_re_pole_aprox_parallel_num = []
 
 listy_im_ana = []
 listy_im_ana2 = []
 listy_im_ana3 = []
+listy_im_ana_parallel_num = []
 listy_im_num = []
 listy_im_pole_aprox = []
-
+listy_im_pole_aprox_parallel_num = []
 
 for value in listx: 
 
     y_re_ana = function_ana_xx_re(value)       
     y_re_ana2 = function_ana2_xx_re(value)       
     y_re_ana3 = function_ana3_xx_re(value)  
+    y_re_ana_parallel_num = function_ana_xx_re_parallel_num(value)       
     y_re_num = function_num_xx_re(value)
     y_re_pole_aprox = function_pole_aprox_xx_re(value)
+    y_re_pole_aprox_parallel_num = function_pole_aprox_xx_re_parallel_num(value)
     
     listy_re_ana.append(y_re_ana)
     listy_re_ana2.append(y_re_ana2)
     listy_re_ana3.append(y_re_ana3)
+    listy_re_ana_parallel_num.append(y_re_ana_parallel_num)
     listy_re_num.append(y_re_num)
     listy_re_pole_aprox.append(y_re_pole_aprox)
+    listy_re_pole_aprox_parallel_num.append(y_re_pole_aprox_parallel_num)
 
     y_im_ana = function_ana_xx_im(value)       
     y_im_ana2 = function_ana2_xx_im(value)   
     y_im_ana3 = function_ana3_xx_im(value)   
+    y_im_ana_parallel_num = function_ana_xx_im_parallel_num(value)   
     y_im_num = function_num_xx_im(value)
     y_im_pole_aprox = function_pole_aprox_xx_im(value)
+    y_im_pole_aprox_parallel_num = function_pole_aprox_xx_im_parallel_num(value)
 
     listy_im_ana.append(y_im_ana)
     listy_im_ana2.append(y_im_ana2)
     listy_im_ana3.append(y_im_ana3)
+    listy_im_ana_parallel_num.append(y_im_ana_parallel_num)
     listy_im_num.append(y_im_num)
     listy_im_pole_aprox.append(y_im_pole_aprox)
-    
+    listy_im_pole_aprox_parallel_num.append(y_im_pole_aprox_parallel_num)
     
     
 #%%
+    
+label_png = r'$r_{\rm p} = R_p k_\parallel/(k_\parallel - k_{\rm p})$'    
+#label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'      
+
 graph(title,labelx,r'Re{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
-plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_re_ana2,'.',ms = ms+1,color = 'darkorange',label = 'PP analytical 2')
-plt.plot(listx,listy_re_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_re_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+#plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_re_ana2,'.',ms = ms,color = 'red',label = 'PP ana Exp func')
+#plt.plot(listx,listy_re_ana_parallel_num,'.',ms = ms+1,color = 'darkred',label = 'PP ana' + label_png)
+plt.plot(listx,listy_re_num,'.',ms = ms,color = 'orange',label = 'full numerical')
+plt.plot(listx,listy_re_pole_aprox,'.-',ms = ms,color = 'blue',label = 'PP numerical')
+#plt.plot(listx,listy_re_pole_aprox_parallel_num,'.-',ms = 3,color = 'lightseagreen',label = 'PP num ' +label_png)
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
@@ -237,18 +288,50 @@ os.chdir(path_save)
 plt.savefig( 'Re_Gself' + label1 + '.png', format='png')   
 
 
-graph(title,labelx,r'Im{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Im{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
-plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_im_ana2,'.',ms = ms+1,color = 'darkorange',label = 'PP analytical 2')
-plt.plot(listx,listy_im_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_im_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+#plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_im_ana2,'.',ms = ms,color = 'red',label = 'PP ana Exp func')
+#plt.plot(listx,listy_im_ana_parallel_num,'.',ms = ms+1,color = 'darkred',label = 'PP ana' + label_png)
+plt.plot(listx,listy_im_num,'.',ms = ms,color = 'orange',label = 'full numerical')
+plt.plot(listx,listy_im_pole_aprox,'.-',ms = ms,color = 'blue',label = 'PP numerical')
+#plt.plot(listx,listy_im_pole_aprox_parallel_num,'.-',ms = 3,color = 'lightseagreen',label = 'PP num ' +label_png)
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
 os.chdir(path_save)
 plt.savefig( 'Im_Gself' + label1 + '.png', format='png')   
 
+
+
+graph(title,labelx,r'Re{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_re_ana2,'.',ms = ms,color = 'red',label = 'PP ana Exp func')
+plt.plot(listx,listy_re_ana_parallel_num,'.',ms = ms,color = 'darkred',label = 'PP ana' + label_png)
+plt.plot(listx,listy_re_num,'.',ms = ms,color = 'orange',label = 'full numerical')
+plt.plot(listx,listy_re_pole_aprox,'.-',ms = ms,color = 'blue',label = 'PP numerical')
+plt.plot(listx,listy_re_pole_aprox_parallel_num,'.-',ms = ms,color = 'lightseagreen',label = 'PP num ' +label_png)
+plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+plt.tight_layout()
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'Re_Gself_all' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi) 
+
+
+graph(title,labelx,r'Im{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_im_ana2,'.',ms = ms+1,color = 'red',label = 'PP ana Exp func')
+plt.plot(listx,listy_im_ana_parallel_num,'.',ms = ms+1,color = 'darkred',label = 'PP ana' + label_png)
+plt.plot(listx,listy_im_num,'.',ms = ms,color = 'orange',label = 'full numerical')
+plt.plot(listx,listy_im_pole_aprox,'.-',ms = 3,color = 'blue',label = 'PP numerical')
+plt.plot(listx,listy_im_pole_aprox_parallel_num,'.-',ms = 3,color = 'lightseagreen',label = 'PP num ' +label_png)
+plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+plt.tight_layout()
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'Im_Gself_all' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)   
 
 
 tabla = np.array([listx,listy_re_num,listy_im_num])
@@ -270,3 +353,86 @@ np.savetxt( 'Gself_hBN_pole_aprox_' + label1 + '.txt', tabla, fmt='%1.11e', deli
 
 
 #%%
+
+
+# for gm meeting 
+
+
+
+
+graph(title,labelx,r'Re{G$_{self}$} ($\mu$m$^{-3})$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+#plt.plot(listx,listy_re_ana2,'.',ms = ms,color = 'red',label = 'PP ana Exp func')
+plt.plot(listx,listy_re_num,'.',ms = ms,color = 'orange',label = 'full num')
+plt.plot(listx,listy_re_pole_aprox_parallel_num,'.-',ms = ms,color = 'lightseagreen',label = 'PP num ' +label_png)
+plt.plot(listx,listy_re_ana_parallel_num,'.',ms = ms,color = 'darkred',label = 'PP ana ' + label_png)
+
+#plt.plot(listx,listy_re_pole_aprox,'.-',ms = ms,color = 'blue',label = 'PP numerical')
+plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+plt.tight_layout()
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'Re_Gself_GM' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi) 
+
+
+graph(title,labelx,r'Im{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+#plt.plot(listx,listy_im_ana2,'.',ms = ms+1,color = 'red',label = 'PP ana Exp func')
+plt.plot(listx,listy_im_num,'.',ms = ms,color = 'orange',label = 'full num')
+plt.plot(listx,listy_im_pole_aprox_parallel_num,'.-',ms = ms,color = 'lightseagreen',label = 'PP num ' +label_png)
+plt.plot(listx,listy_im_ana_parallel_num,'.',ms = ms,color = 'darkred',label = 'PP ana' + label_png)
+#plt.plot(listx,listy_im_pole_aprox,'.-',ms = 3,color = 'blue',label = 'PP numerical')
+
+plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+plt.tight_layout()
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'Im_Gself_GM' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)  
+
+
+
+
+
+
+
+
+
+ 
+label_png2 = r'$r_{\rm p} = R_p k_{\rm p}/(k_\parallel - k_{\rm p})$'    
+
+
+graph(title,labelx,r'Re{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_re_num,'.',ms = ms,color = 'orange',label = 'full num')
+plt.plot(listx,listy_re_pole_aprox,'.-',ms = ms,color = 'blue',label = 'PP num '  + label_png2)
+plt.plot(listx,listy_re_ana2,'.',ms = ms,color = 'red',label = 'PP ana ' + label_png2)
+#plt.plot(listx,listy_re_pole_aprox_parallel_num,'.-',ms = ms,color = 'lightseagreen',label = 'PP num ' +label_png)
+#plt.plot(listx,listy_re_ana_parallel_num,'.',ms = ms,color = 'darkred',label = 'PP ana ' + label_png)
+
+
+plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+plt.tight_layout()
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'Re_Gself_GM_v2' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi) 
+
+
+graph(title,labelx,r'Im{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+#plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
+plt.plot(listx,listy_im_num,'.',ms = ms,color = 'orange',label = 'full num')
+plt.plot(listx,listy_im_pole_aprox,'.-',ms = ms,color = 'blue',label = 'PP num '+ label_png2)
+plt.plot(listx,listy_im_ana2,'.',ms = ms,color = 'red',label = 'PP ana' + label_png2)
+
+#plt.plot(listx,listy_im_pole_aprox_parallel_num,'.-',ms = ms,color = 'lightseagreen',label = 'PP num ' +label_png)
+#plt.plot(listx,listy_im_ana_parallel_num,'.',ms = ms,color = 'darkred',label = 'PP ana' + label_png)
+
+
+plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
+plt.tight_layout()
+#    plt.yscale('log')
+os.chdir(path_save)
+plt.savefig( 'Im_Gself_GM_v2' + label1 + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)  

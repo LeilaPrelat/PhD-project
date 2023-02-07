@@ -547,13 +547,13 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
 #    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
-    cte_extra = (a*omegac)**4
+#    cte_extra = (a*omegac)**4
 
     k_prima = omegac*np.sqrt(epsi1)
         
     rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    
         
-    return rta*cte_extra
+    return rta
 
 
 
