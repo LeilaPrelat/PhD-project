@@ -78,7 +78,7 @@ print('Definir parametros del problema')
 zp = 0.05
 b = -0.01
 
-d_nano = 0.1
+d_nano = 1
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
@@ -165,7 +165,7 @@ if plot_vs_E ==1 :
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
     E0 = 0.175 # eV
-    E0 = 0.1
+    E0 = 0.09
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
@@ -269,8 +269,10 @@ graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamlet
 plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k',label = r'$z^{\rm opt}_{\rm o}$/$\lambda_{\rm p}$')
-plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
-plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+#plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
+#plt.text(0.85,0.03,r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
+plt.text(60,0.12,r'$\omega/\omega_{\parallel}$= %.2f'%(omega_omega_D),fontsize=tamlegend)
+#plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 plt.tight_layout()
 #if plot_vs_c == 1:
 #    plt.yscale('log')

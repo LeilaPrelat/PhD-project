@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 0
-load_data = 1
+create_data = 1
+load_data = 0
 
 #%%
 
@@ -73,7 +73,7 @@ print('Definir parametros del problema')
 
 b = -0.01
 
-d_nano = 0.1
+d_nano = 1
 int_v = 10
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
@@ -120,6 +120,8 @@ listx = np.linspace(0.093 , 0.1625, N ) ## para d = 0.1 nm y primer intervalo
 
 #listx = np.linspace(0.093 , 0.1, N ) ## para d = 0.1 nm y primer intervalo 
 
+listx = np.linspace(0.13 , 0.1625, N ) ## para d = 1 nm y primer intervalo (largo )
+listx = np.linspace(0.09 , 0.14, 25) ## para d = 1 nm y primer intervalo (una parte, un zoom )
 
 #%%
 
@@ -142,6 +144,8 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
             list_zp_nano = np.linspace(50,750,N)
         else:
             list_zp_nano = np.linspace(100,400,N)    
+    elif d_nano == 1:
+        list_zp_nano = np.linspace(90,290,N) ## para todo el intervalo 
         
     else:
         list_zp_nano = np.linspace(10,400,N)
@@ -276,7 +280,12 @@ if load_data == 1:
     for x in listx:
         list_lambda_p.append(np.real(lambda_p_v2(x)))
 
-    list_zp_div_lambda_p = np.array(listy)/np.array(list_lambda_p)
+
+    
+    list_zp_div_lambda_p = []
+    for ind in range(len(listx)):
+        rta = listy[ind]/list_lambda_p[ind]
+        list_zp_div_lambda_p.append(rta)
     
     labely = 'Surface-dipole' + '\n' +  r'distance  $z_{\rm 0}$/$\lambda_{\rm p}$'
     labelx = r'Frequency $\omega/\omega_\parallel$'
@@ -287,8 +296,13 @@ if load_data == 1:
     
     list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 27, 3)
 
+    if d_nano == 0.1:
+        lim = -1
+    elif d_nano == 1:
+        lim = -1
+
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-    plt.plot(listx_2,np.array(list_zp_div_lambda_p),'-',ms = ms,color = 'purple')
+    plt.plot(listx_2[0:lim],np.array(list_zp_div_lambda_p[0:lim]),'-',ms = ms,color = 'purple')
 #    plt.plot(listx,np.array(list_lambda_p)*1e-3,'--',ms = ms,color = 'lightseagreen')
 #    plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
     plt.tight_layout()

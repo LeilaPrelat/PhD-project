@@ -61,8 +61,8 @@ title = r'$z_p$=%inm, d = %i nm' %(zp*1e3,d_nano)
 N = 100
 
     # z0 = 0.06*1e3
-labelx = r'$\hbar\omega$ [eV]'   
-label1 = 'vs_E_d%inm' %(d_nano) 
+labelx = r'$\hbar\omega$ (eV)'   
+label1 = 'vs_E_d%.2fnm' %(d_nano) 
 
 x1 = 0.09260651629072682 
 x2 = 0.10112781954887218
@@ -224,7 +224,7 @@ for value in listx:
     
     
 #%%
-graph(title,labelx,r'Re(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Re{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_re_ana2,'.',ms = ms+1,color = 'darkorange',label = 'PP analytical 2')
@@ -237,7 +237,7 @@ os.chdir(path_save)
 plt.savefig( 'Re_Gself' + label1 + '.png', format='png')   
 
 
-graph(title,labelx,r'Im(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Im{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_im_ana2,'.',ms = ms+1,color = 'darkorange',label = 'PP analytical 2')
@@ -248,6 +248,25 @@ plt.tight_layout()
 #    plt.yscale('log')
 os.chdir(path_save)
 plt.savefig( 'Im_Gself' + label1 + '.png', format='png')   
+
+
+
+tabla = np.array([listx,listy_re_num,listy_im_num])
+tabla = np.transpose(tabla)
+header1 = 'E [eV]     Re{Gself}     Im{Gself}' + ', ' + title + ', ' + name_this_py
+np.savetxt( 'Gself_hBN_num_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
+
+
+tabla = np.array([listx,listy_re_ana2,listy_im_ana2])
+tabla = np.transpose(tabla)
+header1 = 'E [eV]     Re{Gself}     Im{Gself}' + ', ' + title + ', ' + name_this_py
+np.savetxt( 'Gself_hBN_ana_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
+
+
+tabla = np.array([listx,listy_re_pole_aprox,listy_im_pole_aprox])
+tabla = np.transpose(tabla)
+header1 = 'E [eV]     Re{Gself}     Im{Gself}' + ', ' + title + ', ' + name_this_py
+np.savetxt( 'Gself_hBN_pole_aprox_' + label1 + '.txt', tabla, fmt='%1.11e', delimiter='\t', header = header1)
 
 
 #%%

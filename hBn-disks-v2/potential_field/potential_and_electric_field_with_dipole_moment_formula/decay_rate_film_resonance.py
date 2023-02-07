@@ -311,7 +311,7 @@ def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano,int_v,b,zp):     ## 
 
     k_prima = omegac*np.sqrt(epsi_silica(E))
     
-    factor_final = k_prima/(12*np.pi*(int_v**2))
+    factor_final = k_prima/(48*(np.pi**2)*(int_v**2))
 
     rta = np.imag(Green_self)*factor_final/factor_K    
     

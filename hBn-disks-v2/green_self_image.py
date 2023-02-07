@@ -474,13 +474,16 @@ def green_self_ana_v1(omegac,epsi_silica,d_nano,zp_micro):
 
     
 
-    arg = -2*kp*zp_micro  #NO ESTOY SEGURA DE ESTA EXPONENCIAL EH 
-    expo_self = np.exp(arg) 
+    arg = -2*kp*zp_micro  
+    
+    try:
 
+        dif_term = kp*special.exp1(arg)*np.exp(arg) + (2*zp_micro)**(-1)
+    except RuntimeWarning:
+        dif_term = kp*np.pi*1j*np.exp(arg)
+        
     
-    
-    
-    rtaself_x = 0.5*( 2*(2*zp_micro)**(-3) + kp*(2*zp_micro)**(-2) + kp**2*( kp*special.exp1(arg)*expo_self + (2*zp_micro)**(-1)  ))
+    rtaself_x = 0.5*( 2*(2*zp_micro)**(-3) + kp*(2*zp_micro)**(-2) + kp**2*dif_term   )
     
     
 
