@@ -2,11 +2,16 @@
 
 	- cambiar la polarizabilidad de hBN disks : 
 		- graficar la parte real de la polarizabilidad en funcion de la freq para dif D y hallar el D que haga que las resonancias caigan dentro de las bandas
-		usar kappa_r = kappa/2 o algo asi y solo queda sin definir el ancho de la lorenziana que es kappa, pero kappa puede ser kappa = 0.1*omega_0 y ahi la unica variable es omega_0.   
-	- preparar un overleaf para explicar el problema de las Gamma_{SP,n} -->0 cuando a --> inf
+		problema con esto: no cae dentro de las bandas para ningun D. preguntar a Eduardo, tambien por signo de Im{alfa} negativo y por el valor de "t" (ver overleaf) 
+		
+		
+		- para alfa dipolo : usar kappa_r = kappa/2 o algo asi y solo queda sin definir el ancho de la lorenziana que es kappa, pero kappa puede ser kappa = 0.1*omega_0 y ahi la unica variable es omega_0.: jueves    
+
 	
 	
 *jueves 9 de febrero : 
+
+	- preparar un overleaf para explicar el problema de las Gamma_{SP,n} -->0 cuando a --> inf	
 	- reunion con javier sobre el problema de las Gamma_{SP,n} -->0 cuando a --> inf. Desde las 14 hr en adelante. 
 		
 
