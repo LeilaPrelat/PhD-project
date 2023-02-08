@@ -1,0 +1,16 @@
+*Eduardo 2023/02/07 reunion  : hacer miercoles 8 de febrero
+
+	- cambiar la polarizabilidad de hBN disks : 
+		- graficar la parte real de la polarizabilidad en funcion de la freq para dif D y hallar el D que haga que las resonancias caigan dentro de las bandas
+		usar kappa_r = kappa/2 o algo asi y solo queda sin definir el ancho de la lorenziana que es kappa, pero kappa puede ser kappa = 0.1*omega_0 y ahi la unica variable es omega_0.   
+	- preparar un overleaf para explicar el problema de las Gamma_{SP,n} -->0 cuando a --> inf
+	
+	
+*jueves 9 de febrero : 
+	- reunion con javier sobre el problema de las Gamma_{SP,n} -->0 cuando a --> inf. Desde las 14 hr en adelante. 
+		
+
+*viernes 10 de febrero : home office . 	
+	- preparar un overleaf con todo lo importante y un nuevo github con lo necesario + escribir una descripcion de las funciones ---> viernes 
+	
+

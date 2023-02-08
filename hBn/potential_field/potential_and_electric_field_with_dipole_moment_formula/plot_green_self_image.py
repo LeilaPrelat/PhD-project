@@ -273,7 +273,7 @@ for value in listx:
 label_png = r'$r_{\rm p} = R_p k_\parallel/(k_\parallel - k_{\rm p})$'    
 #label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'      
 
-graph(title,labelx,r'Re{G$_{self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Re{G$_{\rm self}$} ($\mu$m)$^{-3}$',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx[0:-2],listy_re_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_re_ana2,'.',ms = ms,color = 'red',label = 'PP ana Exp func')
@@ -288,7 +288,7 @@ os.chdir(path_save)
 plt.savefig( 'Re_Gself' + label1 + '.png', format='png')   
 
 
-graph(title,labelx,r'Im{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+graph(title,labelx,r'Im{G$_{\rm self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx[0:-2],listy_im_ana[0:-2],'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_im_ana2,'.',ms = ms,color = 'red',label = 'PP ana Exp func')
