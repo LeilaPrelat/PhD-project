@@ -73,12 +73,12 @@ def epsilon_z(hbw):
 
 
 def polarizability_parallel(hbw,d_film_nano,D_disk_nano,epsilon_silica):
-    
+    ""
     a_zeta, b_zeta, c_zeta = -0.01267, -45.34, 0.8635
     a_eta, b_eta, c_eta = 0.03801, -8.569, -0.1108
 
     
-    t = D_disk_nano*0.1  ### revisar si es 0.1 o 1
+    t = 0.4  ### 
     x = t/D_disk_nano
     
     zeta1 = a_zeta*np.exp(b_zeta*x)  + c_zeta    
@@ -106,7 +106,7 @@ def polarizability_perp(hbw,d_film_nano,D_disk_nano,epsilon_silica):
     a_eta, b_eta, c_eta = 0.03801, -8.569, -0.1108
 
 
-    t = D_disk_nano*0.1  ### revisar si es 0.1 o 1
+    t = 0.4  ### 
     x = t/D_disk_nano
     
     

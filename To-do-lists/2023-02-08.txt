@@ -8,14 +8,25 @@
 		- para alfa dipolo : usar kappa_r = kappa/2 o algo asi y solo queda sin definir el ancho de la lorenziana que es kappa, pero kappa puede ser kappa = 0.1*omega_0 y ahi la unica variable es omega_0.: jueves    
 
 	
-	
 *jueves 9 de febrero : 
 
 	- preparar un overleaf para explicar el problema de las Gamma_{SP,n} -->0 cuando a --> inf	
+	- revisar de nuevo la version analitica de phi_n para inf dipolos 
+		- grafeno . done 
+		- silver
+		- hBN	
+
+
+
+	- revisar de nuevo la version analitica de phi para 1 dipolo. <--- viernes
+	- escribir un summary of equations 
+
+
+*viernes 10 de febrero : home office 
+
+	- actualizar el informe del paper para javier  . <--- viernes
+	- terminar mis notas. <--- viernes 
+	(notas : preparar un overleaf con todo lo importante y un nuevo github con lo necesario + escribir una descripcion de las funciones )
+	
 	- reunion con javier sobre el problema de las Gamma_{SP,n} -->0 cuando a --> inf. Desde las 14 hr en adelante. 
 		
-
-*viernes 10 de febrero : home office . 	
-	- preparar un overleaf con todo lo importante y un nuevo github con lo necesario + escribir una descripcion de las funciones ---> viernes 
-	
-
