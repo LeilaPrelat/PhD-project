@@ -518,7 +518,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
     kx = omegac*int_v + 2*np.pi*n/a
     
     delta_n = 2*np.pi/a
-    print(delta_n/kx)
+#    print(delta_n/kx)
 
     den = np.sqrt(kp**2 - kx**2)
     

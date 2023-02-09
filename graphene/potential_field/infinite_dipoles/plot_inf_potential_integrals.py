@@ -18,8 +18,8 @@ sns.set()
 
 #%%
 
-plot_vs_y = 1
-plot_vs_E = 0
+plot_vs_y = 0
+plot_vs_E = 1
 
 #%%
 

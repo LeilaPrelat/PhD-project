@@ -70,7 +70,10 @@ tabla = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt', de
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla ## energy and zp 
 
-zp_nano = listy[-20]
+ind = 18
+ind = -1
+print(listx[ind])
+zp_nano = listy[ind]
 
 omegac0_1 = np.max(listx)*1e-3/(c*hb)
 lambda_SP_1 = 2*np.pi/omegac0_1
@@ -82,13 +85,13 @@ lambda_SP_2 = 2*np.pi/omegac0_2
 a_min = np.real(lambda_SP_1)*Nmax/(int_v - 1)
 a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
-a = np.mean([a_min,a_max])
+a = np.mean([a_min,a_max]) ##  micrones 
 
 a = 1.5
-#a = 1
+a = 15
 #a = 500*1e-3
 #a = 5031*1e-3
-
+print(a)
 
 
 a_nm = a*1e3

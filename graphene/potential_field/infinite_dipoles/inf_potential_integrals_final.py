@@ -81,9 +81,11 @@ def F1_ana(omegac,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,n,y,z):
     term_ky = np.sqrt(kp**2 - kx**2)
     
     kp_pv2 = np.sqrt(kp**2)
+#    kp_pv2 = kp 
+#    
     
     term = (1 + kp/kp_pv2)
-
+#    term = 2
     
     exp_z = np.exp(-kp_pv2*(2*zp-z))*np.exp(1j*term_ky*np.abs(y)) 
 
