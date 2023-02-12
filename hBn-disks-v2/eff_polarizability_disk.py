@@ -20,7 +20,7 @@ name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
 
-graficar = 1
+graficar = 0
 
 
 
@@ -72,13 +72,13 @@ def epsilon_z(hbw):
     return epsi_inf - f_x*(num/den)
 
 
-def polarizability_parallel(hbw,d_film_nano,D_disk_nano,epsilon_silica):
+def polarizability_parallel(hbw,d_thickness_disk_nano,D_disk_nano,epsilon_silica):
     ""
     a_zeta, b_zeta, c_zeta = -0.01267, -45.34, 0.8635
     a_eta, b_eta, c_eta = 0.03801, -8.569, -0.1108
 
     
-    t = 0.4  ### 
+    t = 0.4  ### nm 
     x = t/D_disk_nano
     
     zeta1 = a_zeta*np.exp(b_zeta*x)  + c_zeta    
@@ -86,7 +86,7 @@ def polarizability_parallel(hbw,d_film_nano,D_disk_nano,epsilon_silica):
     
 
     cte_eta_aux = (epsilon_x(hbw) - 1)/(epsilon_silica(hbw) + 1) 
-    eta_parallel = - d_film_nano*cte_eta_aux/(2*np.pi*D_disk_nano)
+    eta_parallel = - d_thickness_disk_nano*cte_eta_aux/(2*np.pi*D_disk_nano)
     
     num = zeta1**2
     den = 1/eta_parallel - 1/eta1
@@ -100,13 +100,13 @@ def polarizability_parallel(hbw,d_film_nano,D_disk_nano,epsilon_silica):
     return D_3*cte_epsilon*num/den
     
 
-def polarizability_perp(hbw,d_film_nano,D_disk_nano,epsilon_silica):
+def polarizability_perp(hbw,d_thickness_disk_nano,D_disk_nano,epsilon_silica):
     
     a_zeta, b_zeta, c_zeta = -0.01267, -45.34, 0.8635
     a_eta, b_eta, c_eta = 0.03801, -8.569, -0.1108
 
 
-    t = 0.4  ### 
+    t = 0.4  ### nm
     x = t/D_disk_nano
     
     
@@ -114,7 +114,7 @@ def polarizability_perp(hbw,d_film_nano,D_disk_nano,epsilon_silica):
     eta1 = a_eta*np.exp(b_eta*x)  + c_eta
     
     cte_eta_aux = (epsilon_z(hbw) - 1)/(epsilon_silica(hbw) + 1) 
-    eta_perp = - d_film_nano*cte_eta_aux/(2*np.pi*D_disk_nano)
+    eta_perp = - d_thickness_disk_nano*cte_eta_aux/(2*np.pi*D_disk_nano)
     
     num = zeta1**2
     den = 1/eta_perp - 1/eta1
@@ -185,7 +185,7 @@ if graficar == 1:
     list_D = [8.8,15,10,20,120]
     
     
-    D_nano = 500000
+    D_nano = 50
     d_nano = 0.1
     
     labelpng = 'd%.2fnm_D%.2fnm' %(d_nano,D_nano)

@@ -74,17 +74,19 @@ print('Definir parametros del problema')
 
 #v = c/int_v
 
-
+epsi1 = 1
 zp = 0.05
 b = -0.01
 
-d_nano = 1
+d_thickness_disk_nano = 0.4
+d_nano_film = 0.4
+D_disk_nano = 50
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
 title4 = r'b = %i nm' %(b*1e3)
-labelp = r'_res_d%.2fnm' %(d_nano) 
+labelp = r'_res_d%.2fnm' %(d_nano_film) 
 
 N = 350
 
@@ -94,7 +96,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta1 = EELS_film_ana_f_div_gamma0_v3(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    rta1 = EELS_film_ana_f_div_gamma0_v3(omegac0,epsilon_Silica, d_nano_film, d_thickness_disk_nano, D_disk_nano,int_v,b,zp)
 #    rta2 = EELS_dir_ana_f(omegac0,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)
     
 #    print(rta1)
@@ -117,15 +119,15 @@ def function_imag_ana(energy0,int_v,zp_nano):
 #    return rta    
     
 
-def lambda_p_v2(energy0):
+def lambda_p(energy0):
     
 #    d_micros = d_nano*1e-3
-    lambda_p_v = hBn_lambda_p(energy0,epsilon_Silica)*d_nano
+    lambda_p_v = hBn_lambda_p(energy0,epsi1,epsilon_Silica(energy0))*d_nano_film
 
     return lambda_p_v ## en nano
 
 
-def lambda_p(energy0): ## creo que esta no tiene mucho que ver 
+def lambda_p_v2(energy0): ## creo que esta no tiene mucho que ver 
     
     epsi_x = epsilon_x(energy0)
     epsi_HBN_par = epsi_x
@@ -133,7 +135,7 @@ def lambda_p(energy0): ## creo que esta no tiene mucho que ver
     
     omegac = energy0/aux
 #    d_micros = d_nano*1e-3
-    d_micro = d_nano*1e-3
+    d_micro = d_nano_film*1e-3
     alfa_p = epsi_silica*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
       
@@ -165,13 +167,13 @@ if plot_vs_E ==1 :
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
     E0 = 0.175 # eV
-    E0 = 0.14
+    E0 = 0.099
 
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
     label1 = 'vs_zp' + labelp + '_E%imeV' %(E0*1e3)
 #    listx = np.linspace(0.0001,2,N)
-    if d_nano == 1:
+    if d_nano_film == 1:
         if E0 <= 0.187:
             listx = np.linspace(10,650,N)
             listx = np.linspace(10,950,N)
@@ -179,7 +181,7 @@ if plot_vs_zp == 1 :
             listx = np.linspace(25,400,N)
 
     else:
-        listx = np.linspace(5,600,N)
+        listx = np.linspace(0.0005,3,N)
     
     
 #    print(minimum_function(E0,int_v0)*1e3)
@@ -271,7 +273,7 @@ plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k',label = r'$z^{\rm opt}_{\rm o}$/$\lambda_{\rm p}$')
 #plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
 #plt.text(0.85,0.03,r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
-plt.text(60,0.12,r'$\omega/\omega_{\parallel}$= %.2f'%(omega_omega_D),fontsize=tamlegend)
+#plt.text(0,0.0001,r'$\omega/\omega_{\parallel}$= %.2f'%(omega_omega_D),fontsize=tamlegend)
 #plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 plt.tight_layout()
 #if plot_vs_c == 1:

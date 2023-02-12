@@ -86,7 +86,7 @@ xf = x4 - 1e-3
 
 b = -0.01
 
-d_nano = 0.1
+d_nano = 0.4
 
 #### la parte real de lambda_p para d = 0.4 nm es positiva si #####
 

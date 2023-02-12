@@ -21,7 +21,7 @@ path_constants =  path_basic.replace('/potential_field/potential_and_electric_fi
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_pole_aprox_resonance_v1,dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance,dipole_moment_anav2_for_decay_rate_resonance, dipole_moment_ana_for_decay_rate_resonance_dir
+    from dipole_moment import dipole_moment_pole_aprox_resonance_v1,dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance,dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_anav2_for_decay_rate_resonance, dipole_moment_ana_for_decay_rate_resonance_dir
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_basic)
 
@@ -44,7 +44,7 @@ aux = c*hb
 
 #%%
 
-def EELS_film_ana_f(omegac,epsi_silica,d_nano,int_v,b,zp):     
+def EELS_film_ana_f(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
     """    
     Parameters
     ----------
@@ -77,11 +77,13 @@ def EELS_film_ana_f(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
+
+
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano,zp)
-    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano_film,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano_film,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
 #    rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 , rtaself_y1 , rtaself_z1 
@@ -102,7 +104,7 @@ def EELS_film_ana_f(omegac,epsi_silica,d_nano,int_v,b,zp):
     return cte_aux*np.imag(Green_self) 
 
 
-def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):     
+def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
     """    
     Parameters
     ----------
@@ -139,13 +141,13 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
     
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano_film,zp)
 
 #    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v1(omegac,epsi_silica,d_nano,zp)
-    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano_film,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
     
@@ -179,7 +181,7 @@ def EELS_film_ana_f_div_gamma0(omegac,epsi_silica,d_nano,int_v,b,zp):
 
 
 
-def EELS_film_ana_f_div_gamma0_v2(omegac,epsi_silica,d_nano,int_v,b,zp):     
+def EELS_film_ana_f_div_gamma0_v2(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
     """    
     Parameters
     ----------
@@ -210,11 +212,11 @@ def EELS_film_ana_f_div_gamma0_v2(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
-    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano_film,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano_film,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
     
@@ -238,7 +240,7 @@ def EELS_film_ana_f_div_gamma0_v2(omegac,epsi_silica,d_nano,int_v,b,zp):
     
     if usar_mismo_p == 1: ## aca los momentos p se cancelan  
         
-        px_dir,py_dir,pz_dir = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp) # multiplicar por e/(2*pi*v)
+        px_dir,py_dir,pz_dir = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp) # multiplicar por e/(2*pi*v)
 
         denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
@@ -255,7 +257,7 @@ def EELS_film_ana_f_div_gamma0_v2(omegac,epsi_silica,d_nano,int_v,b,zp):
 
 
 
-def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano,int_v,b,zp):     ## normalizando con el paper 149
+def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     ## normalizando con el paper 149
     """    
     Parameters
     ----------
@@ -285,13 +287,13 @@ def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano,int_v,b,zp):     ## 
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp) # multiplicar por e/(2*pi*v)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp) # multiplicar por e/(2*pi*v)
     
 
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
-    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano_film,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano_film,zp)
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
     
@@ -326,7 +328,7 @@ def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano,int_v,b,zp):     ## 
 
 #%%
     
-def EELS_film_num_f(omegac,epsi_silica,d_nano,int_v,b,zp):     
+def EELS_film_num_f(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
     """    
     Parameters
     ----------
@@ -359,10 +361,10 @@ def EELS_film_num_f(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_num_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_num_resonance(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x, rtaself_y, rtaself_z  =  green_self_num(omegac,epsi_silica,d_nano,zp)
+    rtaself_x, rtaself_y, rtaself_z  =  green_self_num(omegac,epsi_silica,d_nano_film,zp)
     
     Green_self = rtaself_x*(np.abs(px_v)**2) + rtaself_y*(np.abs(py_v)**2)  + rtaself_z*(np.abs(pz_v)**2)
 #    print(rtaself_x)
@@ -382,7 +384,7 @@ def EELS_film_num_f(omegac,epsi_silica,d_nano,int_v,b,zp):
 #%%
 
 
-def EELS_film_pole_aprox_f(omegac,epsi_silica,d_nano,int_v,b,zp):     
+def EELS_film_pole_aprox_f(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
     """    
     Parameters
     ----------
@@ -415,11 +417,11 @@ def EELS_film_pole_aprox_f(omegac,epsi_silica,d_nano,int_v,b,zp):
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
-    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp)
-    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp)
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano_film,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano_film,zp)
     
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
    

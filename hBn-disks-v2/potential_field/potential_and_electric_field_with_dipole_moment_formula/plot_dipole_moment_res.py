@@ -17,7 +17,7 @@ import seaborn as sns
 sns.set()
 
 
-comparar_otro_hBN = 1
+comparar_otro_hBN = 0
 
 #%%
 
@@ -65,8 +65,10 @@ int_v = 10
 zp = 0.05
 b = -0.01
 
+d_thickness_disk_nano = 0.1
+D_disk_nano = 50 
 
-d_nano = 0.1
+d_nano_film = 0.4
 
 #omega0THz = 65
 #omega0 = omega0THz*1e12 
@@ -75,8 +77,9 @@ d_nano = 0.1
     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title4 = r'v = c/%i, $z_p$=%i nm, b = %i nm, d = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano)
-labelp = r'_res_d%.2fnm' %(d_nano)
+title1 = r'$v$ = c/%i, $z_p$=%i nm, $b$ = %i nm, $d_{\rm film}$ = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano_film)
+title2 = r'$d_{\rm disk}$ = %.2f nm, $D$ = %.2f nm' %(d_thickness_disk_nano,D_disk_nano)
+labelp = r'_res_d%.2fnm' %(d_nano_film)
 
 N = 75
 
@@ -100,7 +103,7 @@ listx = np.linspace(x1 + 1e-3, x4 - 1e-3,N)
 
 ## entre x1 y x2, y entre x3 y x4 ##
 
-title =  title4 
+title =  title1 + '\n' + title2  
 
 
 
@@ -109,7 +112,7 @@ title =  title4
 def function_num(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f = dipole_moment_num_resonance(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f = dipole_moment_num_resonance(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     # print(rta)
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
 
@@ -121,7 +124,7 @@ def function_num(energy0):
 def function_ana_v1(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f  = dipole_moment_ana_resonance_v1(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f  = dipole_moment_ana_resonance_v1(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
     
@@ -133,7 +136,7 @@ def function_ana_v1(energy0):
 def function_ana_v2(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f  = dipole_moment_ana_resonance_v2(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f  = dipole_moment_ana_resonance_v2(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
     
@@ -144,7 +147,7 @@ def function_ana_v2(energy0):
 def function_pole_approx_v1(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance_v1(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance_v1(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
     
@@ -156,7 +159,7 @@ def function_pole_approx_v1(energy0):
 def function_pole_approx_v2(energy0):
     omegac0 = energy0/aux 
 
-    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance_v2(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    px_f,py_f,pz_f  = dipole_moment_pole_aprox_resonance_v2(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     rta = np.abs(px_f)**2 + np.abs(py_f)**2 + np.abs(pz_f)**2 
     
@@ -230,7 +233,7 @@ label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'
 if comparar_otro_hBN == 1:
     
     os.chdir(path_save)
-    label1 = 'vs_E_res_d%.2fnm' %(d_nano) 
+    label1 = 'vs_E_res_d%.2fnm' %(d_nano_film) 
        
     tabla = np.loadtxt( 'dip_mom_hBN_num_' + label1 + '.txt', delimiter='\t', skiprows=1)
     tabla = np.transpose(tabla)
@@ -249,10 +252,10 @@ if comparar_otro_hBN == 1:
 
 
 graph(title,labelx,r'$|p|$/(e/2$\pi v$) ($\mu$m$^{2}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-plt.plot(listx[0:-2],listy_ana_v1[0:-2],'.',ms = ms,color = 'purple',label = 'PP ana')
+#plt.plot(listx[0:-2],listy_ana_v1[0:-2],'.-',ms = ms,color = 'purple',label = 'PP ana')
 #plt.plot(listx,listy_ana_v2,'--',ms = ms,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_num,'.',ms = ms,color = 'darkred',label = 'full numerical')
-#plt.plot(listx,listy_pole_v1,'.-',ms = 3,color = 'darkred',label = 'PP num' )
+plt.plot(listx,listy_pole_v1,'.-',ms = 3,color = 'darkred',label = 'PP num' )
 #plt.plot(listx,listy_pole_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2'  )
 if comparar_otro_hBN == 1:
     plt.plot(listx_ana_S,listy_re_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana sphere')
@@ -262,7 +265,7 @@ ejey_aux = np.linspace(np.min([np.min(listy_pole_v1),np.min(listy_num)]), np.max
 for x in [x1,x2,x3]:
     plt.plot(x*np.ones(10), ejey_aux,'--',color = 'grey' )
 
-if d_nano == 0.1:
+if d_nano_film == 0.1:
     plt.ylim(1e-1,1e5)
 plt.plot(listx[-1]*np.ones(10), ejey_aux,'--',color = 'grey' )    
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.05,handletextpad=0.2, handlelength=length_marker)

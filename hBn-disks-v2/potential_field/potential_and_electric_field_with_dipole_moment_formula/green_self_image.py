@@ -98,8 +98,8 @@ def green_self_num(omegac,epsi_silica,d_nano,zp_micro):
     rp = lambda u: u/(u*(1-r*expB_self(u)) - alfa_p)
 
 
-    cota_sup1 = 400/omegac
-    cota_inf1 = 0.01/omegac
+    cota_inf = 0.01*omegac
+    cota_sup = 600*omegac
     
 ####       
     cte_x = k1_3*0.5 #signo menos
@@ -110,8 +110,8 @@ def green_self_num(omegac,epsi_silica,d_nano,zp_micro):
     IntselfB_function_re_xx = lambda u: np.real((u**2)*rp(u)*expB_self(u))
     IntselfB_function_im_xx = lambda u: np.imag((u**2)*rp(u)*expB_self(u))
 
-    intselfB_re_x,err = integrate.quad(IntselfB_function_re_xx, cota_inf1, cota_sup1)
-    intselfB_im_x,err = integrate.quad(IntselfB_function_im_xx, cota_inf1, cota_sup1)
+    intselfB_re_x,err = integrate.quad(IntselfB_function_re_xx, cota_inf, cota_sup)
+    intselfB_im_x,err = integrate.quad(IntselfB_function_im_xx, cota_inf, cota_sup)
 #    
 #    print(intselfB_re_x)
     

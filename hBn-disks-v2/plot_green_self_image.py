@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
 
-comparar_otro_hBN = 1
+comparar_otro_hBN = 0
 
 #%%
 
@@ -60,7 +60,7 @@ print('Definir parametros del problema')
 zp_nano = 50
 
 
-d_nano = 0.1
+d_nano = 0.4
 
 title = r'$z_{\rm p}$ = %i nm, d = %.2f nm' %(zp_nano,d_nano)
 
@@ -287,13 +287,14 @@ label2 = r'$r_{\rm p} = k_{\rm p}/(k_\parallel - k_{\rm p})$'
 graph(title,labelx,r'Re{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'blue',label = 'PP analytical 3')
 #plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_re_ana_v1,'--',ms = ms,color = 'purple',label = 'PP ana')
+plt.plot(listx,listy_re_ana_v1,'-',ms = ms,color = 'purple',label = 'PP ana')
 plt.plot(listx,listy_re_num,'--',ms = ms,color = 'darkred',label = 'full numerical')
 #plt.plot(listx,listy_re_pole_aprox_v1,'.',ms = ms+1,color = 'darkred',label = 'PP num')
 #plt.plot(listx,listy_re_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 if comparar_otro_hBN == 1:
-    plt.plot(listx_ana_S,listy_re_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana sphere')
-    plt.plot(listx_num_S,listy_re_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num sphere')
+    plt.plot(listx_ana_S,listy_re_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana dip')
+    plt.plot(listx_num_S,listy_re_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num dip')
+    labelp = labelp + '_v2'
 #    plt.plot(listx_pole_S,listy_re_pole_S,'--',ms = ms,color = 'darkred',label = 'PP num sphere')
 
     
@@ -308,14 +309,14 @@ plt.savefig( 'Re_Gself' + labelp + '.png', format='png')
 graph(title,labelx,r'Im{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_re_ana3,'.',ms = ms,color = 'purple',label = 'PP analytical 3')
 #plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
-plt.plot(listx,listy_im_ana_v2,'--',ms = ms,color = 'purple',label = 'PP ana')
+plt.plot(listx,listy_im_ana_v2,'-',ms = ms,color = 'purple',label = 'PP ana')
 #plt.plot(listx,listy_im_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_im_num,'--',ms = ms,color = 'darkred',label = 'full numerical')
 #plt.plot(listx,listy_im_pole_aprox_v1,'.',ms = ms+1,color = 'darkred',label = 'PP num')
 #plt.plot(listx,listy_im_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 if comparar_otro_hBN == 1:
-    plt.plot(listx_ana_S,listy_im_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana sphere')
-    plt.plot(listx_num_S,listy_im_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num sphere')
+    plt.plot(listx_ana_S,listy_im_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana dip')
+    plt.plot(listx_num_S,listy_im_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num dip')
 #    plt.plot(listx_pole_S,listy_im_pole_S,'--',ms = ms,color = 'darkred',label = 'PP num sphere')
 
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
