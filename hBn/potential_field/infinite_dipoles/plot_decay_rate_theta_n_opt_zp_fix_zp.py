@@ -68,7 +68,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 3
+zp_nano = 5
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)

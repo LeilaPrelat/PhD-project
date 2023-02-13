@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 1
-load_data = 0
+create_data = 0
+load_data = 1
 
 #%%
 

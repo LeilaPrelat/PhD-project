@@ -434,16 +434,16 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
     term_kp = 1 + kp/kp_2
     term_kp_2 = kp_2 + kp
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
+    phi_n = -np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
 #    phi_n = -np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a) ## aprox
     
     
-    cte_formula = a/(24*np.pi*Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+    cte_formula = a/(12*np.pi*Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
     
 #    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
     
-    cte_formula = a*192*2*np.pi**4/np.abs(Rp)  ## hay un extra (1/(2pi))^N en la formula de phi. necesario para grafeno  
-
+#    cte_formula = a*192*2*np.pi**4/np.abs(Rp)  ## hay un extra (1/(2pi))^N en la formula de phi. necesario para grafeno  
+#
 
 
     arg = np.abs(b)*omegac*int_v

@@ -60,7 +60,7 @@ print('Definir parametros del problema')
 zp_nano = 50
 
 
-d_nano = 0.4
+d_nano = 1
 
 title = r'$z_{\rm p}$ = %i nm, d = %.2f nm' %(zp_nano,d_nano)
 

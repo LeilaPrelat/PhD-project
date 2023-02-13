@@ -53,30 +53,31 @@ aux2 = 1e12/c
 
 #%%
 
-epsi1, epsi3 = 1,1
+
 
 print('Definir parametros del problema')
 
-
+int_v = 10
+Nmax = 4
 b = - 0.01
 
-d_nano = 0.1
 
-int_v = 10
+d_nano_film = 1
 
-Nmax = 4
+D_disk_nano = 100
+d_thickness_disk_nano = 1
+
 
 labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
 #labely = r'Emission probability (eV$^{-1}$)'
-
-tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance_d%.2fnm_v%i_all.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
+labelp = r'_dfilm%.1fnm_ddisk%.1fnm_v%i' %(d_nano_film,d_thickness_disk_nano,int_v)
+tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance' + labelp + '.txt', delimiter='\t', skiprows=1)
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[-20]
-zp_nano = 0.05
-zp_nano = 15
-
+zp_nano = 0.3
+#zp_nano = 50
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
 lambda_SP_1 = 2*np.pi/omegac0_1
@@ -89,8 +90,8 @@ a_min = np.real(lambda_SP_1)*Nmax/(int_v - 1)
 a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
-a = 0.5*1e-3
-a = 185*1e-3
+a = 125*1e-3
+#a = 185*1e-3
 #a = 5*1e-3
 
 #a = 150*1e-3
@@ -104,7 +105,7 @@ title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3)
 title3 = r'a = %i nm' %(a*1e3)
 title4 = r', $z_p$ = $z^{opt}_p$' 
 
-labelp = r'_a%.2fnm_zp%.2fnm_d%.2fnm' %(a*1e3,zp_nano,d_nano)
+labelp = r'_a%.2fnm_zp%.2fnm_d%.2fnm' %(a*1e3,zp_nano,d_nano_film)
 #label1 = 'vs_zp_lambda_p'  + labelp
 
 
@@ -124,7 +125,7 @@ f2 = interp1d(listx, listz)
 
 N = 25
 lim1,lim2 = 18,-60
-lim1,lim2 = 14,-1
+lim1,lim2 = 18,-1
 #lim1,lim2 = 14,-1
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 #listx_2 = np.linspace(listx[lim1], 0.2, N)
@@ -159,7 +160,7 @@ def function_real_ana(energy0_meV,zp_nano,n):
     omegac0 = energy0_meV/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,n)
+    rta = decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,zp,a,b,n)
 
     return rta
 

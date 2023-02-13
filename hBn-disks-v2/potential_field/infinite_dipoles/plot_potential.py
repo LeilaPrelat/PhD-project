@@ -61,17 +61,23 @@ epsi1, epsi3 = 1,1
 print('Definir parametros del problema')
 
 
-b = - 0.01
-
-d_nano = 0.1
-int_v = 10
-
-Nmax = 4
 list_n = [0,1,2,3,4]
 
 labely = r'$\phi_n$'
 
-tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance_d%.2fnm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
+int_v = 10
+Nmax = 4
+b = - 0.01
+
+d_nano_film = 1
+
+D_disk_nano = 100
+d_thickness_disk_nano = 1
+
+
+#labely = r'Emission probability (eV$^{-1}$)'
+labelp = r'_dfilm%.1fnm_ddisk%.1fnm_v%i' %(d_nano_film,d_thickness_disk_nano,int_v)
+tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_disks_resonance' + labelp + '.txt', delimiter='\t', skiprows=1)
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
@@ -92,7 +98,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max])
 
 #a = 8000*1e-3
-a = 185*1e-3
+a = 125*1e-3
 
 a_nm = a*1e3
 
@@ -103,7 +109,7 @@ title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3)
 title3 = r'a = %i nm' %(a*1e3)
 title4 = r', $z_p$ = $z^{opt}_p$' 
 
-labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
+labelp = r'_a%.2fnm_zp%.2fnm_d%inm' %(a*1e3,zp_nano,d_nano_film)
 #label1 = 'vs_zp_lambda_p'  + labelp
 
 
@@ -136,7 +142,7 @@ def function_ana(zp_nano,energy0_eV,Nmax):
     omegac0 = energy0_eV/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = potential_inf_dipoles_ana(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,Nmax)
+    rta = potential_inf_dipoles_ana(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,zp,a,b,Nmax)
 
     return rta
 
@@ -146,7 +152,7 @@ def function_num(zp_nano,energy0_eV,Nmax):
     omegac0 = energy0_eV/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = potential_inf_dipoles_num(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,Nmax)
+    rta = potential_inf_dipoles_num(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,zp,a,b,Nmax)
 
     return rta
 
@@ -156,7 +162,7 @@ def function_pole_aprox(zp_nano,energy0_eV,Nmax):
     omegac0 = energy0_eV/(c*hb)  
     zp = zp_nano*1e-3
          
-    rta = potential_inf_dipoles_pole_aprox(omegac0,epsilon_Silica,d_nano,int_v,zp,a,b,Nmax)
+    rta = potential_inf_dipoles_pole_aprox(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,zp,a,b,Nmax)
 
     return rta
 
@@ -272,7 +278,7 @@ elif plot_vs_zp_lambda_p == 1:
         list_y_im_tot.append(list_y_im)
     
     
-    graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+    graph(title,labelx,r'Re{$\phi$}' ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
     for n in list_n:
         plt.plot(listx_4,list_y_re_tot[n],'.-',ms = ms, label = 'n = %i'%(n))  
     plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
@@ -283,7 +289,7 @@ elif plot_vs_zp_lambda_p == 1:
     plt.savefig('re_phi_n_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
 
 
-    graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+    graph(title,labelx,r'Im{$\phi$}' ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
     for n in list_n:
         plt.plot(listx_4,list_y_im_tot[n],'.-',ms = ms, label = 'n = %i'%(n))  
     plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)

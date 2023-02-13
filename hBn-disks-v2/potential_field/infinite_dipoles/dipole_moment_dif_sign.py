@@ -16,7 +16,7 @@ from scipy import integrate
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
+path_constants =  path_basic.replace('/potential_field/potential_and_electric_field_with_dipole_moment_formula','')
 #print('Importar modulos necesarios para este codigo')
 
 try:
@@ -123,6 +123,8 @@ def dipole_moment_ana_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_di
     kp_2 = np.sqrt(kp**2)
     term_kp = kp_2 + kp
     
+    term_kp = 2*kp
+    kp_2 = kp
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
@@ -649,6 +651,131 @@ def dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thick
     pz = alffa_eff_z*(-omegac*int_v*K1 + k0*INT_z )
     
     return px,py,pz
+
+
+
+
+
+
+
+
+
+
+
+
+def dipole_moment_pole_aprox_resonance_v1_for_decay_rate(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    formula del potencial electric con QE approximation, rp con 
+    aproximacion del polo y con aprox de principal value para las integrales
+    con rp
+    """
+
+    E = omegac*aux
+    k0 = omegac #=omega/c
+    # x_y = ky/k0
+#    n1 = epsi1*mu1
+#    cte1 = np.sqrt(n1)
+    # k1 = omegac*cte1
+#    k1_2 = (k0*cte1)**2
+ #   n_v1 = int_v/cte1
+    
+
+
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana_v2(omegac,epsi_silica,d_nano_film,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano_film,zp)
+
+    rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+
+    alfa_parallel = polarizability_parallel(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
+    alfa_perp = polarizability_perp(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
+
+    
+    alffa_eff_x = (1/alfa_parallel -  rtaself_x)**(-1)
+    alffa_eff_y = alffa_eff_x
+    alffa_eff_z = (1/alfa_perp -  rtaself_z)**(-1)
+
+
+    epsi_x = epsilon_x(E)
+    epsi_HBN_par = epsi_x
+    
+    d_micro = d_nano_film*1e-3
+    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+
+    cota_inf = 0.01/k0
+    cota_sup = 600/k0   
+    
+    alpha_x = int_v    
+    
+#    term6 = np.sign(z)*pz*Rp*kp_2*J0*exp_electron
+    alpha_parallel = lambda u: np.sqrt(alpha_x**2 + u**2)
+
+    rp = lambda u: -alpha_parallel(u)/(alpha_parallel(u) - alfa_p)
+      
+    expo = lambda u: np.exp(-np.sqrt(alpha_x**2 + u**2)*k0*(2*zp + np.abs(b)))
+    
+    int_f_re_x = lambda u: np.real(rp(u)*expo(u)/alpha_parallel(u))
+    int_f_im_x = lambda u: np.imag(rp(u)*expo(u)/alpha_parallel(u))
+    
+    INT_re_x,err = integrate.quad(int_f_re_x, cota_inf, cota_sup) 
+    INT_im_x,err = integrate.quad(int_f_im_x, cota_inf, cota_sup) 
+    
+    INT_x = INT_re_x + 1j*INT_im_x
+    
+    
+    int_f_re_y = lambda u: np.real(rp(u)*expo(u)*u/alpha_parallel(u))
+    int_f_im_y = lambda u: np.imag(rp(u)*expo(u)*u/alpha_parallel(u))
+    
+    INT_re_y,err = integrate.quad(int_f_re_y, cota_inf, cota_sup) 
+    INT_im_y,err = integrate.quad(int_f_im_y, cota_inf, cota_sup) 
+    
+    INT_y = INT_re_y + 1j*INT_im_y
+        
+
+
+    int_f_re_z = lambda u: np.real(rp(u)*expo(u))
+    int_f_im_z = lambda u: np.imag(rp(u)*expo(u))
+    
+    INT_re_z,err = integrate.quad(int_f_re_z, cota_inf, cota_sup) 
+    INT_im_z,err = integrate.quad(int_f_im_z, cota_inf, cota_sup) 
+    
+    INT_z = INT_re_z + 1j*INT_im_z
+
+
+    arg = np.abs(b)*omegac*int_v
+    K1 = special.kn(1,arg)
+    K0 = special.kn(0,arg)    
+    
+    
+    px = alffa_eff_x*1j*omegac*int_v*(K0 - INT_x)
+    
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - k0*INT_y)
+    
+    pz = alffa_eff_z*(-omegac*int_v*K1 + k0*INT_z )
+    
+    return px,py,pz
+
+
+
+
+
+
 
 
 #     rp = lambda u: alfa_p/(alpha_parallel(u) - alfa_p)
