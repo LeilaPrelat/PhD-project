@@ -21,16 +21,16 @@ path_constants =  path_basic.replace('/potential_field/potential_and_electric_fi
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_pole_aprox_resonance_v1,dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance,dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_anav2_for_decay_rate_resonance, dipole_moment_ana_for_decay_rate_resonance_dir
+    from dipole_moment_dif_sign import dipole_moment_pole_aprox_resonance_v1,dipole_moment_pole_aprox_resonance_v1_for_decay_rate,dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance,dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_anav2_for_decay_rate_resonance, dipole_moment_ana_for_decay_rate_resonance_dir
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_basic)
 
 
 try:
-    sys.path.insert(1, path_basic)
-    from green_self_image import green_self_ana_v1,green_self_ana_v2,green_self_num_integral_inside_light_cone,green_self_pole_aprox_v1,green_self_num
+    sys.path.insert(1, path_constants)
+    from green_self_image_dif_sign import green_self_ana_v1,green_self_ana_v2,green_self_num_integral_inside_light_cone,green_self_pole_aprox_v1,green_self_num
 except ModuleNotFoundError:
-    print('green_self_image.py no se encuentra en ' + path_basic)
+    print('green_self_image_dif_sign.py no se encuentra en ' + path_constants)
 
  
 try:
@@ -287,7 +287,7 @@ def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano_film,d_thickness_dis
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp) # multiplicar por e/(2*pi*v)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1_for_decay_rate(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp) # multiplicar por e/(2*pi*v)
     
 
 #    print(px_v,py_v,pz_v)
@@ -312,8 +312,11 @@ def EELS_film_ana_f_div_gamma0_v3(omegac,epsi_silica,d_nano_film,d_thickness_dis
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
     k_prima = omegac*np.sqrt(epsi_silica(E))
+#    epsi1 = 1
+#    k_prima = omegac*np.sqrt(epsi1)
+#    print(k_prima_2/k_prima)
     
-    factor_final = k_prima/(48*(np.pi**2)*(int_v**2))
+    factor_final = k_prima*2*np.pi/(12*np.pi*(int_v**2))
 
     rta = np.imag(Green_self)*factor_final/factor_K    
     
@@ -417,7 +420,7 @@ def EELS_film_pole_aprox_f(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,
 #    k1_2 = (k0*cte1)**2
  #   n_v1 = int_v/cte1
 #    k1_2 = k1**2
-    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
+    px_v,py_v,pz_v = dipole_moment_pole_aprox_resonance_v1_for_decay_rate(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
 #    print(px_v,py_v,pz_v)
 #    px_tot_2 = np.abs(px_v)**2 + np.abs(py_v)**2 + np.abs(pz_v)**2 
     rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_pole_aprox_v1(omegac,epsi_silica,d_nano_film,zp)

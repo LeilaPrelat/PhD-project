@@ -248,7 +248,7 @@ plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k',label = r'$z^{\rm opt}_{\rm o}$/$\lambda_{\rm p}$')
 #plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
 #plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
-plt.text(3.5,0.038,r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
+plt.text(3.3,0.038,r'$\omega/\omega_{\parallel}$ = %.2f'%(omega_omega_D),fontsize=tamlegend)
 #plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 plt.tight_layout()
 #if plot_vs_c == 1:

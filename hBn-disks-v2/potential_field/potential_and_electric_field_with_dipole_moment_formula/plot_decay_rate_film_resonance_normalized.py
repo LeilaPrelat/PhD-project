@@ -78,15 +78,16 @@ epsi1 = 1
 zp = 0.05
 b = -0.01
 
-d_thickness_disk_nano = 0.4
-d_nano_film = 0.4
-D_disk_nano = 50
- 
+
+d_nano_film = 1
+
+D_disk_nano = 100
+d_thickness_disk_nano = 1
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
 title4 = r'b = %i nm' %(b*1e3)
-labelp = r'_res_d%.2fnm' %(d_nano_film) 
+labelp = r'_res_dfilm%.2fnm_ddisk%.2fnm_D%inm' %(d_nano_film,d_thickness_disk_nano,D_disk_nano) 
 
 N = 350
 
@@ -122,7 +123,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
 def lambda_p(energy0):
     
 #    d_micros = d_nano*1e-3
-    lambda_p_v = hBn_lambda_p(energy0,epsi1,epsilon_Silica(energy0))*d_nano_film
+    lambda_p_v = hBn_lambda_p(energy0,epsilon_Silica(energy0),epsilon_Silica(energy0))*d_nano_film
 
     return lambda_p_v ## en nano
 
@@ -166,9 +167,13 @@ if plot_vs_E ==1 :
 
 if plot_vs_zp == 1 : 
     int_v0 = 10 ## deberia ser 150 (disp relation) pero funciona con 10 <--- problema con la relacion de dispersion
-    E0 = 0.175 # eV
-    E0 = 0.099
+    E0 = 0.173 # eV
+ #   E0 = 0.095
 
+    E0 = 0.171 
+#    E0 = 0.175
+    E0 = 0.195
+#    
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
     label1 = 'vs_zp' + labelp + '_E%imeV' %(E0*1e3)
@@ -183,10 +188,24 @@ if plot_vs_zp == 1 :
     else:
         listx = np.linspace(0.0005,3,N)
     
-    
-#    print(minimum_function(E0,int_v0)*1e3)
+    if D_disk_nano == 50:
+        
+        listx = np.linspace(0.001,3.5,N)
+    else:
+        listx = np.linspace(1,10,N)#    print(minimum_function(E0,int_v0)*1e3)
 #    print(np.abs(minimum_function(E0,int_v0))*2*1e3)
+    if E0 == 0.171:
+        listx = np.linspace(3,14,N)
+        
+    elif E0 == 0.175:
+        listx = np.linspace(7.3,9.3,N)
+
+
+    elif E0 == 0.195:
+        listx = np.linspace(1,6,N)
+        
     lambda_p_value = lambda_p(E0)
+    
 
 
 title =  title4 
@@ -271,10 +290,9 @@ graph(title,labelx,r'$\Gamma_{\rm SP}/\Gamma_{\rm EELS}$',tamfig,tamtitle,tamlet
 plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*maxi2, np.array(listy_aux)*1e-12,'-k',label = r'$z^{\rm opt}_{\rm o}$/$\lambda_{\rm p}$')
-#plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
-#plt.text(0.85,0.03,r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
-#plt.text(0,0.0001,r'$\omega/\omega_{\parallel}$= %.2f'%(omega_omega_D),fontsize=tamlegend)
-#plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+plt.plot([],[],'-w',label = r'$\omega/\omega_{\parallel}$=%.2f'%(omega_omega_D))
+#plt.text(0.01,0.01,r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D),fontsize=tamlegend,transform=plt.transAxes)
+plt.legend(loc = 'best',markerscale=0,fontsize=tamlegend,frameon=False,handletextpad=0, handlelength=0)
 plt.tight_layout()
 #if plot_vs_c == 1:
 #    plt.yscale('log')

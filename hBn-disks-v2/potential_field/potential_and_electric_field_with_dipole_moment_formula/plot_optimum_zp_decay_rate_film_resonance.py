@@ -20,8 +20,8 @@ from scipy.signal import find_peaks
 #%%
 
 
-create_data = 0
-load_data = 1
+create_data = 1
+load_data = 0
 
 #%%
 
@@ -73,15 +73,20 @@ print('Definir parametros del problema')
 
 b = -0.01
 
-d_nano = 1
+d_nano_film = 1
+
+D_disk_nano = 100
+d_thickness_disk_nano = 1
+#title1 = r'$\kappa$ = %.2f$\om
+
 int_v = 10
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title1 = r'b = %i nm, v = c/%i, d = %i nm, hBN' %(b*1e3,int_v, d_nano)
+title1 = r'b = %i nm, v = c/%i, d = %i nm, hBN' %(b*1e3,int_v, d_nano_film)
 #title2 = r'$\hbar\gamma_{in}$ = %i meV, $\epsilon_b$ = %i' %(hbgamma_DL*1e3,epsilon_b)
-labelp = r'_d%.1fnm_v%i' %(d_nano,int_v)
+labelp = r'_dfilm%.1fnm_ddisk%.1fnm_v%i' %(d_nano_film,d_thickness_disk_nano,int_v)
 title = title1 
 
 x1 = 0.09260651629072682 
@@ -123,61 +128,11 @@ listx = np.linspace(0.093 , 0.1625, N ) ## para d = 0.1 nm y primer intervalo
 listx = np.linspace(0.13 , 0.1625, N ) ## para d = 1 nm y primer intervalo (largo )
 listx = np.linspace(0.09 , 0.14, 25) ## para d = 1 nm y primer intervalo (una parte, un zoom )
 
+# con el cambio de signo en Gself y dip moment, ahora se puede usar el segundo intervalo (entre x3 y x4)
+listx  = np.linspace(0.171 , 0.195, 100)
+
 #%%
 
-
-def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
-    omegac0 = energy0/aux
-#    if primer_intervalo == 1:
-#        listx = np.linspace(50,450,100)
-#    else:
-#        listx = np.linspace(200,600,100)
-    N = 400
-    N = 270
-    if d_nano == 1:    
-#        if energy0 <= 0.187:
-#            listx = np.linspace(300,700,N) # segundo intervalo
-#        else:
-#            listx = np.linspace(100,500,N) # segundo intervalo
-
-        if energy0 <= 0.187:
-            list_zp_nano = np.linspace(50,750,N)
-        else:
-            list_zp_nano = np.linspace(100,400,N)    
-    elif d_nano == 1:
-        list_zp_nano = np.linspace(90,290,N) ## para todo el intervalo 
-        list_zp_nano = np.linspace(150,250,N) ## para una parte del intervalo (un zoom)
-    else:
-        list_zp_nano = np.linspace(10,400,N)
-        list_zp_nano = np.linspace(10,200,N)
-        
-        
-        
-    listy = []
-    for zp_nano in list_zp_nano:
-        zp = zp_nano*1e-3
-        rta = EELS_film_pole_aprox_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
-        listy.append(rta)
-#    print(energy0,v_sobre_c)
-    
-    peaks, _ = find_peaks(listy, height=0)
-    maxi = list_zp_nano[peaks]
-    print(energy0, maxi)
-    if len(maxi ) > 1 :
-        listy = np.array(listy)
-        list_maxis_y = listy[peaks]
-        
-        maxi_ind = np.argmax(list_maxis_y)
-        maxi =  list_zp_nano[peaks[maxi_ind]]
-        print(maxi)
-    print('')
-    
-    return float(maxi)
-
-
-    
-#%%    
-    
 def lambda_p(energy0):
     
     E = energy0
@@ -186,7 +141,7 @@ def lambda_p(energy0):
     
 #    d_micros = d_nano*1e-3
 #    Rp = Silver_Rp(E,epsi1,epsi3)
-    lambda_p_v = hBn_lambda_p(E,epsilon_Silica(energy0),epsilon_Silica(energy0))*d_nano
+    lambda_p_v = hBn_lambda_p(E,epsilon_Silica(energy0),epsilon_Silica(energy0))*d_nano_film
 
 
     return lambda_p_v
@@ -200,12 +155,77 @@ def lambda_p_v2(energy0): ## creo que esta no tiene mucho que ver
     
     omegac = energy0/aux
 #    d_micros = d_nano*1e-3
-    d_micro = d_nano*1e-3
+    d_micro = d_nano_film*1e-3
     alfa_p = epsi_silica*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
       
 
     return (2*np.pi/kp)*1e3 ## en nano
+
+def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
+    omegac0 = energy0/aux
+#    if primer_intervalo == 1:
+#        listx = np.linspace(50,450,100)
+#    else:
+#        listx = np.linspace(200,600,100)
+    N = 400
+    N = 350
+#    if d_nano_film == 1:    
+##        if energy0 <= 0.187:
+##            listx = np.linspace(300,700,N) # segundo intervalo
+##        else:
+##            listx = np.linspace(100,500,N) # segundo intervalo
+#
+#        if energy0 <= 0.187:
+#            list_zp_nano = np.linspace(50,750,N)
+#        else:
+#            list_zp_nano = np.linspace(100,400,N)    
+#    elif d_nano_film == 1:
+#        list_zp_nano = np.linspace(90,290,N) ## para todo el intervalo 
+#        list_zp_nano = np.linspace(150,250,N) ## para una parte del intervalo (un zoom)
+#    else:
+#        list_zp_nano = np.linspace(10,400,N)
+#        list_zp_nano = np.linspace(10,200,N)
+        
+    if D_disk_nano == 50:
+        
+        list_zp_nano = np.linspace(0.001,3.5,N)
+    else:
+        list_zp_nano = np.linspace(1,10,N)#         
+        list_zp_nano = np.linspace(2,9,N) # mas preciso          
+        
+    listy = []
+    for zp_nano in list_zp_nano:
+        zp = zp_nano*1e-3
+        rta = EELS_film_pole_aprox_f(omegac0,epsilon_Silica, d_nano_film, d_thickness_disk_nano, D_disk_nano,int_v,b,zp)
+        listy.append(rta)
+#    print(energy0,v_sobre_c)
+        
+    lambda_p_value = lambda_p(energy0)    
+    peaks, _ = find_peaks(listy, height=0)
+    maxi = list_zp_nano[peaks]
+    
+    print('energy: ', energy0, 'eV', ' zp: ' , maxi, 'nm', r'$\lambda_p$: ', lambda_p_value, 'nm')
+    
+    
+    if len(maxi ) > 1 :
+        listy = np.array(listy)
+        list_maxis_y = listy[peaks]
+        
+        maxi_ind = np.argmax(list_maxis_y)
+        maxi =  list_zp_nano[peaks[maxi_ind]]
+        print(maxi,)
+    print('')
+
+
+   
+    return float(maxi)
+
+
+    
+#%%    
+    
+
 
 
 #%%
@@ -214,17 +234,17 @@ labelx = r'Plasmon energy $\hbar\omega$ (eV)'
 labely = r'optimal $z_p$ [nm]'
     
 tamfig = [2.5, 2]
-tamletra = 7
+tamletra = 9
 tamtitle  = 8
-tamnum = 6
-tamlegend = 6
+tamnum = 7
+tamlegend = 8
 labelpady = 2
 labelpadx = 3
-pad = 2.5
+pad = 3
 mk = 1
 ms = 2
 hp = 0.3
-length_marker = 1.5
+length_marker = 0
 dpi = 500
 
 def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad):
@@ -245,13 +265,13 @@ if create_data == 1:
 
     list_lambda_p = []
     for x in listx:
-        list_lambda_p.append(np.real(lambda_p_v2(x)))
+        list_lambda_p.append(np.real(lambda_p(x)))
         
 
     
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
     plt.plot(listx[0:len(listy)],listy,'.-',ms = ms,color = 'purple',label = r'opt $z_p$')
-    plt.plot(listx,list_lambda_p,'.-',ms = ms,color = 'lightseagreen',label = r'$\lambda_p$')
+#    plt.plot(listx,list_lambda_p,'.-',ms = ms,color = 'lightseagreen',label = r'$\lambda_p$')
     plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)
     plt.tight_layout()
     os.chdir(path_save)
@@ -278,7 +298,7 @@ if load_data == 1:
 
     list_lambda_p = []
     for x in listx:
-        list_lambda_p.append(np.real(lambda_p_v2(x)))
+        list_lambda_p.append(np.real(lambda_p(x)))
 
 
     
@@ -293,13 +313,13 @@ if load_data == 1:
     omega_D = 170.1*1e-3  ## eV sin el hbar porque se cancela con el listx 
     
     listx_2 = np.array(listx)/omega_D ## sin el hbar porque se cancela con el listx 
-    if d_nano == 0.1:
+    if d_nano_film == 0.1:
         list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 27, 3)
         lim = -1
         
-    elif d_nano == 1:
+    elif d_nano_film == 1:
         list_zp_div_lambda_p = savgol_filter(list_zp_div_lambda_p, 15, 3)
-        lim = -13
+        lim = -1
 
     graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
     plt.plot(listx_2[0:lim],np.array(list_zp_div_lambda_p[0:lim]),'-',ms = ms,color = 'purple')

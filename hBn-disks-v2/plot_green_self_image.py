@@ -31,7 +31,7 @@ if not os.path.exists(path_save):
 err = 'fieldE_direct_numerical.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from green_self_image import green_self_ana_v1,green_self_ana_v2, green_self_pole_aprox_v1, green_self_pole_aprox_v2, green_self_num
+    from green_self_image_dif_sign import green_self_ana_v1,green_self_ana_v2, green_self_pole_aprox_v1, green_self_pole_aprox_v2, green_self_num
 except ModuleNotFoundError:
     print(err)
 
@@ -290,7 +290,7 @@ graph(title,labelx,r'Re{G$_{self}$} ($\mu$m$^{-3}$)',tamfig,tamtitle,tamletra,ta
 plt.plot(listx,listy_re_ana_v1,'-',ms = ms,color = 'purple',label = 'PP ana')
 plt.plot(listx,listy_re_num,'--',ms = ms,color = 'darkred',label = 'full numerical')
 #plt.plot(listx,listy_re_pole_aprox_v1,'.',ms = ms+1,color = 'darkred',label = 'PP num')
-#plt.plot(listx,listy_re_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
+plt.plot(listx,listy_re_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 if comparar_otro_hBN == 1:
     plt.plot(listx_ana_S,listy_re_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana dip')
     plt.plot(listx_num_S,listy_re_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num dip')
@@ -313,7 +313,7 @@ plt.plot(listx,listy_im_ana_v2,'-',ms = ms,color = 'purple',label = 'PP ana')
 #plt.plot(listx,listy_im_ana_v2,'--',ms = ms+1,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_im_num,'--',ms = ms,color = 'darkred',label = 'full numerical')
 #plt.plot(listx,listy_im_pole_aprox_v1,'.',ms = ms+1,color = 'darkred',label = 'PP num')
-#plt.plot(listx,listy_im_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
+plt.plot(listx,listy_im_pole_aprox_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2')
 if comparar_otro_hBN == 1:
     plt.plot(listx_ana_S,listy_im_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana dip')
     plt.plot(listx_num_S,listy_im_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num dip')

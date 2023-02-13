@@ -296,7 +296,7 @@ plt.plot(listx_2,np.array(listy_im_ana),'-',ms = ms,color = 'purple')
 #plt.plot(listx,list_ana_parallel,'.-',ms = ms,color = 'darkred',label = r'$\Gamma_{\parallel}$')
 #plt.plot(np.ones(10)*zp_crit_lambda_p_value, np.array(listy_aux)*1e-4,'--k')
 #plt.plot([],[],'-w',label = r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D))
-plt.text(0.85,0.041,r'$\omega/\omega_{\rm D}$=%.2f'%(omega_omega_D),fontsize=tamlegend)
+plt.text(0.8,0.041,r'$\omega/\omega_{\rm D}$ = %.2f'%(omega_omega_D),fontsize=tamlegend)
 #plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=0)
 plt.tight_layout()
 #if plot_vs_c == 1:

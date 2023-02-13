@@ -33,7 +33,7 @@ if not os.path.exists(path_save):
 err = 'fieldE_direct_numerical.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_ana_resonance_v1, dipole_moment_ana_resonance_v2, dipole_moment_pole_aprox_resonance_v1, dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance
+    from dipole_moment_dif_sign import dipole_moment_ana_resonance_v1, dipole_moment_ana_resonance_v2, dipole_moment_pole_aprox_resonance_v1, dipole_moment_pole_aprox_resonance_v2, dipole_moment_num_resonance
 except ModuleNotFoundError:
     print(err)
 
@@ -68,7 +68,7 @@ b = -0.01
 d_thickness_disk_nano = 0.1
 D_disk_nano = 50 
 
-d_nano_film = 0.4
+d_nano_film = 1
 
 #omega0THz = 65
 #omega0 = omega0THz*1e12 
@@ -77,7 +77,7 @@ d_nano_film = 0.4
     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title1 = r'$v$ = c/%i, $z_p$=%i nm, $b$ = %i nm, $d_{\rm film}$ = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano_film)
+title1 = r'$v$ = c/%i, $z_{\rm p}$ = %i nm, $b$ = %i nm, $d_{\rm film}$ = %.2f nm' %(int_v, zp*1e3,b*1e3,d_nano_film)
 title2 = r'$d_{\rm disk}$ = %.2f nm, $D$ = %.2f nm' %(d_thickness_disk_nano,D_disk_nano)
 labelp = r'_res_d%.2fnm' %(d_nano_film)
 
@@ -256,7 +256,7 @@ graph(title,labelx,r'$|p|$/(e/2$\pi v$) ($\mu$m$^{2}$)',tamfig,tamtitle,tamletra
 #plt.plot(listx,listy_ana_v2,'--',ms = ms,color = 'purple',label = 'PP ana 2 ' +  label2)
 plt.plot(listx,listy_num,'.',ms = ms,color = 'darkred',label = 'full numerical')
 plt.plot(listx,listy_pole_v1,'.-',ms = 3,color = 'darkred',label = 'PP num' )
-#plt.plot(listx,listy_pole_v2,'--',ms = 3,color = 'darkred',label = 'PP num 2'  )
+plt.plot(listx,listy_pole_v2,'--',ms = 3,color = 'purple',label = 'PP num 2'  )
 if comparar_otro_hBN == 1:
     plt.plot(listx_ana_S,listy_re_ana2_S,'--',ms = ms,color = 'blue',label = 'PP ana sphere')
     plt.plot(listx_num_S,listy_re_num_S,'--',ms = ms,color = 'lightseagreen',label = 'full num sphere')

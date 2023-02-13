@@ -16,7 +16,7 @@ from scipy import integrate
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field/potential_and_electric_field_with_dipole_moment_formula','')
+path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
 #print('Importar modulos necesarios para este codigo')
 
 try:
@@ -126,11 +126,11 @@ def dipole_moment_ana_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_di
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - np.pi*1j*term_kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 + np.pi*1j*term_kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - np.pi*1j*term_kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 + np.pi*1j*term_kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + np.pi*1j*kp_2*term_kp*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 - np.pi*1j*kp_2*term_kp*expo/ky )
     
     
     return px, py, pz
@@ -209,11 +209,11 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - np.pi*1j*term_kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 + np.pi*1j*term_kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - np.pi*1j*term_kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 + np.pi*1j*term_kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + np.pi*1j*kp_2*term_kp*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 - np.pi*1j*kp_2*term_kp*expo/ky )
     
     
     return px, py, pz
@@ -287,11 +287,11 @@ def dipole_moment_ana_resonance_v2(omegac,epsi_silica,d_nano_film,d_thickness_di
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     Rp = 1
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - 2*np.pi*1j*Rp*kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 + 2*np.pi*1j*Rp*kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - 2*np.pi*1j*Rp*kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 + 2*np.pi*1j*Rp*kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + 2*np.pi*1j*Rp*(kp**2)*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 - 2*np.pi*1j*Rp*(kp**2)*expo/ky )
     
     return px, py, pz
 
@@ -369,11 +369,11 @@ def dipole_moment_anav2_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
-    px = alffa_eff_x*1j*omegac*int_v*(K0 - np.pi*1j*term_kp*expo/ky)
+    px = alffa_eff_x*1j*omegac*int_v*(K0 + np.pi*1j*term_kp*expo/ky)
     
-    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - np.pi*1j*term_kp*expo)
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 + np.pi*1j*term_kp*expo)
     
-    pz = alffa_eff_z*(-omegac*int_v*K1 + np.pi*1j*kp_2*term_kp*expo/ky )
+    pz = alffa_eff_z*(-omegac*int_v*K1 - np.pi*1j*kp_2*term_kp*expo/ky )
     
     
     return px, py, pz
@@ -495,7 +495,7 @@ def dipole_moment_num_resonance(omegac,epsi_silica,d_nano_film,d_thickness_disk_
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
 
 
-    rp = lambda u: alpha_parallel(u)/(alpha_parallel(u)*(1-r*expB_self(u)) - alfa_p)
+    rp = lambda u: -alpha_parallel(u)/(alpha_parallel(u)*(1-r*expB_self(u)) - alfa_p)
  
       
     expo = lambda u: np.exp(-np.sqrt(alpha_x**2 + u**2)*k0*(2*zp + np.abs(b)))
@@ -605,7 +605,7 @@ def dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano_film,d_thick
 #    term6 = np.sign(z)*pz*Rp*kp_2*J0*exp_electron
     alpha_parallel = lambda u: np.sqrt(alpha_x**2 + u**2)
 
-    rp = lambda u: alpha_parallel(u)/(alpha_parallel(u) - alfa_p)
+    rp = lambda u: -alpha_parallel(u)/(alpha_parallel(u) - alfa_p)
       
     expo = lambda u: np.exp(-np.sqrt(alpha_x**2 + u**2)*k0*(2*zp + np.abs(b)))
     
@@ -713,7 +713,7 @@ def dipole_moment_pole_aprox_resonance_v2(omegac,epsi_silica,d_nano_film,d_thick
 #    term6 = np.sign(z)*pz*Rp*kp_2*J0*exp_electron
     alpha_parallel = lambda u: np.sqrt(alpha_x**2 + u**2)
 
-    rp = lambda u: alfa_p/(alpha_parallel(u) - alfa_p)
+    rp = lambda u: -alfa_p/(alpha_parallel(u) - alfa_p)
       
     expo = lambda u: np.exp(-np.sqrt(alpha_x**2 + u**2)*k0*(2*zp + np.abs(b)))
     

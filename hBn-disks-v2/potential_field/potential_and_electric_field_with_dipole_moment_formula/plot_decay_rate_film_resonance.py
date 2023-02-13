@@ -45,7 +45,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_constants)
-    from hBn_PP import epsilon_x
+    from hBn_PP import epsilon_x,hBn_lambda_p
 except ModuleNotFoundError:
     print('epsilon_z.py no se encuentra en ' + path_constants)
 
@@ -86,7 +86,10 @@ xf = x4 - 1e-3
 
 b = -0.01
 
-d_nano = 0.4
+d_nano_film = 1
+
+d_thickness_disk_nano = 1
+D_disk_nano = 100
 
 #### la parte real de lambda_p para d = 0.4 nm es positiva si #####
 
@@ -102,7 +105,7 @@ d_nano = 0.4
 
 #########################
 
-def lambda_p(energy0):
+def lambda_p_v2(energy0):
     
     epsi_x = epsilon_x(energy0)
     epsi_HBN_par = epsi_x
@@ -110,7 +113,7 @@ def lambda_p(energy0):
     
     omegac = energy0/aux
 #    d_micros = d_nano*1e-3
-    d_micro = d_nano*1e-3
+    d_micro = d_nano_film*1e-3
     alfa_p = epsi_silica*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
       
@@ -118,12 +121,19 @@ def lambda_p(energy0):
     return (2*np.pi/kp)*1e3 ## en micro
 
 
+def lambda_p(energy0):
+    
+#    d_micros = d_nano*1e-3
+    lambda_p_v = hBn_lambda_p(energy0,epsilon_Silica(energy0),epsilon_Silica(energy0))*d_nano_film
+
+    return lambda_p_v ## en nano
+
  
 #title1 = r'$\kappa$ = %.2f$\omega_0$, $\kappa_r$ = %.2f$\kappa$, $E_0$=%i meV' %(kappa_factor_omega0, kappa_r_factor, energy0_pol)     
 #title2 = r'$\hbar\mu$ = %.2feV, $\hbar\gamma$ = %.4feV' %(hbmu,hbgama) 
 #title3 = r'$z_p$=%inm, px=%i, py=%i, pz=%i' %(zp*1e3,px,py,pz)
-title4 = r'b = %i nm, d = %.2f nm' %(b*1e3,d_nano)
-labelp = r'_res' 
+title4 = r'b = %i nm, d = %.2f nm' %(b*1e3,d_nano_film)
+labelp = r'_res_dfilm%.2fnm_ddisk%.2fnm_D%inm' %(d_nano_film,d_thickness_disk_nano,D_disk_nano) 
 
 N = 30
 
@@ -133,7 +143,7 @@ def function_imag_ana(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta = EELS_film_ana_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    rta = EELS_film_ana_f(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     return rta
 
@@ -142,7 +152,7 @@ def function_imag_num(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta = EELS_film_num_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    rta = EELS_film_num_f(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     return rta
 
@@ -151,7 +161,7 @@ def function_imag_pole_aprox(energy0,int_v,zp_nano):
     omegac0 = energy0/aux 
     zp = zp_nano*1e-3
 
-    rta = EELS_film_pole_aprox_f(omegac0,epsilon_Silica,d_nano,int_v,b,zp)
+    rta = EELS_film_pole_aprox_f(omegac0,epsilon_Silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)
     
     return rta
 
@@ -192,15 +202,16 @@ if plot_vs_zp == 1 :
 #    E0 = 0.143
     E0 = 0.1625
     
-    E0 = 0.172
+    E0 = 0.171
+    E0 = 0.195
     int_v0 = 10
     lambbda_p = np.real(lambda_p(E0))
 
-    labelx = r'$z_p$ [nm]'   
+    labelx = r'$z_{\rm p}$ (nm)'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %.3f eV, $\lambda_p$ = %.1f nm' %(int_v0,E0,lambbda_p)
     label1 = 'vs_zp_E%imeV' %(E0*1e3) + labelp
 #    listx = np.linspace(0.0001,2,N)
-    if d_nano == 1:
+    if d_nano_film == 1:
         if E0 <= 0.187:
             listx = np.linspace(1,400,N)
         else:
@@ -208,7 +219,11 @@ if plot_vs_zp == 1 :
 
     else:
         listx = np.linspace(1,800,N)
-    listx = np.linspace(10,400,N)
+    if D_disk_nano == 50:
+        
+        listx = np.linspace(0.001,3.5,N)
+    else:
+        listx = np.linspace(1,10,N)
 #    listx = np.linspace(400,1600,N)
 #    listx = np.linspace(250,750,N)
 #    
@@ -310,7 +325,7 @@ if len(maxi ) > 1 :
 
 graph(title,labelx,'$\Gamma_{film}$ [$\mu$s]',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 #plt.plot(listx,listy_im_ana,'.-',ms = ms,color = 'purple', label = 'PP analytical')
-#plt.plot(listx,listy_im_num,'.-',ms = ms,color = 'lightseagreen',label = 'full numerical')
+plt.plot(listx,listy_im_num,'.-',ms = ms,color = 'lightseagreen',label = 'full numerical')
 plt.plot(listx,listy_im_pole_aprox,'.-',ms = ms,color = 'darkred',label = 'PP numerical')
 #plt.plot(np.ones(10)*maxi, listy_aux,'-k')
 plt.legend(loc = 'best',markerscale=1.5,fontsize=tamlegend,frameon=0.1,handletextpad=0.2, handlelength=length_marker)

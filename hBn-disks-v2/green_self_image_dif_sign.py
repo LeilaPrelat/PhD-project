@@ -95,11 +95,11 @@ def green_self_num(omegac,epsi_silica,d_nano,zp_micro):
 
 
 
-    rp = lambda u: u/(u*(1-r*expB_self(u)) - alfa_p)
+    rp = lambda u: -u/(u*(1-r*expB_self(u)) - alfa_p)
 
 
-    cota_inf = 0.01*omegac
-    cota_sup = 600*omegac
+    cota_sup1 = 400/omegac
+    cota_inf1 = 0.01/omegac
     
 ####       
     cte_x = k1_3*0.5 #signo menos
@@ -110,8 +110,8 @@ def green_self_num(omegac,epsi_silica,d_nano,zp_micro):
     IntselfB_function_re_xx = lambda u: np.real((u**2)*rp(u)*expB_self(u))
     IntselfB_function_im_xx = lambda u: np.imag((u**2)*rp(u)*expB_self(u))
 
-    intselfB_re_x,err = integrate.quad(IntselfB_function_re_xx, cota_inf, cota_sup)
-    intselfB_im_x,err = integrate.quad(IntselfB_function_im_xx, cota_inf, cota_sup)
+    intselfB_re_x,err = integrate.quad(IntselfB_function_re_xx, cota_inf1, cota_sup1)
+    intselfB_im_x,err = integrate.quad(IntselfB_function_im_xx, cota_inf1, cota_sup1)
 #    
 #    print(intselfB_re_x)
     
@@ -178,7 +178,7 @@ def green_self_num_integral_inside_light_cone(omegac,epsi_silica,d_nano,zp_micro
 
 
 
-    rp = lambda u: u/(u*(1-r*expB_self(u)) - alfa_p)
+    rp = lambda u: -u/(u*(1-r*expB_self(u)) - alfa_p)
 
 
     cota_sup1 = 1/omegac
@@ -249,7 +249,7 @@ def green_self_pole_aprox_v1(omegac,epsi_silica,d_nano,zp_micro):
     d_micro = d_nano*1e-3
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     
-    rp = lambda u: u/(u - alfa_p)   
+    rp = lambda u: -u/(u - alfa_p)   
 #    print(np.real(rp(10)))
     
 #    rs_num = lambda u: 1j*u - 1j*u - cond/cte1
@@ -323,7 +323,7 @@ def green_self_pole_aprox_v2(omegac,epsi_silica,d_nano,zp_micro):
     d_micro = d_nano*1e-3
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     
-    rp = lambda u: alfa_p/(u - alfa_p)   
+    rp = lambda u: -alfa_p/(u - alfa_p)   
 #    print(np.real(rp(10)))
     
 #    rs_num = lambda u: 1j*u - 1j*u - cond/cte1
@@ -494,7 +494,7 @@ def green_self_ana_v1(omegac,epsi_silica,d_nano,zp_micro):
         dif_term = kp*np.pi*1j*np.exp(arg)
         
     
-    rtaself_x = 0.5*( 2*(2*zp_micro)**(-3) + kp*(2*zp_micro)**(-2) + kp**2*dif_term   )
+    rtaself_x = -0.5*( 2*(2*zp_micro)**(-3) + kp*(2*zp_micro)**(-2) + kp**2*dif_term   )
     
     
 
@@ -568,7 +568,7 @@ def green_self_ana_v2(omegac,epsi_silica,d_nano,zp_micro):
     Rp = 1
     
     
-    rtaself_x = Rp*kp*0.5*( (1 + 2*kp*zp_micro)/(4*zp_micro**2) + kp**2*special.exp1(arg)*expo_self  )
+    rtaself_x = -Rp*kp*0.5*( (1 + 2*kp*zp_micro)/(4*zp_micro**2) + kp**2*special.exp1(arg)*expo_self  )
     
     
 

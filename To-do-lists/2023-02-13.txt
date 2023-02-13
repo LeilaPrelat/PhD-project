@@ -1,0 +1,74 @@
+*Eduardo 2023/02/07 reunion  : hacer miercoles 8 de febrero
+
+	- cambiar la polarizabilidad de hBN disks : 
+		- graficar la parte real de la polarizabilidad en funcion de la freq para dif D y hallar el D que haga que las resonancias caigan dentro de las bandas
+		problema con esto: no cae dentro de las bandas para ningun D. preguntar a Eduardo, tambien por signo de Im{alfa} negativo y por el valor de "t" (ver overleaf) 
+		
+		
+		- para alfa dipolo : usar kappa_r = kappa/2 o algo asi y solo queda sin definir el ancho de la lorenziana que es kappa, pero kappa puede ser kappa = 0.1*omega_0 y ahi la unica variable es omega_0.: jueves    
+
+	
+*Jueves 9 de febrero : 
+
+	- preparar un overleaf para explicar el problema de las Gamma_{SP,n} -->0 cuando a --> inf	
+	- revisar de nuevo la version analitica de phi_n para inf dipolos 
+		- grafeno . done 
+		- silver
+		- hBN	
+
+	- revisar de nuevo la version analitica de phi para 1 dipolo. <--- viernes
+	
+
+	- reunion con javier sobre el problema de las Gamma_{SP,n} -->0 cuando a --> inf. Desde las 14 hr en adelante. 
+	Algo que me di cuenta post reunion : 
+		- para a = 1500 nm, aparece solo n = 0 de orden 8*10^{-5} 
+		- para a = 15000 nm, aparece n = 0, n = 1, ..., hasta n = 4 y sumados dan 2*10^{-5}
+	* entonces los casos de SP parecen ser consistentes entre si, al considerar que no interactuan entre ellos, no deberia haber diferencia
+	entre un "a" chico o un "a" grande *  
+
+
+*Viernes 10 de febrero : home office 
+
+	- ver lo de la polarizabilidad de los discos 
+	- ver bien todos los parametros: 
+		- "d" del film hBN
+		- "d" de los discos
+		- "D" diametro de los discos 
+	d = 0.4 nm de hBN de los dipolos 
+
+###########################################################################################################################################
+
+*Lunes 13 de febrero 
+
+	- creo que hay un error de signo en el Gself de hBN disks porque si lo comparo con hBN deberia haber un pico positivo en 
+	Im{Gself} al igual que en hBN perfect dipoles. 
+	---> crear un nuevo .py que sea "green_self_image_dif_sign.py"
+	
+		- rehacer dipole moment. 
+		- rehacer decay rate: ver si ahora tengo cosas razonables para el optimum zp dentro de los limites de hBN. 
+			- sí. para dfilm = 1 = ddisk y Ddisk = 100 nm
+			- funciona aun mejor si uso "dipole moment for decay rate" o sea restando la integral inside light cone 
+		- inf dipoles decay rate:
+		
+
+###########################################################################################################################################
+
+*Martes 14 de febrero 
+
+
+
+
+*Miercoles 15 de febrero after GM  
+
+- actualizar el informe del paper para javier  .
+	- terminar mis notas. 
+	(notas : preparar un overleaf con todo lo importante )
+	
+- escribir un summary of equations 
+- 
+
+###########################################################################################################################################
+
+
+
+

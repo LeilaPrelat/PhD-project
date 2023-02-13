@@ -27,7 +27,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment import dipole_moment_pole_aprox_for_decay_rate_resonance_v1,dipole_moment_ana_resonance_v1,dipole_moment_anav1_for_decay_rate_resonance
+    from dipole_moment_dif_sign import dipole_moment_pole_aprox_resonance_v1,dipole_moment_ana_resonance_v1,dipole_moment_anav1_for_decay_rate_resonance
 except ModuleNotFoundError:
     print('potential.py no se encuentra en ' + path_basic)
 
@@ -91,7 +91,7 @@ def decay_rate_theta_inf_dipoles_ana_res(omegac,epsi_silica,d_nano,int_v,zp,a,b,
     Rp = 1
 #    theta_degree = 45
 #    theta = theta_degree*np.pi/180
-    px,py,pz  = dipole_moment_pole_aprox_for_decay_rate_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -177,7 +177,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0(omegac,epsi_silica,d_nano,in
 
 #        
     
-    px,py,pz  = dipole_moment_pole_aprox_for_decay_rate_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -282,7 +282,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
     
-    px,py,pz  = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_pole_aprox_resonance_v1(omegac,epsi_silica,d_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -297,11 +297,11 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
 
     
     cte_formula = a/(48*np.pi**2*np.abs(Rp)) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
-    
-    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
-    
-    cte_formula = a*192*2*np.pi**4/np.abs(Rp)  ## hay un extra (1/(2pi))^N en la formula de phi. necesario para grafeno  
-#
+#    
+#    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
+#    
+#    cte_formula = a*192*2*np.pi**4/np.abs(Rp)  ## hay un extra (1/(2pi))^N en la formula de phi. necesario para grafeno  
+##
 
 
     arg = np.abs(b)*omegac*int_v
