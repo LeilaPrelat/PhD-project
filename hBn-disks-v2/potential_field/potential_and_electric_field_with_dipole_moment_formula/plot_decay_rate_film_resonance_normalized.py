@@ -170,9 +170,9 @@ if plot_vs_zp == 1 :
     E0 = 0.173 # eV
  #   E0 = 0.095
 
-    E0 = 0.171 
+    E0 = 0.173 
 #    E0 = 0.175
-    E0 = 0.195
+#    E0 = 0.195
 #    
     labelx = r'Surface-dipole distance, $z_{\rm 0}$/$\lambda_{\rm p}$'   
     title4 = title4 + ', ' + r'v = c/%i, $\hbar\omega$ = %i eV' %(int_v0,E0)
@@ -203,7 +203,10 @@ if plot_vs_zp == 1 :
 
     elif E0 == 0.195:
         listx = np.linspace(1,6,N)
-        
+    
+    else:
+        listx = np.linspace(2,9,N) ## mas general 
+    
     lambda_p_value = lambda_p(E0)
     
 

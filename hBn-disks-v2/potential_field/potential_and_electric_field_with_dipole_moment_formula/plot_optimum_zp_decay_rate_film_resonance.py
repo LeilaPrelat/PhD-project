@@ -192,7 +192,7 @@ def function_imag_ana(energy0): ## devuelve el zp optimo en nanometros
         list_zp_nano = np.linspace(0.001,3.5,N)
     else:
         list_zp_nano = np.linspace(1,10,N)#         
-        list_zp_nano = np.linspace(2,9,N) # mas preciso          
+        list_zp_nano = np.linspace(2,11,N) # mas preciso          
         
     listy = []
     for zp_nano in list_zp_nano:
