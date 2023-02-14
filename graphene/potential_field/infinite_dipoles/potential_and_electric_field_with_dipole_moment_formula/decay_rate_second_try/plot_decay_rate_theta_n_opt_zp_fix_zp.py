@@ -54,7 +54,7 @@ print('Definir parametros del problema')
 
 
 b = - 0.01
-list_n = [0,1,2,3,4] 
+list_n = [0,1,2,3,4,5,6,7,8,9,10,11,12] 
 
 int_v = 20
 int_v = 10
@@ -88,7 +88,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max]) ##  micrones 
 
 a = 1.5
-a = 30
+a = 300
 #a = 500*1e-3
 #a = 5031*1e-3
 print(a)
@@ -132,7 +132,7 @@ elif a == 150:
     lim1,lim2 = 16,-75
     listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 else:
-    lim1,lim2 = 16,-70
+    lim1,lim2 = 17,-78
     listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 listy_2 = f1(listx_2)
 listz_2 = f2(listx_2)  
