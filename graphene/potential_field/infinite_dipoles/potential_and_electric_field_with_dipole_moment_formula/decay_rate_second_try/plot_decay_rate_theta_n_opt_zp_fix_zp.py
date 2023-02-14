@@ -54,16 +54,16 @@ print('Definir parametros del problema')
 
 
 b = - 0.01
-
+list_n = [0,1,2,3,4] 
 
 int_v = 20
 int_v = 10
 
-Nmax = 1
+Nmax = list_n[-1]
 
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
+labely = r'$\Gamma_{\rm SP, n}/\Gamma_{\rm EELS}$ $\times$ $10^8$'
 labely = 'Decay rate of surface' + '\n' + r'plasmons $\Gamma_{n,\rm SP}/\Gamma_{\rm 0}$ $\times$ $10^8$'
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
+labely = r'$\Gamma_{\rm SP, n}/\Gamma_{\rm EELS}$'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_graphene_resonance_b-10nm.txt', delimiter='\t', skiprows=1)
@@ -71,7 +71,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla ## energy and zp 
 
 ind = 18
-ind = -1
+ind = -20
 print(listx[ind])
 zp_nano = listy[ind]
 
@@ -88,7 +88,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max]) ##  micrones 
 
 a = 1.5
-a = 15
+a = 30
 #a = 500*1e-3
 #a = 5031*1e-3
 print(a)
@@ -128,10 +128,12 @@ if a == 15:
 #lim1,lim2 = 10,-63
     listx_2 = np.linspace(listx[lim1], listx[lim2], N)
     listx_2 = np.linspace(38,70,N)
-else:
-    lim1,lim2 = 16,-1
+elif a == 150:
+    lim1,lim2 = 16,-75
     listx_2 = np.linspace(listx[lim1], listx[lim2], N)
-
+else:
+    lim1,lim2 = 16,-70
+    listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 listy_2 = f1(listx_2)
 listz_2 = f2(listx_2)  
 
@@ -198,7 +200,7 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
 #%%
 from scipy.signal import find_peaks
 maxis_zp_lambda_p = []
-list_n = [0,1,2,3,4]   
+  
 #    if theta_degree != 0:     
 #        listx_2 = listx
 #        listy_2 = listy
@@ -267,7 +269,7 @@ for n in list_n:
         list_y_re.append(function_real_ana(x,n))
             
     listx_3 = np.array(listy_2)/np.array(listz_2)
-    plt.plot(listx_4,np.array(list_y_re)*1e2,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_4,np.array(list_y_re),'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)

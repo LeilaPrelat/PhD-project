@@ -21,7 +21,7 @@ path_constants =  path_basic.replace('/potential_field/potential_and_electric_fi
 
 try:
     sys.path.insert(1, path_constants)
-    from green_self_image_dif_sign import green_self_pole_aprox_v1,green_self_pole_aprox_v2, green_self_ana_v2, green_self_ana_v1, green_self_num,green_self_num_integral_inside_light_cone
+    from green_self_image_dif_sign import green_self_pole_aprox_v1,green_self_pole_aprox_v2, green_self_ana_v2, green_self_ana_v1, green_self_num,green_self_num_integral_inside_light_cone, green_self_ana2_perfect_dipole, green_self_num_integral_inside_light_cone_perfect_dipole
 except ModuleNotFoundError:
     print('green_self_image_dif_sig.py no se encuentra en ' + path_constants)
 
@@ -123,8 +123,8 @@ def dipole_moment_ana_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_di
     kp_2 = np.sqrt(kp**2)
     term_kp = kp_2 + kp
     
-    term_kp = 2*kp
-    kp_2 = kp
+#    term_kp = 2*kp
+#    kp_2 = kp
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
@@ -172,14 +172,18 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,
 
     rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
     
+#
+#    alfa_parallel = polarizability_parallel(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
+#    alfa_perp = polarizability_perp(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
+#
+#    
+#    alffa_eff_x = (1/alfa_parallel -  rtaself_x)**(-1)
+#    alffa_eff_y = alffa_eff_x
+#    alffa_eff_z = (1/alfa_perp -  rtaself_z)**(-1)
 
-    alfa_parallel = polarizability_parallel(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
-    alfa_perp = polarizability_perp(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
-
-    
-    alffa_eff_x = (1/alfa_parallel -  rtaself_x)**(-1)
-    alffa_eff_y = alffa_eff_x
-    alffa_eff_z = (1/alfa_perp -  rtaself_z)**(-1)
+    alffa_eff_x = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_x))**(-1)
+    alffa_eff_y = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_y))**(-1)
+    alffa_eff_z = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_z))**(-1)
 
 #    charge_electron = 4.806e-10/c
 #    cte_uni = int_v/(2*np.pi*c)
@@ -190,10 +194,10 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,
     alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
     kp = alfa_p*omegac
 
-#    d_micros = d_nano*1e-3
-#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-#    kp = 2*np.pi/lambda_p_v
-#    alfa_p = kp/omegac 
+    d_micros = d_nano_film*1e-3
+    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+    kp = 2*np.pi/lambda_p_v
+    alfa_p = kp/omegac 
 
       
     arg = np.abs(b)*omegac*int_v
@@ -208,6 +212,9 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,
     kp_2 = np.sqrt(kp**2)
     term_kp = kp_2 + kp
     
+    term_kp = 2*kp
+    kp_2 = kp
+    
 #    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
     
     
@@ -221,6 +228,86 @@ def dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,
     return px, py, pz
 
     
+
+def dipole_moment_ana_perfect_dipole_resonance(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     
+    """    
+    Parameters
+    ----------
+    omegac : omega/c = k0 en 1/micrometros    
+    epsi1 : epsilon del medio de arriba del plano
+    epsi2 : epsilon del medio de abajo del plano
+    hbmu : chemical potential in eV  
+    hbgama : collision frequency in eV
+    z : coordenada z
+    xD : coordenada x del dipolo 
+    yD : coordenada y del dipolo
+    zD : coordenada z del dipolo 
+    zp : posicion del plano (>0)
+    px : coordenada x del dipolo 
+    py : coordenada y del dipolo
+    pz : coordenada z del dipolo
+    Returns
+    -------
+    px,py,pz en unidades de k*alfa_eff
+    """
+
+    E = omegac*aux
+#    k0 = omegac #=omega/c
+    # x_y = ky/k0
+#    k1_2 = (k0*cte1)**2
+ #   n_v1 = int_v/cte1
+
+    rtaself_x1, rtaself_y1, rtaself_z1  =  green_self_ana2_perfect_dipole(omegac,epsi_silica,d_nano_film,zp)
+    rtaself_x2, rtaself_y2, rtaself_z2  =  green_self_num_integral_inside_light_cone_perfect_dipole(omegac,epsi_silica,d_nano_film,zp)
+
+    rtaself_x, rtaself_y, rtaself_z  =  rtaself_x1 - rtaself_x2, rtaself_y1 - rtaself_y2, rtaself_z1 - rtaself_z2
+    
+
+    alfa_parallel = polarizability_parallel(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
+    alfa_perp = polarizability_perp(E,d_thickness_disk_nano,D_disk_nano,epsi_silica)
+
+    
+    alffa_eff_x = (1/alfa_parallel -  rtaself_x)**(-1)
+    alffa_eff_y = alffa_eff_x
+    alffa_eff_z = (1/alfa_perp -  rtaself_z)**(-1)
+
+    alffa_eff_x = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_x))**(-1)
+    alffa_eff_y = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_y))**(-1)
+    alffa_eff_z = 1j*(2*omegac**3/(3*epsi_silica(E)) +  np.imag(rtaself_z))**(-1)
+    
+    
+#    epsi1 = 1
+    d_micros = d_nano_film*1e-3
+    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
+    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+    kp = 2*np.pi/lambda_p_v
+    alfa_p = kp/omegac 
+            
+    arg = np.abs(b)*omegac*int_v
+    K1 = special.kn(1,arg)
+    K0 = special.kn(0,arg)
+    
+    kx = omegac*int_v
+#    expo = np.exp(-np.sqrt(kx**2 + kp**2)*(np.abs(b) + 2*zp))
+    expo = np.exp(-kp*(np.abs(b) + 2*zp))
+    
+#    den = np.sqrt(kx**2 + kp**2) - kp
+    ky = np.sqrt(kp**2 - kx**2)
+    kp_2 = np.sqrt(kp**2)
+    term_kp = 1 + kp/kp_2
+    
+#    term_extra = 2*np.pi*1j*Rp*kp*np.abs(kp)*expo/ky
+    
+    
+    px = alffa_eff_x*1j*omegac*int_v*(K0 - 2*np.pi*1j*Rp*kp*expo/ky)
+    
+    py = alffa_eff_y*1j*(2*1j*omegac*int_v*K1 - 2*np.pi*1j*Rp*kp*expo)
+    
+    pz = alffa_eff_z*(-omegac*int_v*K1 + 2*np.pi*1j*Rp*(kp**2)*expo/ky )
+    
+    return px, py, pz
+
+
 #     rp = lambda u: alfa_p/(alpha_parallel(u) - alfa_p)
 
 def dipole_moment_ana_resonance_v2(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp):     

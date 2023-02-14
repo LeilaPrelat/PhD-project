@@ -82,7 +82,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 0.3
+zp_nano = 0.05
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -98,7 +98,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max])
 
 #a = 8000*1e-3
-a = 125*1e-3
+a = 185*1e-3
 
 a_nm = a*1e3
 

@@ -27,7 +27,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_basic)
-    from dipole_moment_dif_sign import dipole_moment_pole_aprox_resonance_v1,dipole_moment_ana_resonance_v1,dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_pole_aprox_resonance_v1_for_decay_rate
+    from dipole_moment_dif_sign import dipole_moment_pole_aprox_resonance_v1,dipole_moment_ana_resonance_v1,dipole_moment_anav1_for_decay_rate_resonance,dipole_moment_pole_aprox_resonance_v1_for_decay_rate,dipole_moment_ana_perfect_dipole_resonance
 except ModuleNotFoundError:
     print('potential.py no se encuentra en ' + path_basic)
 
@@ -275,21 +275,20 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
 #    alfa_p = kp/omegac 
     
     
-    Rp = 1
-    epsi_x = epsilon_x(E)
-    epsi_HBN_par = epsi_x
-    d_micro = d_nano_film*1e-3
-    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
-    kp = alfa_p*omegac
+#    Rp = 1
+#    epsi_x = epsilon_x(E)
+#    epsi_HBN_par = epsi_x
+#    d_micro = d_nano_film*1e-3
+#    alfa_p = epsi_silica(E)*2/(omegac*d_micro*(epsi_HBN_par-1))
+#    kp = alfa_p*omegac
 
-#    d_micros = d_nano_film*1e-3
-#    epsi1,epsi3 = 1,1
-##    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
-#    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
-#    kp = 2*np.pi/lambda_p_v
-#    alfa_p = kp/omegac 
+    d_micros = d_nano_film*1e-3
+    Rp = hBn_Rp(E,epsi_silica(E),epsi_silica(E))
+    lambda_p_v = hBn_lambda_p(E,epsi_silica(E),epsi_silica(E))*d_micros
+    kp = 2*np.pi/lambda_p_v
+    alfa_p = kp/omegac 
 #    
-    px,py,pz  = dipole_moment_pole_aprox_resonance_v1_for_decay_rate(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_ana_perfect_dipole_resonance(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -300,11 +299,16 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
 #    term_kp = 1 + kp/kp_2
     term_kp_2 = kp_2 + kp
     
+#    term_kp_2 = 2*kp
+#    kp_2 = kp
+    
     phi_n = np.exp(-2*kp_2*zp)*np.abs(Rp)*(px*kx*term_kp_2/den + py*term_kp_2 + 1j*pz*kp_2*term_kp_2/den )/(4*np.pi*a)
 
     
     cte_formula = a/(12*np.pi*np.abs(Rp)) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
-#    
+    cte_formula = 12*2*(np.pi**3)*a/(Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+    
+#      
 #    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
 #    
 #    cte_formula = a*192*2*np.pi**4/np.abs(Rp)  ## hay un extra (1/(2pi))^N en la formula de phi. necesario para grafeno  
@@ -317,18 +321,19 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi_silica,d_nano
 
     
     factor_K = K0**2 + K1**2  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
-
+    extra_cte_adimensional = a*omegac ## para poder comparar con diferentes materiales y que no dependa del periodo "a" 
+  
     
 #    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
     k_prima = omegac*np.sqrt(epsi_silica(E))
-    epsi1 = 1
-    k_prima = omegac*np.sqrt(epsi1)
-        
+#    epsi1 = 1
+#    k_prima = omegac*np.sqrt(epsi1)
+#        
     rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    
         
-    return rta
+    return rta/extra_cte_adimensional
 
 
 

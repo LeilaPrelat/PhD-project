@@ -556,7 +556,8 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
     
     cte_formula = a/(48*np.pi*Rp) ## para silver 
-    
+    cte_formula = a/(2*np.pi*Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+          
 #    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
     
 #    cte_formula = a*np.pi/Rp  ## hay un extra 1/(2pi) en la formula de phi. necesario para grafeno  
@@ -569,7 +570,8 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
 
     
     factor_K = K0**2 + K1**2  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
-
+    extra_cte_adimensional = a*omegac ## para poder comparar con diferentes materiales y que no dependa del periodo "a" 
+#    print(extra_cte_adimensional)
     
 #    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
@@ -578,7 +580,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
         
     rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    
         
-    return rta
+    return rta/extra_cte_adimensional ## el grafeno tiene un radio mas grande 
 
 
 

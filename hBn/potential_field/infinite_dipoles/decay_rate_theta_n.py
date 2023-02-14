@@ -438,7 +438,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
 #    phi_n = -np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a) ## aprox
     
     
-    cte_formula = a/(12*np.pi*Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+    cte_formula = 48*2*(np.pi**3)*a/(Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
     
 #    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
     
@@ -457,11 +457,14 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi3,d_nano
 #    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
+    extra_cte_adimensional = a*omegac ## para poder comparar con diferentes materiales y que no dependa del periodo "a" 
+    
     k_prima = omegac*np.sqrt(epsi1)
         
     rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    
-        
-    return rta
+    
+ #   print(extra_cte_adimensional)
+    return rta/extra_cte_adimensional
 
 
 

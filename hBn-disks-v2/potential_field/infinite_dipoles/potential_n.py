@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 
 try:
     sys.path.insert(1, path_constants)
-    from dipole_moment_dif_sign import dipole_moment_ana_resonance_v1, dipole_moment_num_resonance,dipole_moment_pole_aprox_resonance_v1, dipole_moment_pole_aprox_resonance_v1_for_decay_rate
+    from dipole_moment_dif_sign import dipole_moment_ana_resonance_v1, dipole_moment_num_resonance,dipole_moment_pole_aprox_resonance_v1, dipole_moment_pole_aprox_resonance_v1_for_decay_rate,dipole_moment_anav1_for_decay_rate_resonance
 except ModuleNotFoundError:
     print('dipole_moment.py no se encuentra en ' + path_constants)
     
@@ -200,7 +200,7 @@ def potential_inf_dipoles_ana(omegac,epsi_silica,d_nano_film,d_thickness_disk_na
     kp = alfa_p*omegac
    
    
-    px,py,pz  = dipole_moment_ana_resonance_v1(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)  
+    px,py,pz  = dipole_moment_anav1_for_decay_rate_resonance(omegac,epsi_silica,d_nano_film,d_thickness_disk_nano,D_disk_nano,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
     kx = omegac*int_v + 2*np.pi*n/a     
@@ -208,7 +208,7 @@ def potential_inf_dipoles_ana(omegac,epsi_silica,d_nano_film,d_thickness_disk_na
    # return np.imag(final_2*cte*kp*np.cos(theta))
    
    
-    phi_n = np.exp(-2*kp*zp)*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+    phi_n = -np.exp(-2*kp*zp)*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
 
     return phi_n
 

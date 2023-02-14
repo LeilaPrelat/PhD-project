@@ -74,7 +74,7 @@ labely = r'$\Gamma_n$'
 labely = r'Emission probability (arb. units)'
 
 
-tabla = np.loadtxt('zp_optimum_for_decay_rate_resonance_d%inm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
+tabla = np.loadtxt('zp_optimum_for_decay_rate_Silver_resonance_d%inm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 

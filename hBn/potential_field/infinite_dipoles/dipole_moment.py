@@ -16,7 +16,7 @@ from scipy import integrate
 name_this_py = os.path.basename(__file__)
 path = os.path.abspath(__file__) #path absoluto del .py actual
 path_basic = path.replace('/' + name_this_py,'')
-path_constants =  path_basic.replace('/potential_field/infite_dipoles','')
+path_constants =  path_basic.replace('/potential_field/infinite_dipoles','')
 #print('Importar modulos necesarios para este codigo')
 
 try:
@@ -27,10 +27,10 @@ except ModuleNotFoundError:
 
 
 try:
-    sys.path.insert(1, path_constants)
+    sys.path.insert(1, path_basic)
     from green_self_image import green_self_pole_aprox, green_self_ana2, green_self_num,green_self_num_integral_inside_light_cone
 except ModuleNotFoundError:
-    print('graphene_sigma.py no se encuentra en ' + path_basic)
+    print('green_self_image.py no se encuentra en ' + path_basic)
 
 
 try:

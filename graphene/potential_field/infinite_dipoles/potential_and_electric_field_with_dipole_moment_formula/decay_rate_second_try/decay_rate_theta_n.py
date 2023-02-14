@@ -529,7 +529,8 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
     phi_n = -np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
     
     cte_formula = a/(48*(np.pi**2)*Rp)
-    
+    cte_formula = 12*np.pi*a/(Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+      
 #    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
     
 #    cte_formula = a*np.pi/Rp  ## hay un extra 1/(2pi) en la formula de phi. necesario para grafeno  
@@ -548,7 +549,8 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
 #    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
 
 #    cte_extra = (a*omegac)**4
-
+    extra_cte_adimensional = a*omegac ## para poder comparar con diferentes materiales y que no dependa del periodo "a" 
+   
     k_prima = omegac*np.sqrt(epsi1)
         
     rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/factor_K    

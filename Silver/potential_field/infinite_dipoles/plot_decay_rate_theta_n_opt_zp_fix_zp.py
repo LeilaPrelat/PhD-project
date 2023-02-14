@@ -60,7 +60,7 @@ int_v = 10
 
 Nmax = 4
 
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
+labely = r'$\Gamma_{\rm SP, n}/\Gamma_{\rm EELS}$'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_Silver_resonance_d%inm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
@@ -68,9 +68,9 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 4
 
 zp_nano = listy[-20]
+zp_nano = 14
 omegac0_1 = np.max(listx)/(c*hb)
 lambda_SP_1 = 2*np.pi/omegac0_1
 
@@ -85,7 +85,7 @@ a = np.mean([a_min,a_max])
 
 #a = 5031*1e-3
 a = 5500*1e-3
-a = 1500*1e-3
+a = 1250*1e-3
 
 a_nm = a*1e3
 
@@ -114,9 +114,9 @@ labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 250
+N = 225
 lim1,lim2 = 18,-60
-lim1,lim2 = 27,-57
+lim1,lim2 = 30,-55
 #lim1,lim2 = 0,-1
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 
@@ -205,7 +205,8 @@ for n in list_n:
         
     maxi = np.max(list_y_re)
     maxis.append(maxi)
-    print(n,maxi)
+    arg_max = np.argmax(list_y_re)
+    print(n, listx_2[int(arg_max)], maxi)
 #    list_y_re = np.array(list_y_re)/maxi
      
 maxis = []
@@ -244,7 +245,7 @@ graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,p
 k = 0
 for n in list_n:   
 
-    plt.plot(listx_4,np.array(list_y_re_tot[k])*1e2,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_4,np.array(list_y_re_tot[k]),'-',ms = ms, label = 'n = %i'%(n))
     k = k + 1
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)

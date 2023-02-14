@@ -60,7 +60,7 @@ int_v = 10
 
 Nmax = 4
 
-labely = r'$\Gamma_{n,\rm SP}/\Gamma_{\rm EELS}$ ($\times$ $10^{-2}$)'
+labely = r'$\Gamma_{\rm SP, n}/\Gamma_{\rm EELS}$'
 #labely = r'Emission probability (eV$^{-1}$)'
 
 tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_resonance_d%inm_v%i.txt'%(d_nano,int_v), delimiter='\t', skiprows=1)
@@ -68,7 +68,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[0]
-zp_nano = 5
+zp_nano = 3
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -84,6 +84,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max])
 
 #a = 8000*1e-3
+a = 185*1e-3
 a = 185*1e-3
 
 a_nm = a*1e3
@@ -113,9 +114,9 @@ labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
 f1 = interp1d(listx, listy)
 f2 = interp1d(listx, listz)
 
-N = 100
+N = 225
 lim1,lim2 = 18,-60
-lim1,lim2 = 0,-70
+lim1,lim2 = 0,-85
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 
 
@@ -234,7 +235,7 @@ for n in list_n:
 #    list_y_re = np.array(list_y_re)*1e14
     
     listx_3 = np.array(listx_2)/np.array(listz_2)
-    plt.plot(listx_4,np.array(list_y_re)*1e2,'-',ms = ms, label = 'n = %i'%(n))
+    plt.plot(listx_4,np.array(list_y_re),'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
 #    plt.grid(1)
