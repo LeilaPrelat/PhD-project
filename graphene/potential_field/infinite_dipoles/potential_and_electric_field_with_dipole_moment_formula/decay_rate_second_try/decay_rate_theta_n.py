@@ -557,10 +557,7 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v3(omegac,epsi1,epsi2,hbmu,h
         
     return rta
 
-
-
-
-def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_angle(omegac,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,b,n):     
+def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_v4(omegac,epsi1,epsi2,hbmu,hbgama,int_v,zp,a,b,n):     
     """    
     Parameters
     ----------
@@ -596,61 +593,49 @@ def decay_rate_theta_inf_dipoles_ana_res_div_gamma0_angle(omegac,epsi1,epsi2,hbm
     kp = alfa_p*k1
     
     
-    px,py,pz  = dipole_moment_anav2_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)  
+    px,py,pz  = dipole_moment_anav2_for_decay_rate_res(omegac,epsi1,epsi2,hbmu,hbgama,int_v,b,zp)  
 #    list_dipoles = np.linspace(-Nmax,Nmax,2*Nmax + 1)
 #            
-  
-#    expo_kx = np.exp(1j*kx*x)
-#
-    ### cte que falta en dip moment : e/(2*np.pi*v)
-#    charge_e_cgs = 1.602176634*1e-20
-#    
-#    hbar_cgs = 1.054571817*1e-27
+    kx = omegac*int_v + 2*np.pi*n/a
     
-    v = c/int_v
-    cte_dip = 1/(2*np.pi*v)
-    
-    px,py,pz = px*cte_dip, py*cte_dip, pz*cte_dip
-    
+    delta_n = 2*np.pi/a
+#    print(delta_n/kx)
 
-    def theta(E_meV,a):
+    den = np.sqrt(kp**2 - kx**2)
     
-        E = E_meV*1e-3  
-        cond = 4*np.pi*alfac*sigma_DL(E,hbmu,hbgama)
-        alfa_p = 1j*(epsi1 + epsi2)/(cond)
-        omegac = E/(hb*c)
-        kp = alfa_p*omegac    
-        
-        theta0 = np.arccos((omegac*int_v + 2*np.pi*n/a)/np.real(kp))
-    #    print(theta0)
-        return theta0*180/np.pi
-
-    kx = omegac*int_v + 2*np.pi*n/a   
-    den = np.sqrt(kp**2 - kx**2)  ### ky 
-    
-    Emev = E*1e3
-    den = kp*np.sin(theta(Emev,a))
-    kx = kp*np.cos(theta(Emev,a))
-    
+    kp_2 = np.sqrt(kp**2)
+    term_kp = 1 + kp/kp_2
+    term_kp_2 = kp_2 + kp
    # return np.imag(final_2*cte*kp*np.cos(theta))
-    phi_n = np.exp(-2*kp*zp)*Rp*kp*(px*kx/den + py + 1j*pz*kp/den )/(2*np.pi*a)
+    phi_n = -np.exp(-2*kp_2*zp)*Rp*kp*(px*kx*term_kp/den + py*term_kp + 1j*pz*term_kp_2/den )/(4*np.pi*a)
     
-    rta = a*np.abs(phi_n)**2/(2*np.pi*Rp)
+    cte_formula = 4*np.pi*a/Rp
+#    cte_formula = 12*np.pi*a/(Rp) ## hay un extra 1/(2pi) en la formula de phi. necesario para silver 
+#      
+#    cte_formula = a/(12*Rp) ## hay un extra 1/(2pi) en la formula de phi
     
-#    cte_aux = cte_aux*1e9 ### cambiar unidades
+#    cte_formula = a*np.pi/Rp  ## hay un extra 1/(2pi) en la formula de phi. necesario para grafeno  
+#
 
-    gamma = np.sqrt(1 - (int_v)**(-2))**(-1)
-    alpha = -3*epsi1/(4*1j*k1**3)
-
+    gamma = (1 - (int_v**(-2)) )**(-1/2)
     arg = np.abs(b)*omegac*int_v/gamma
     K1 = special.kn(1,arg)
     K0 = special.kn(0,arg)
-    
-#    print(K1)
-   
 
-    factor_gamma0 = (2*omegac*int_v/(v*gamma))**2
-    gamma0 = factor_gamma0*(K0**2/gamma**2 + K1**2)*np.imag(alpha)/np.pi  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
     
-    return rta/(gamma0*hb)
+    factor_K = ( (K0/gamma)**2 + K1**2)/(gamma**2)  ## decay rate de 1 dipolo # pero sin el "e/hbar" se cancela con el momento dipolar^2
+    seno_theta_n = den/kp
+#    print(seno_theta_n)
+    
+#    px_dir,py_dir,pz_dir = dipole_moment_anav2_for_decay_rate_resonance_dir(omegac,int_v,b,zp)        
+#    denominador = np.abs(px_dir)**2 +  np.abs(py_dir)**2 +  np.abs(pz_dir)**2
+
+#    cte_extra = (a*omegac)**4
+    extra_cte_adimensional = a*omegac ## para poder comparar con diferentes materiales y que no dependa del periodo "a" 
+   
+    k_prima = omegac*np.sqrt(epsi1)
+        
+    rta = (np.abs(phi_n)**2)*cte_formula*k_prima*(int_v**(-2))/(factor_K*seno_theta_n)
+        
+    return rta
 

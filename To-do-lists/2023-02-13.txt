@@ -61,7 +61,7 @@
 	- 1 dipolo : halle el zp optimo para el caso cuando la polarizabilidad es la de discos,fuera del caso de resonancia. Ahi tengo una sola freq de resonancia por eso el grafico de Gamma_SP es mas angosto para hBN disks que para hBN perfect dipole. Los zp de hBN disks fuera de resonancia tienen un orden de diferencia menor que los hBN perfect dipoles en resonancia. 
 	**Observaciones de Eduardo**: 
 		- tiene sentido que el zp optimo cuando hay silica en lugar de aire sea menor porque "entran mas ondas" porque es un medio optico denso. 
-		- comparar el zp de hBN disks cuando tengo aire en lugar de cuadno tengo silica y ver si se parece al caso de los dipolos perfectos <--- Mierc post GM 
+		- comparar el zp de hBN disks cuando tengo aire en lugar de cuadno tengo silica y ver si se parece al caso de los dipolos perfectos <--- Jueves 16/02 post GM 
 		
 	- inf dipolos: 
 		- usar la polarizabilidad en resonancia de los dipolos perfectos ---> recupero lo mismo que hBN perfect dipoles
@@ -69,10 +69,11 @@
 		
 - acerca de que Gamma_{SP,n} es mas chico que Gamma{SP} de 1 dipolo para cada material: 
 	- parece que falta un seno de theta_n en la formula de Gamma_{SP,n}, puede ser que lo resuelva. Si no lo resuelve, graficar
-	la suma de los picos de Gamma_{SP,n} dividido Gamma{SP} de 1 dipolo  para cada material y ver si hay un factor en comun que me esté faltando.  <--- Mierc post GM 
-		
-		
+	la suma de los picos de Gamma_{SP,n} dividido Gamma{SP} de 1 dipolo  para cada material y ver si hay un factor en comun que me esté faltando.  <--- Mierc 15/02 post GM .
 	
+		
+		
+###########################################################################################################################################
 	
 
 
