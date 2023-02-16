@@ -77,14 +77,16 @@
 	
 
 
-*Miercoles 15 de febrero after GM  
+*Viernes 17 de febrero after GM  
 
+
+- ver por qué no funcionan residuos en la integral de Gself (preguntar papa) 
 - actualizar el informe del paper para javier  .
 	- terminar mis notas. 
 	(notas : preparar un overleaf con todo lo importante )
 	
 - escribir un summary of equations 
-- 
+- revisar lo del Gself (si full numerical con k_parallel/(kp - k_parallel) y analitico con residuos funciona bien) 
 
 ###########################################################################################################################################
 

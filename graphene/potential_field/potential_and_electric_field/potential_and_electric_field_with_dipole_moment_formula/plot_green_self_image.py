@@ -30,7 +30,7 @@ if not os.path.exists(path_save):
 err = 'fieldE_direct_numerical.py no se encuentra en ' + path_basic
 try:
     sys.path.insert(1, path_basic)
-    from green_self_image import green_self_num, green_self_ana,green_self_pole_aprox, green_self_ana2,green_self_ana3
+    from green_self_image import green_self_num, green_self_ana,green_self_pole_aprox,green_self_pole_aprox_v2, green_self_ana2,green_self_ana3
 except ModuleNotFoundError:
     print(err)
 
@@ -54,19 +54,19 @@ int_v = 10
 cota = 75 #nanometros
 epsi1,epsi2 = 1,1
 hbmu,hbgama = 0.3,0.0001
-zp = 0.05
+zp = 2
 
 
 
-title = r'$z_p$=%inm, $\hbar\mu$ = %.2feV' %(zp*1e3,hbmu)
+title = r'$z_p$ = %i nm, $\hbar\mu$ = %.2f eV' %(zp*1e3,hbmu)
 
 N = 100
 
     # z0 = 0.06*1e3
-labelx = r'$\hbar\omega$ [meV]'   
+labelx = r'$\hbar\omega$ (meV)'   
 label1 = 'vs_E' 
 
-listx = np.linspace(1,60,N)
+listx = np.linspace(20,60,N)
 
 
 def function_num_xx_re(energy0):
@@ -148,6 +148,25 @@ def function_pole_aprox_xx_im(energy0):
     return np.imag(rtaself_x)
 
 
+
+
+def function_pole_aprox_xx_re_v2(energy0):
+    omegac0 = energy0*1e-3/aux 
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_v2(omegac0,epsi1,epsi2,hbmu,hbgama,zp)
+    
+    return np.real(rtaself_x)
+
+
+
+def function_pole_aprox_xx_im_v2(energy0):
+    omegac0 = energy0*1e-3/aux 
+
+    rtaself_x, rtaself_y, rtaself_z  = green_self_pole_aprox_v2(omegac0,epsi1,epsi2,hbmu,hbgama,zp)
+    
+    return np.imag(rtaself_x)
+
+
 #%%
     
 tamfig = (4.5,3.5)
@@ -179,14 +198,14 @@ listy_re_ana2 = []
 listy_re_ana3 = []
 listy_re_num = []
 listy_re_pole_aprox = []
-
+listy_re_pole_aprox_v2 = []
 
 listy_im_ana = []
 listy_im_ana2 = []
 listy_im_ana3 = []
 listy_im_num = []
 listy_im_pole_aprox = []
-
+listy_im_pole_aprox_v2 = []
 
 for value in listx: 
 
@@ -195,34 +214,37 @@ for value in listx:
     y_re_ana3 = function_ana3_xx_re(value)   
     y_re_num = function_num_xx_re(value)
     y_re_pole_aprox = function_pole_aprox_xx_re(value)
+    y_re_pole_aprox_v2 = function_pole_aprox_xx_re_v2(value)
     
     listy_re_ana.append(y_re_ana)
     listy_re_ana2.append(y_re_ana2)
     listy_re_ana3.append(y_re_ana3)    
     listy_re_num.append(y_re_num)
     listy_re_pole_aprox.append(y_re_pole_aprox)
+    listy_re_pole_aprox_v2.append(y_re_pole_aprox_v2)
 
     y_im_ana = function_ana_xx_im(value)       
     y_im_ana2 = function_ana2_xx_im(value)   
     y_im_ana3 = function_ana3_xx_im(value)   
     y_im_num = function_num_xx_im(value)
     y_im_pole_aprox = function_pole_aprox_xx_im(value)
+    y_im_pole_aprox_v2 = function_pole_aprox_xx_im_v2(value)
 
     listy_im_ana.append(y_im_ana)
     listy_im_ana2.append(y_im_ana2)
     listy_im_ana3.append(y_im_ana3)
     listy_im_num.append(y_im_num)
     listy_im_pole_aprox.append(y_im_pole_aprox)
-    
+    listy_im_pole_aprox_v2.append(y_im_pole_aprox_v2)
     
     
 #%%
 graph(title,labelx,r'Re(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-plt.plot(listx,listy_re_ana3,'.-',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx,listy_re_ana3,'.-',ms = ms,color = 'blue',label = 'PP analytical 3')
 plt.plot(listx,listy_re_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_re_ana2,'.',ms = ms,color = 'darkorange',label = 'PP analytical 2')
 plt.plot(listx,listy_re_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_re_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+plt.plot(listx,listy_re_pole_aprox_v2,'.-',ms = 3,color = 'darkred',label = 'PP numerical 2')
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
@@ -231,11 +253,11 @@ plt.savefig( 'Re_Gself' + label1 + '.png', format='png')
 
 
 graph(title,labelx,r'Im(G$_{self}$)',tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
-plt.plot(listx,listy_im_ana3,'.-',ms = ms,color = 'blue',label = 'PP analytical 3')
+#plt.plot(listx,listy_im_ana3,'.-',ms = ms,color = 'blue',label = 'PP analytical 3')
 plt.plot(listx,listy_im_ana,'.',ms = ms,color = 'purple',label = 'PP analytical')
 plt.plot(listx,listy_im_ana2,'.',ms = ms,color = 'darkorange',label = 'PP analytical 2')
 plt.plot(listx,listy_im_num,'.',ms = ms,color = 'lightseagreen',label = 'full numerical')
-plt.plot(listx,listy_im_pole_aprox,'.-',ms = 3,color = 'darkred',label = 'PP numerical')
+plt.plot(listx,listy_im_pole_aprox_v2,'.-',ms = 3,color = 'darkred',label = 'PP numerical 2')
 plt.legend(loc = 'best',markerscale=2,fontsize=tamlegend,frameon=0,handletextpad=0.2, handlelength=length_marker)
 plt.tight_layout()
 #    plt.yscale('log')
