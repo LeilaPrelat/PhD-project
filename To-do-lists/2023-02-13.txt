@@ -61,7 +61,7 @@
 	- 1 dipolo : halle el zp optimo para el caso cuando la polarizabilidad es la de discos,fuera del caso de resonancia. Ahi tengo una sola freq de resonancia por eso el grafico de Gamma_SP es mas angosto para hBN disks que para hBN perfect dipole. Los zp de hBN disks fuera de resonancia tienen un orden de diferencia menor que los hBN perfect dipoles en resonancia. 
 	**Observaciones de Eduardo**: 
 		- tiene sentido que el zp optimo cuando hay silica en lugar de aire sea menor porque "entran mas ondas" porque es un medio optico denso. 
-		- comparar el zp de hBN disks cuando tengo aire en lugar de cuadno tengo silica y ver si se parece al caso de los dipolos perfectos <--- Jueves 16/02 post GM 
+		- comparar el zp de hBN disks cuando tengo aire en lugar de cuadno tengo silica y ver si se parece al caso de los dipolos perfectos <--- Jueves 16/02  
 		
 	- inf dipolos: 
 		- usar la polarizabilidad en resonancia de los dipolos perfectos ---> recupero lo mismo que hBN perfect dipoles
@@ -69,24 +69,48 @@
 		
 - acerca de que Gamma_{SP,n} es mas chico que Gamma{SP} de 1 dipolo para cada material: 
 	- parece que falta un seno de theta_n en la formula de Gamma_{SP,n}, puede ser que lo resuelva. Si no lo resuelve, graficar
-	la suma de los picos de Gamma_{SP,n} dividido Gamma{SP} de 1 dipolo  para cada material y ver si hay un factor en comun que me esté faltando.  <--- Mierc 15/02 post GM .
+	la suma de los picos de Gamma_{SP,n} dividido Gamma{SP} de 1 dipolo  para cada material y ver si hay un factor en comun que me esté faltando.  <--- Mierc 15/02 post GM + jueves 16/02 pre-almuerzo
 	
-		
+		agregar seno(theta_n) = sqrt(kp**2 - kx**2)/kp + cambiar factor "a/(48*pi**2*Rp)" ---> "4*pi*a/(Rp)"
+			- grafeno. done 15/02
+			- silver   16/02
+			- hBN      16/02
+			- hBN disks    16/02 
+	
+	 
+
 		
 ###########################################################################################################################################
-	
+
+***Jueves 16 de febrero after GM  	
+
+- corregir Gamma_{SP,n} (continuacion) 
+    - silver. done 
+    - hBN. done
+    - hBN disks <--- falta 
+
+- hBN disks: comparar el zp de hBN disks cuando tengo aire en lugar de cuando tengo silica y ver si se parece al caso de los dipolos perfectos <--- Jueves 16/02  
 
 
-*Viernes 17 de febrero after GM  
+- after icfo: recoger pedido amazon
 
 
-- ver por qué no funcionan residuos en la integral de Gself (preguntar papa) 
+
+***Viernes 17 de febrero after GM  
+
+- ver por qué no funcionan residuos en la integral de Gself (preguntar papa para que lo haga el finde) 
 - actualizar el informe del paper para javier  .
-	- terminar mis notas. 
-	(notas : preparar un overleaf con todo lo importante )
-	
+- escribir informacion suplementaria del paper. 
+
+
+
+***Lunes 18 de febrero 
+
+- ir a IT por fortitoken 
+- perdirle a eduardo que revise mi informe 
 - escribir un summary of equations 
-- revisar lo del Gself (si full numerical con k_parallel/(kp - k_parallel) y analitico con residuos funciona bien) 
+- rehacer el github con solo lo importante 
+- terminar mis notas. (notas : preparar un overleaf con todo lo importante )
 
 ###########################################################################################################################################
 

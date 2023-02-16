@@ -54,11 +54,11 @@ aux2 = 1e12/c
 #%%
 
 
-
+list_n = [0,1,2,3,4]   
 print('Definir parametros del problema')
 
 int_v = 10
-Nmax = 4
+Nmax = list_n[-1]
 b = - 0.01
 
 
@@ -76,7 +76,7 @@ tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
 zp_nano = listy[-20]
-zp_nano = 3
+zp_nano = 3.5
 #zp_nano = 50
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -91,7 +91,7 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
 a = 0.001*1e-3
-a = 185*1e-3
+a = 120*1e-3
 #a = 5*1e-3
 
 #a = 150*1e-3
@@ -125,7 +125,7 @@ f2 = interp1d(listx, listz)
 
 N = 225
 lim1,lim2 = 18,-60
-lim1,lim2 = 0,-65
+lim1,lim2 = 0,-58
 #lim1,lim2 = 14,-1
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 #listx_2 = np.linspace(listx[lim1], 0.2, N)
@@ -196,7 +196,7 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
 #%%
 
 maxis = []
-list_n = [0,1,2,3,4]   
+
 #    if theta_degree != 0:     
 #        listx_2 = listx
 #        listy_2 = listy
@@ -243,13 +243,6 @@ for n in list_n:
     list_y_re_tot.append(list_y_re)
 
     #%%
-#list_y_re_tot_v0 = list_y_re_tot[1]
-#list_y_re_tot_v1 = list_y_re_tot[2]
-#list_y_re_tot_v2 =  list_y_re_tot[3]
-#list_y_re_tot_v3 =  list_y_re_tot[4]
-#list_y_re_tot_v4 =  list_y_re_tot[0]
-   
-#list_y_re_tot_v2 = [list_y_re_tot_v0,list_y_re_tot_v1,list_y_re_tot_v2,list_y_re_tot_v3,list_y_re_tot_v4]
 
 listx_3 = []
 for ind in range(len(listy_2)):

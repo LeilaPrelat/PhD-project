@@ -51,14 +51,12 @@ epsi1, epsi3 = 1,1
 
 print('Definir parametros del problema')
 
-
+list_n = [0,1,2,3,4]   
 b = - 0.01
 
 d_nano = 1
-
 int_v = 10
-
-Nmax = 4
+Nmax = list_n[-1]
 
 labely = r'$\Gamma_{\rm SP, n}/\Gamma_{\rm EELS}$'
 #labely = r'Emission probability (eV$^{-1}$)'
@@ -67,10 +65,11 @@ tabla = np.loadtxt('zp_optimum_for_decay_rate_Silver_resonance_d%inm_v%i.txt'%(d
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
-zp_nano = listy[0]
+zp_nano = listy[10]
 
-zp_nano = listy[-20]
-zp_nano = 14
+#zp_nano = listy[-1]
+zp_nano = 20
+#zp_nano = 50
 omegac0_1 = np.max(listx)/(c*hb)
 lambda_SP_1 = 2*np.pi/omegac0_1
 
@@ -82,10 +81,10 @@ a_min = np.real(lambda_SP_1)*Nmax/(int_v - 1)
 a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 
 a = np.mean([a_min,a_max])
-
+a = a_min
 #a = 5031*1e-3
-a = 5500*1e-3
-a = 1250*1e-3
+#a = 5500*1e-3
+a = 1000*1e-3
 
 a_nm = a*1e3
 
@@ -116,7 +115,7 @@ f2 = interp1d(listx, listz)
 
 N = 225
 lim1,lim2 = 18,-60
-lim1,lim2 = 30,-55
+lim1,lim2 = 26,-55
 #lim1,lim2 = 0,-1
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 
@@ -185,33 +184,18 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
     return  
  
 #%%
+    
+from scipy.signal import find_peaks
 from scipy.signal import savgol_filter
-maxis = []
-list_n = [0,1,2,3,4]   
+
+maxis_zp_lambda_p = []
+values_maxis = []  
+values_maxis_tot = []
 #    if theta_degree != 0:     
 #        listx_2 = listx
 #        listy_2 = listy
 #        listz_2 = listz
-for n in list_n:
-    
-    list_y_re = []
-
-
-    for ind in range(len(listx_2)):
-#        zp = listy_2[ind]
-        x =  listx_2[ind]
-#        x = 43 #meV
-        list_y_re.append(function_real_ana(x,n))
-        
-    maxi = np.max(list_y_re)
-    maxis.append(maxi)
-    arg_max = np.argmax(list_y_re)
-    print(n, listx_2[int(arg_max)], maxi)
-#    list_y_re = np.array(list_y_re)/maxi
-     
-maxis = []
 list_y_re_tot = []
-
 for n in list_n:
     
     list_y_re = []
@@ -223,16 +207,31 @@ for n in list_n:
 #        x = 43 #meV
         list_y_re.append(function_real_ana(x,n))
         
-    maxi = np.max(list_y_re)
-    maxis.append(maxi)
-#    print(n,maxi)
-#    list_y_re = np.array(list_y_re)/np.max(maxis)
+    maxi, _ = find_peaks(list_y_re, height=0)
+    if len(maxi)>1:
+        list_maximos = []
+        for maxis in maxi: 
+            list_maximos.append(list_y_re[maxis])
+        index_max = np.argmax(list_maximos)
+        maxis_zp_lambda_p.append(listx_2[maxi[int(index_max)]])
+        values_maxis.append(np.max(list_maximos))
+        values_maxis_tot.append(np.sum(list_maximos))
+    else:
+#        print(int(maxi))
+        maxis_zp_lambda_p.append(listx_2[int(maxi)])
+        values_maxis.append(list_y_re[int(maxi)])
+        values_maxis_tot.append(list_y_re[int(maxi)])
+    
 
-#    list_y_re = np.array(list_y_re)*1e14
-#    list_y_re = savgol_filter(list_y_re, 49, 3)  
+    list_y_re_tot.append(list_y_re)    
     
-    list_y_re_tot.append(list_y_re)
-    
+#    print(n,maxis_zp_lambda_p,values_maxis)
+#    list_y_re = np.array(list_y_re)/maxi
+   
+tot = np.sum(values_maxis)
+
+print('a', a_nm, 'nm', 'zp:',zp_nano,'nm', 'maximo:', np.abs(tot))
+#    
 #%%
 
 listx_3 = []
@@ -244,8 +243,9 @@ listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),len(list_y_re_tot[0]))
 graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)    
 k = 0
 for n in list_n:   
-
-    plt.plot(listx_4,np.array(list_y_re_tot[k]),'-',ms = ms, label = 'n = %i'%(n))
+    list_y_re = np.array(list_y_re_tot[k]) 
+#    list_y_re = savgol_filter(list_y_re, 49, 3)  
+    plt.plot(listx_4,list_y_re,'-',ms = ms, label = 'n = %i'%(n))
     k = k + 1
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)

@@ -51,14 +51,11 @@ epsi1, epsi3 = 1,1
 
 print('Definir parametros del problema')
 
-
+list_n = [0,1,2,3,4]   
 b = - 0.01
-
 d_nano = 1
-
 int_v = 10
-
-Nmax = 4
+Nmax = list_n[-1]
 
 labely = r'$\Gamma_{\rm SP, n}/\Gamma_{\rm EELS}$'
 #labely = r'Emission probability (eV$^{-1}$)'
@@ -67,8 +64,8 @@ tabla = np.loadtxt('zp_optimum_for_decay_rate_hBN_resonance_d%inm_v%i.txt'%(d_na
 tabla = np.transpose(tabla)
 [listx,listy,listz] = tabla
 
-zp_nano = listy[0]
-zp_nano = 3
+zp_nano = 3.25
+#zp_nano = 150
 
 #zp_nano = listy[-20]
 omegac0_1 = np.max(listx)/(c*hb)
@@ -84,8 +81,8 @@ a_max = np.real(lambda_SP_2)*Nmax/(int_v + 1)
 a = np.mean([a_min,a_max])
 
 #a = 8000*1e-3
-a = 185*1e-3
-a = 185*1e-3
+a = 120*1e-3
+#a = 2.75
 
 a_nm = a*1e3
 
@@ -96,7 +93,7 @@ title2 = r'v = c/%i, b = %i nm' %(int_v,b*1e3)
 title3 = r'a = %i nm' %(a*1e3)
 title4 = r', $z_p$ = $z^{opt}_p$' 
 
-labelp = r'_a%inm_zp%inm_d%inm' %(a*1e3,zp_nano,d_nano)
+labelp = r'_a%inm_zp%.2fnm_d%inm' %(a*1e3,zp_nano,d_nano)
 #label1 = 'vs_zp_lambda_p'  + labelp
 
 
@@ -116,7 +113,7 @@ f2 = interp1d(listx, listz)
 
 N = 225
 lim1,lim2 = 18,-60
-lim1,lim2 = 0,-85
+lim1,lim2 = 0,-77
 listx_2 = np.linspace(listx[lim1], listx[lim2], N)
 
 
@@ -184,8 +181,10 @@ def graph(title,labelx,labely,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpad
  
 #%%
 
-maxis = []
-list_n = [0,1,2,3,4]   
+from scipy.signal import find_peaks
+maxis_zp_lambda_p = []
+values_maxis = []  
+values_maxis_tot = []
 #    if theta_degree != 0:     
 #        listx_2 = listx
 #        listy_2 = listy
@@ -196,25 +195,59 @@ for n in list_n:
 
 
     for ind in range(len(listx_2)):
-#        zp_nano = listy_2[ind]
+#        zp = listy_2[ind]
         x =  listx_2[ind]
 #        x = 43 #meV
         list_y_re.append(function_real_ana(x,zp_nano,n))
         
-    maxi = np.max(list_y_re)
-    maxis.append(maxi)
-    print(n,maxi)
+    maxi, _ = find_peaks(list_y_re, height=0)
+    if len(maxi)>1:
+        list_maximos = []
+        for maxis in maxi: 
+            list_maximos.append(list_y_re[maxis])
+        index_max = np.argmax(list_maximos)
+        maxis_zp_lambda_p.append(listx_2[maxi[int(index_max)]])
+        values_maxis.append(np.max(list_maximos))
+        values_maxis_tot.append(np.sum(list_maximos))
+    else:
+#        print(int(maxi))
+        maxis_zp_lambda_p.append(listx_2[int(maxi)])
+        values_maxis.append(list_y_re[int(maxi)])
+        values_maxis_tot.append(list_y_re[int(maxi)])
+        
+#    print(n,maxis_zp_lambda_p,values_maxis)
 #    list_y_re = np.array(list_y_re)/maxi
+   
+tot = np.sum(values_maxis)
 
+print('a', a_nm, 'nm', 'zp:',zp_nano,'nm', 'suma de maximos:', np.abs(tot))
+
+#%%
 listx_3 = []
 for ind in range(len(listy_2)):
     listx_3.append(listy_2[ind]/listz_2[ind])
     
 listx_4 = np.linspace(np.min(listx_3),np.max(listx_3),N)
 
-   
-maxis = []
-  
+    
+graph(title,'Energy [eV]',labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
+for n in list_n:
+    
+    list_y_re = []
+
+
+    for ind in range(len(listx_2)):
+#        zp = listy_2[ind]
+        x =  listx_2[ind]
+#        x = 43 #meV
+        list_y_re.append(function_real_ana(x,zp_nano,n))
+            
+    plt.plot(listx_2,np.array(list_y_re),'-',ms = ms, label = 'n = %i'%(n))
+    
+plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
+#    plt.grid(1)
+plt.tight_layout()
+    
 graph(title,labelx,labely ,tamfig,tamtitle,tamletra,tamnum,labelpadx,labelpady,pad)
 for n in list_n:
     
@@ -222,19 +255,12 @@ for n in list_n:
 
 
     for ind in range(len(listx_2)):
-#        zp_nano = listy_2[ind]
+#        zp = listy_2[ind]
         x =  listx_2[ind]
 #        x = 43 #meV
         list_y_re.append(function_real_ana(x,zp_nano,n))
-        
-    maxi = np.max(list_y_re)
-    maxis.append(maxi)
-#    print(n,maxi)
-#    list_y_re = np.array(list_y_re)/np.max(maxis)
-
-#    list_y_re = np.array(list_y_re)*1e14
-    
-    listx_3 = np.array(listx_2)/np.array(listz_2)
+            
+    listx_3 = np.array(listy_2)/np.array(listz_2)
     plt.plot(listx_4,np.array(list_y_re),'-',ms = ms, label = 'n = %i'%(n))
     
 plt.legend(loc = 'best',markerscale=mk,fontsize=tamlegend,frameon=False,handletextpad=hp, handlelength=1)
@@ -243,8 +269,9 @@ plt.tight_layout()
 
 #plt.yscale('log')
 os.chdir(path_save)
+#plt.savefig('decay_rate_fix_zp_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
 plt.savefig('decay_rate_fix_zp_' + labelp + '.png', format='png',bbox_inches='tight',pad_inches = 0.008,dpi = dpi)
 
-
+#%%
 #%%
 
